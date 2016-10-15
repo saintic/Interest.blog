@@ -8,6 +8,7 @@ __email__   = "staugur@saintic.com"
 __version__ = "0.1"
 
 
+import json
 import utils.user
 from utils.public import logger
 from config import GLOBAL
@@ -27,7 +28,7 @@ def before_request():
 @app.after_request
 def add_header(response):
     response.headers["X-Interest-Request-Id"] = g.requestId
-    logger.info({
+    logger.info(json.dumps({
             "AccessLog": True,
             "status_code": response.status_code,
             "method": request.method,
@@ -36,7 +37,7 @@ def add_header(response):
             "referer": request.headers.get('Referer'),
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
-        })
+        }))
     return response
 
 #Custom 404 not found page
