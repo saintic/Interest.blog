@@ -12,9 +12,6 @@ GLOBAL={
 
     "LogLevel": os.environ.get("interest.blog.loglevel", "DEBUG"),
     #Write log's level, current is DEBUG，INFO，WARNING，ERROR，CRITICAL
-
-    "UserAuthUrl": "https://auth.saintic.com/user/",
-    #User login or register interface
 }
 
 PRODUCT={

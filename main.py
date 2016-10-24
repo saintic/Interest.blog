@@ -15,7 +15,6 @@ from config import GLOBAL, SSO
 from utils.public import logger, gen_requestId, isLogged_in
 from admin.admin import admin_page
 
-
 app = Flask(__name__)
 app.register_blueprint(admin_page, url_prefix="/admin")
 
