@@ -26,3 +26,14 @@ PRODUCT={
     #Production environment starting method, optional: `gevent`, `tornado`
 }
 
+SSO={
+
+    "SSO.URL": "https://passport.saintic.com",
+    #The passport(SSO Authentication System) Web Site URL.
+
+    "SSO.REDIRECT": "https://www.saintic.com",
+    #SSO callback address.
+
+    "SSO.PROJECT": PRODUCT["ProcessName"],
+    #SSO request application.
+}
