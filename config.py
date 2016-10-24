@@ -12,9 +12,6 @@ GLOBAL={
 
     "LogLevel": os.environ.get("interest.blog.loglevel", "DEBUG"),
     #Write log's level, current is DEBUG，INFO，WARNING，ERROR，CRITICAL
-
-    "UserAuthUrl": "https://auth.saintic.com/user/",
-    #User login or register interface
 }
 
 PRODUCT={
@@ -26,3 +23,14 @@ PRODUCT={
     #Production environment starting method, optional: `gevent`, `tornado`
 }
 
+SSO={
+
+    "SSO.URL": "https://passport.saintic.com",
+    #The passport(SSO Authentication System) Web Site URL.
+
+    "SSO.REDIRECT": "https://www.saintic.com",
+    #SSO callback address.
+
+    "SSO.PROJECT": PRODUCT["ProcessName"],
+    #SSO request application.
+}
