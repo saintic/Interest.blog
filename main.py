@@ -2,7 +2,7 @@
 #
 #Interest.blog Front, a development of a team blog driven by interests and hobbies.
 #Powered by flask and Bootstrap.
-
+#
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.1"
@@ -44,12 +44,10 @@ def add_header(response):
     }))
     return response
 
-#Custom 404 not found page
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("public/404.html"), 404
 
-#Custom robots.txt rules
 @app.route('/robots.txt')
 def robots():
     return render_template('public/robots.txt')
@@ -57,6 +55,10 @@ def robots():
 @app.route("/")
 def index():
     return render_template("front/index.html")
+
+@app.route("/ablout")
+def about():
+    return render_template("front/about.html")
 
 @app.route('/login/')
 def login():

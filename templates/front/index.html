@@ -1,20 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to SaintIC!</title>
-  　<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="wb:webmaster" content="c5d37a57e7c79d85" />
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<p>Interest.blog Front 即将发布新版，请持续关注！</p>
+{% extends "base.html" %}
 
-<p><em>Thank you.</em></p>
-</body>
-</html>
+{% block title %}Interest Blog Index | SaintIC{% endblock %}
+
+{% block content %}
+
+  <div class="home">
+    <h1 class="page-heading">Posts</h1>
+    <ul class="post-list">
+
+      <li>
+        <span class="post-meta">Jan 1, 2016</span>
+        <h2>
+          <a class="post-link" href="/blog">JavaScript之对象创建</a>
+        </h2>
+      </li>
+    
+      <li>
+        <span class="post-meta">Dec 28, 2015</span>
+        <h2>
+          <a class="post-link" href="/javascript/2015/12/28/javascript-protytype.html">JavaScript 之原型周边</a>
+        </h2>
+      </li>
+    
+    </ul>
+  </div>
+
+{% endblock %}
