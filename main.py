@@ -81,6 +81,7 @@ def logout():
     resp.set_cookie(key='username',  value='', expires=0)
     resp.set_cookie(key='sessionId',  value='', expires=0)
     resp.set_cookie(key='time',  value='', expires=0)
+    resp.set_cookie(key='Azone',  value='', expires=0)
     return resp
 
 @app.route('/sso/')
