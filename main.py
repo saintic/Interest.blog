@@ -74,6 +74,15 @@ def login():
         SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT")}))
         return redirect(SSOLoginURL)
 
+@app.route('/logout/')
+def logout():
+    resp = make_response(redirect(url_for('login')))
+    resp.set_cookie(key='logged_in', value='', expires=0)
+    resp.set_cookie(key='username',  value='', expires=0)
+    resp.set_cookie(key='sessionId',  value='', expires=0)
+    resp.set_cookie(key='time',  value='', expires=0)
+    return resp
+
 @app.route('/sso/')
 def sso():
     ticket = request.args.get("ticket")

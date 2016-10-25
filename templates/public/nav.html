@@ -12,6 +12,11 @@
         <div class="trigger">
           <a class="page-link" href="{{ url_for('about') }}">About</a>
           <a class="page-link" href="https://docs.saintic.com" target="_blank">Document</a>
+          {% if g.signin %}
+              <a class="page-link" href="{{ url_for('about') }}">Logout</a>
+          {% else %}
+              <a class="page-link" href="{{ url_for('login') }}">Login</a>
+          {% endif %}
         </div>
       </nav>
     </div>
