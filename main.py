@@ -8,7 +8,7 @@ __email__   = "staugur@saintic.com"
 __version__ = "0.1"
 
 
-import json
+import json, requests
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
 from config import GLOBAL, SSO
@@ -56,9 +56,14 @@ def robots():
 def index():
     return render_template("front/index.html")
 
-@app.route("/ablout")
+@app.route("/about")
 def about():
     return render_template("front/about.html")
+
+@app.route('/blog/<int:bid>.html')
+def blogShow(bid):
+    data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False).json().get("data")
+    return render_template("front/blogShow.html", blogId=bid, data=data)
 
 @app.route('/login/')
 def login():
