@@ -2,13 +2,13 @@
 #
 #Interest.blog Front, a development of a team blog driven by interests and hobbies.
 #Powered by flask and Bootstrap.
-
+#
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.1"
 
 
-import json
+import json, requests
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
 from config import GLOBAL, SSO
@@ -44,12 +44,10 @@ def add_header(response):
     }))
     return response
 
-#Custom 404 not found page
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("public/404.html"), 404
 
-#Custom robots.txt rules
 @app.route('/robots.txt')
 def robots():
     return render_template('public/robots.txt')
@@ -57,6 +55,15 @@ def robots():
 @app.route("/")
 def index():
     return render_template("front/index.html")
+
+@app.route("/about")
+def about():
+    return render_template("front/about.html")
+
+@app.route('/blog/<int:bid>.html')
+def blogShow(bid):
+    data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False).json().get("data")
+    return render_template("front/blogShow.html", blogId=bid, data=data)
 
 @app.route('/login/')
 def login():
@@ -66,6 +73,16 @@ def login():
         logger.info("User request login to SSO")
         SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT")}))
         return redirect(SSOLoginURL)
+
+@app.route('/logout/')
+def logout():
+    resp = make_response(redirect(url_for('index')))
+    resp.set_cookie(key='logged_in', value='', expires=0)
+    resp.set_cookie(key='username',  value='', expires=0)
+    resp.set_cookie(key='sessionId',  value='', expires=0)
+    resp.set_cookie(key='time',  value='', expires=0)
+    resp.set_cookie(key='Azone',  value='', expires=0)
+    return resp
 
 @app.route('/sso/')
 def sso():
