@@ -40,7 +40,7 @@ PLUGINS={
 
     "CodeHighlighting": True,
 
-    "WeiboShare": False,
+    "WeiboShare": True,
 
     "QQShare": False,
 

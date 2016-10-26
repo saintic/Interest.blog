@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Interest Blog Write | SaintIC{% endblock %}
+
+{% block head %}
+  <!--引入wangEditor.css-->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='wangEditor/css/wangEditor.min.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div id="editor" style="height:400px;max-height:500px;"><p>请输入内容...</p></div>
+<button id="btn1">获取内容</button>
+<button id="btn2">清空内容</button>
+
+{% endblock %}
+
+{% block script %}
+<!--引入jquery和wangEditor.js-->   <!--注意：javascript必须放在body最后，否则可能会出现问题-->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='wangEditor/js/wangEditor.min.js') }}"></script>
+<script type="text/javascript">
+    // 获取元素
+    var div = document.getElementById('editor');
+    // 生成编辑器
+    var editor = new wangEditor(div);
+
+    /* 
+    配置 onchange 事件
+    editor.onchange = function () {
+        // 编辑区域内容变化时，实时打印出当前内容
+        console.log(this.$txt.html());
+    };
+    */
+
+    // 为当前的editor配置密钥
+    editor.config.mapAk = 'rsG1HfOkrldOGdI53TMI9rAdxGuzb0PI';
+
+    // 取消粘贴过滤
+    // editor.config.pasteFilter = false;
+
+    // 插入代码时的默认语言
+    editor.config.codeDefaultLang = 'python'
+
+    /*
+       上传图片功能，文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/113990；
+       后台文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/115736;
+       后台需要配置一个获取表单上传图片并保存的路由。
+    */
+    editor.config.uploadImgUrl = '/upload/image/';
+
+    editor.create();
+
+    $('#btn1').click(function () {
+        // 追加内容
+        // editor.$txt.append('<div class="copyright">文章版权所有，转载请注明出处！</div>');
+
+        // 获取编辑器区域完整html代码
+        var html = editor.$txt.html();
+        alert(html);
+    });
+
+
+    $('#btn2').click(function () {
+        // 清空内容。不能传入空字符串，而必须传入如下参数
+        editor.$txt.html('<p><br></p>');
+    });
+</script>
+
+{% endblock %}
