@@ -4,7 +4,7 @@ import os
 from utils.public import logger
 from flask import Blueprint, request, Response
 
-upload_page = Blueprint(__name__, __name__)
+upload_page = Blueprint("upload", __name__)
 UPLOAD_FOLDER  = '/TmageUploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -12,7 +12,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 #对图片上传进行响应
-upload_page.route("/image/", methods=["POST"])
+@upload_page.route("/image/", methods=["POST",])
 def UploadImage():
     logger.debug(request.files)
     f = request.files[0]
@@ -33,3 +33,14 @@ def UploadImage():
             res.headers["ContentType"] = "text/html"
             res.headers["Charset"] = "utf-8"
             return res
+
+@upload_page.route("/getimage/")
+def GetImage():
+    return """<html><body>
+<form action="/upload/image/" method="post" enctype="multipart/form-data" name="upload_form">
+  <label>选择图片文件</label>
+  <input name="imgfile" type="file" accept="image/gif, image/jpeg"/>
+  <input name="upload" type="submit" value="上传" />
+</form>
+</body></html>"""
+
