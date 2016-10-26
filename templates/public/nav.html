@@ -15,7 +15,7 @@
           {% if g.signin %}
               <a class="page-link" href="{{ url_for('logout') }}">Logout</a>
           {% else %}
-              <a class="page-link" href="{{ url_for('login') }}">Login</a>
+              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome {{ g.username }}">Login</attr></a>
           {% endif %}
         </div>
       </nav>

@@ -11,7 +11,7 @@ __version__ = "0.1"
 import json, requests
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
-from config import GLOBAL, SSO
+from config import GLOBAL, SSO, PLUGINS
 from utils.public import logger, gen_requestId, isLogged_in
 from admin.admin import admin_page
 
@@ -63,7 +63,7 @@ def about():
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False).json().get("data")
-    return render_template("front/blogShow.html", blogId=bid, data=data)
+    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'])
 
 @app.route('/login/')
 def login():

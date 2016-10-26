@@ -34,3 +34,15 @@ SSO={
     "SSO.PROJECT": PRODUCT["ProcessName"],
     #SSO request application.
 }
+
+
+PLUGINS={
+
+    "CodeHighlighting": True,
+
+    "WeiboShare": False,
+
+    "QQShare": False,
+
+    "QzoneShare": False,
+}
