@@ -12,6 +12,7 @@ gen_requestId  = lambda :str(uuid4())
 
 def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''
+    return True
 
     SSOURL = SSO.get("SSO.URL")
     if cookie_str:

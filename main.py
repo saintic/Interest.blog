@@ -13,9 +13,11 @@ from flask import Flask, g, render_template, request, redirect, url_for, make_re
 from config import GLOBAL, SSO, PLUGINS
 from utils.public import logger, gen_requestId, isLogged_in
 from views.admin import admin_page
+from views.upload import upload_page
 
 app = Flask(__name__)
 app.register_blueprint(admin_page, url_prefix="/admin")
+app.register_blueprint(upload_page, url_prefix="/upload")
 
 #Before each URL request, define the initialization time, requestId, user authentication results and other related information and bind to g
 @app.before_request
@@ -26,8 +28,7 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    logger.info(request.url_root)
-    logger.info(app.root_path)
+    logger.info(app.url_map)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
