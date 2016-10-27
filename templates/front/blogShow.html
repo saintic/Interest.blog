@@ -24,7 +24,9 @@
   </div>
 
   <div class="copyright">
-    <p>文章版权所有，转载请注明出处！</p>
+    {% if data.get("sources") == "原创" %}
+        <p>原创文章，版权所有，转载请注明出处！来源地址：{{ request.url }}</p>
+    {% endif %}
   </div>
 </article>
 <div class="Share">
