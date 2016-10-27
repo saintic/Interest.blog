@@ -16,6 +16,7 @@ from views.admin import admin_page
 from views.upload import upload_page
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.register_blueprint(admin_page, url_prefix="/admin")
 app.register_blueprint(upload_page, url_prefix="/upload")
 
