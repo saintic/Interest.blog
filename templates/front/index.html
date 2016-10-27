@@ -24,7 +24,7 @@
     <script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}" type="text/javascript"></script>
     <script>
         $.ajax({
-            url: "https://api.saintic.com/blog?get_index_only=true",
+            url: "https://api.saintic.com/blog?get_index_only=true&sort=desc&limit=all",
             method: 'GET',
             datatype: 'json',
             success: function(res) {
