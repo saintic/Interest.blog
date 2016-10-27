@@ -14,8 +14,9 @@
           <a class="page-link" href="https://docs.saintic.com" target="_blank">Document</a>
           {% if g.signin %}
               <a class="page-link" href="{{ url_for('logout') }}">Logout</a>
+              <a class="page-link" href="{{ url_for('blogWrite') }}">Write</a>
           {% else %}
-              <a class="page-link" href="{{ url_for('login') }}">Login</a>
+              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome {{ g.username }}">Login</attr></a>
           {% endif %}
         </div>
       </nav>

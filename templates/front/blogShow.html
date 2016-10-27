@@ -2,6 +2,14 @@
 
 {% block title %}Interest Blog Detail | SaintIC{% endblock %}
 
+{% block head %}
+  {% if EnableCodeHighlighting %}
+    <link href="{{ url_for('static', filename='highlight/styles/googlecode.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='highlight/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <article class="post">
@@ -15,6 +23,17 @@
     {{ data['content'] | safe }}
   </div>
 
+  <div class="copyright">
+    {% if data.get("sources") == "原创" %}
+        <p>原创文章，版权所有，转载请注明出处！来源地址：{{ request.url }}</p>
+    {% endif %}
+  </div>
 </article>
+<div class="Share">
+  {% if EnableWeiboShare %}
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+    <wb:share-button appkey="1746902937" addition="number" type="button"></wb:share-button>
+  {% endif %}
+</div>
 
 {% endblock %}

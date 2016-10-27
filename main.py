@@ -7,16 +7,18 @@ __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.1"
 
-
 import json, requests
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
-from config import GLOBAL, SSO
+from config import GLOBAL, SSO, PLUGINS
 from utils.public import logger, gen_requestId, isLogged_in
-from admin.admin import admin_page
+from views.admin import admin_page
+from views.upload import upload_page
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.register_blueprint(admin_page, url_prefix="/admin")
+app.register_blueprint(upload_page, url_prefix="/upload")
 
 #Before each URL request, define the initialization time, requestId, user authentication results and other related information and bind to g
 @app.before_request
@@ -27,6 +29,7 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
+    app.logger.info(app.url_map)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
@@ -62,8 +65,12 @@ def about():
 
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
-    data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False).json().get("data")
-    return render_template("front/blogShow.html", blogId=bid, data=data)
+    data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
+    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'])
+
+@app.route('/blog/write/')
+def blogWrite():
+    return render_template("front/blogWrite.html")
 
 @app.route('/login/')
 def login():

@@ -2,8 +2,9 @@
 
 from flask import Blueprint, render_template
 
-admin_page = Blueprint("admin_page", __name__)
+admin_page = Blueprint("admin", __name__)
 
 @admin_page.route("/")
-def admin_index():
+def AdminIndex():
     return render_template("admin/index.html")
+
