@@ -42,7 +42,7 @@ PLUGINS={
 
     "WeiboShare": True,
 
-    "QQShare": False,
+    "QQShare": True,
 
-    "QzoneShare": False,
+    "QzoneShare": True,
 }
