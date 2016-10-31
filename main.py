@@ -1,11 +1,10 @@
 # -*- coding: utf8 -*-
 #
 #Interest.blog Front, a development of a team blog driven by interests and hobbies.
-#Powered by flask and Bootstrap.
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "0.2"
+__version__ = "0.3"
 
 import json, requests
 from urllib import urlencode
