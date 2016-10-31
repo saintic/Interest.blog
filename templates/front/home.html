@@ -21,7 +21,7 @@
     
     {% if user.get("cname") %}
         <p>
-            <attr title="{{ user.get('motto') }}">{{ user.get('cname') }}</attr>
+            <attr title="{{ user.get('motto') or '' }}">{{ user.get('cname') }}</attr>
         </p>
     {% endif %}
 
