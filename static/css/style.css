@@ -30,4 +30,8 @@
   height: auto;
 }
 
-.home-avatar {}
+.home-avatar {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}

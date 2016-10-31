@@ -77,10 +77,10 @@ def blogWrite():
 
 @app.route('/home/')
 def home():
-    #if g.signin:
-    if True:
+    if g.signin:
         data = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
-        return render_template("front/home.html", data=data)
+        blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
+        return render_template("front/home.html", data=data, blog=blog)
     else:
         return redirect(url_for("login"))
 
@@ -89,8 +89,8 @@ def login():
     if g.signin:
         return redirect(url_for("index"))
     else:
-        logger.info("User request login to SSO")
         SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": g.requestId}))
+        logger.info("User request login to SSO(%s)" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
 @app.route('/logout/')
