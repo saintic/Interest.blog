@@ -42,10 +42,10 @@
         {% for _ in blog %}
           <li>
             <scan>
-            <a class="post-link" href="/blog">{{ _.get("title") }}</a>
-            <sub>{{ _.get("create_time") }}</sub>
-            <sub>{{ _.get("sources") }}</sub>
-            <sub>{{ _.get("catalog") }}</sub>
+            <a href="{{ url_for('blogShow', bid=_.get('id')) }}">{{ _.get("title") }}</a>
+            <sub>{{ _.get("create_time") }}</sub> |
+            <sub>{{ _.get("sources") }}</sub> |
+            <sub>{{ _.get("catalog") }}</sub> |
             <sub>{{ _.get("tag") }}</sub>
             </scan>
           </li>
