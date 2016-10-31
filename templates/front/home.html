@@ -11,7 +11,7 @@
 <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Personal Center</h1>
+    <h1 class="post-title">My Home</h1>
   </header>
 
   <div class="post-content">
@@ -24,21 +24,29 @@
         <p>{{ user.get('motto') }}</p>
     {% endif %}
     {% if user.get('url') %}
-        <a href="{{ user.get('url') }}" target="_blank">Website</a>
+        <p><a href="{{ user.get('url') }}" target="_blank">Website</a></p>
     {% endif %}
     {% if user.get('email') %}
-        <a href="mailto:{{ user.get('email') }}">Email</a>
+        <p><a href="mailto:{{ user.get('email') }}">Email</a></p>
     {% endif %}
     {% if user.get('weibo') %}
-        <a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">Weibo</a>
+        <p><a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">Weibo</a></p>
     {% endif %}
     {% if user.get('github') %}
-        <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">GitHub</a>
+        <p><a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">GitHub</a></p>
     {% endif %}
     {% if blog %}
+    <div>
+        <h1 class="page-heading">我的文章</h1>
+        <ul class="post-list">
         {% for _ in blog %}
-            {{ _ }}
+          <li>
+            <span class="post-meta">{{ _.get("create_time") }}</span>
+            <h2><a class="post-link" href="/blog">{{ _.get("title") }}</a></h2>
+          </li>
         {% endfor %}
+        </ul>
+    </div>
     {% endif %}
   </div>
 
