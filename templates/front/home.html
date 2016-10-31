@@ -16,13 +16,13 @@
 
   <div class="post-content">
     <p>
-        <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square" title="{{ user.get('cname') or 'Oh' }}">
+        <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
     </p>
     
     {% if user.get("cname") %}
-        <attr title="{{ user.get('motto') }}">
-        {{ user.get('cname') }}
-        </attr>
+        <p>
+            <attr title="{{ user.get('motto') }}">{{ user.get('cname') }}</attr>
+        </p>
     {% endif %}
 
     {% if user.get('gender') == '男' %}
