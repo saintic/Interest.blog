@@ -11,32 +11,37 @@
 <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">{{ g.username }} Home</h1>
+    <h1 class="post-title">{{ user.get("cname") }} Home</h1>
   </header>
 
   <div class="post-content">
     <p>
-        <img src="{{ data.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ data.get('cname') or 'Oh' }}">
+        <attr title="{% if user.get('gender') == '男' %}A handsome boy{% elif user.get('gender') == '女' %}A pretty girl{% else %}{% endif %} Joined on {{ user.get('time') }}">
+            <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
+        </attr>
     </p>
-    {% if data.get('cname') %}
-        <p><attr title="{% if data.get('gender') == '男' %}A handsome boy{% elif data.get('gender') == '女' %}A pretty girl{% else %}{% endif %} Joined on {{ data.get('time') }}">{{ data.get('cname') }}</attr></p>
+    {% if user.get('motto') %}
+        <p>{{ user.get('motto') }}</p>
     {% endif %}
-    {% if data.get('motto') %}
-        <p>{{ data.get('motto') }}</p>
+    {% if user.get('url') %}
+        <a href="{{ user.get('url') }}" target="_blank">Website</a>
     {% endif %}
-    {% if data.get('url') %}
-        <a href="{{ data.get('url') }}" target="_blank">My</a>
+    {% if user.get('email') %}
+        <a href="mailto:{{ user.get('email') }}">Email</a>
     {% endif %}
-    {% if data.get('email') %}
-        <a href="mailto:{{ data.get('email') }}">Email</a>
+    {% if user.get('weibo') %}
+        <a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">Weibo</a>
     {% endif %}
-    {% if data.get('weibo') %}
-        <a href="{% if 'http' in data.get('weibo') %}{{ data.get('weibo') }}{% else %}{{ 'http://' + data.get('weibo') }}{% endif %}" target="_blank">Weibo</a>
+    {% if user.get('github') %}
+        <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">GitHub</a>
     {% endif %}
-    {% if data.get('github') %}
-        <a href="{% if 'http' in data.get('github') %}{{ data.get('github') }}{% else %}{{ 'http://' + data.get('github') }}{% endif %}" target="_blank">GitHub</a>
+    {% if blog %}
+        {% for _ in blog %}
+            {{ _ }}
+        {% endfor %}
     {% endif %}
   </div>
+
 </article>
 
 {% endblock %}
