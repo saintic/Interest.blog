@@ -5,7 +5,7 @@
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "0.1"
+__version__ = "0.2"
 
 import json, requests
 from urllib import urlencode
@@ -89,7 +89,7 @@ def login():
         return redirect(url_for("index"))
     else:
         SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": g.requestId}))
-        logger.info("User request login to SSO(%s)" %SSOLoginURL)
+        logger.info("User request login to SSO: %s" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
 @app.route('/logout/')
