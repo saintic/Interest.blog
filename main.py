@@ -5,7 +5,7 @@
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "0.1"
+__version__ = "0.2"
 
 import json, requests
 from urllib import urlencode
