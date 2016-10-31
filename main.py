@@ -29,7 +29,6 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    app.logger.info(app.url_map)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
@@ -70,15 +69,27 @@ def blogShow(bid):
 
 @app.route('/blog/write/')
 def blogWrite():
-    return render_template("front/blogWrite.html")
+    if g.signin:
+        return render_template("front/blogWrite.html")
+    else:
+        return redirect(url_for("login"))
+
+@app.route('/home/')
+def home():
+    if g.signin:
+        user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
+        blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
+        return render_template("front/home.html", user=user, blog=blog)
+    else:
+        return redirect(url_for("login"))
 
 @app.route('/login/')
 def login():
     if g.signin:
         return redirect(url_for("index"))
     else:
-        logger.info("User request login to SSO")
-        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT")}))
+        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": g.requestId}))
+        logger.info("User request login to SSO(%s)" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
 @app.route('/logout/')

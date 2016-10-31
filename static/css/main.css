@@ -87,8 +87,13 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 .footer-col-3 { width: -webkit-calc(45% - (30px / 2)); width: calc(45% - (30px / 2)); }
 
+.footer-col-4 { width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); text-align: left;}
+
 @media screen and (max-width: 800px) { .footer-col-1, .footer-col-2 { width: -webkit-calc(50% - (30px / 2)); width: calc(50% - (30px / 2)); }
-  .footer-col-3 { width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); } }
+  .footer-col-3 { width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); }
+  .footer-col-4 { width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); }
+  /* DIY Add col-4 */
+}
 @media screen and (max-width: 600px) { .footer-col { float: none; width: -webkit-calc(100% - (30px / 2)); width: calc(100% - (30px / 2)); } }
 /** Page content */
 .page-content { padding: 30px 0; }

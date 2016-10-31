@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Interest Blog Home | SaintIC{% endblock %}
+
+{% block head %}
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">My Home</h1>
+  </header>
+
+  <div class="post-content">
+    <p>
+        <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
+    </p>
+    
+    {% if user.get("cname") %}
+        <p>
+            <attr title="{{ user.get('motto') or '' }}">{{ user.get('cname') }}</attr>
+        </p>
+    {% endif %}
+
+    {% if user.get('gender') == '男' %}
+        <p>A handsome boy Joined on {{ user.get('time') }}</p>
+    {% elif user.get('gender') == '女' %}
+        <p>A pretty girl Joined on {{ user.get('time') }}</p>
+    {% else %}
+        <p>Joined on {{ user.get('time') }}</p>
+    {% endif %}
+
+    {% if user.get('url') %}
+        <p><a href="{{ user.get('url') }}" target="_blank">Website</a></p>
+    {% endif %}
+
+    {% if user.get('email') %}
+        <p><a href="mailto:{{ user.get('email') }}">Email</a></p>
+    {% endif %}
+
+    {% if user.get('weibo') %}
+        <p><a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">Weibo</a></p>
+    {% endif %}
+
+    {% if user.get('github') %}
+        <p><a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">GitHub</a></p>
+    {% endif %}
+
+    {% if blog %}
+    <div>
+        <h1 class="page-heading">我的文章</h1>
+        <ul class="post-list">
+        {% for _ in blog %}
+          <li>
+            <scan>
+            <a href="{{ url_for('blogShow', bid=_.get('id')) }}">{{ _.get("title") }}</a>
+            <sub>{{ _.get("create_time") }}</sub> |
+            <sub>{{ _.get("sources") }}</sub> |
+            <sub>{{ _.get("catalog") }}</sub> |
+            <sub>{{ _.get("tag") }}</sub>
+            </scan>
+          </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+  </div>
+
+</article>
+
+{% endblock %}
