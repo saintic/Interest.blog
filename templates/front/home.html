@@ -17,7 +17,11 @@
   <div class="post-content">
     <p>
         <attr title="{% if user.get('gender') == '男' %}A handsome boy{% elif user.get('gender') == '女' %}A pretty girl{% else %}{% endif %} Joined on {{ user.get('time') }}">
-            <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
+            {% if user.get('avatar') %}
+                <img src="{{ user.get('avatar') }}" class="circular--square" title="{{ user.get('cname') or 'Oh' }}">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
+            {% endif %}
         </attr>
     </p>
     {% if user.get('motto') %}
