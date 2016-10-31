@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Interest Blog Home | SaintIC{% endblock %}
+
+{% block content %}
+
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Home</h1>
+  </header>
+
+  <div class="post-content">
+    <p>Hi, 很高兴认识你，这是我的技术博客。</p>
+    <p>如果你想在更多的地方认识我，可以选择下面的各种方式：</p>
+    <!--
+    <p><strong>GitHub:</strong> <a href="https://github.com/saintic">SaintIC</a></p>
+    <p><strong>知乎:</strong>  <a href="#">SaintIC</a></p>
+    <p><strong>Weibo:</strong> <a href="http://weibo.com/staugur">SaintIC</a></p>
+    <p><strong>segmentfault:</strong> <a href="#">SaintIC</a></p>
+    <p><strong>OSChina:</strong> <a href="https://my.oschina.net/staugur/home">SaintIC</a></p>
+    <p><strong>Linkedin:</strong> <a href="#">SaintIC</a></p>
+    <p>如果你想砸死我，可以扫描下面的二维码试试：</p>
+    -->
+          <p><img src="{{ data.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="img-circle" title="{{ data.get('cname') or 'Oh' }}"></p>
+            {% if data.get('cname') %}<p><attr title="{% if data.get('gender') == '男' %}A handsome boy{% elif data.get('gender') == '女' %}A pretty girl{% else %}{% endif %} Joined on {{ data.get('time') }}">{{ data.get('cname') }}</attr></p>{% endif %}
+            {% if data.get('motto') %}<p>{{ data.get('motto') }}</p>{% endif %}
+            <p>
+                {% if data.get('url') %}<a href="{{ data.get('url') }}" target="_blank">My</a>{% endif %}
+                {% if data.get('email') %}<a href="mailto:{{ data.get('email') }}">Email</a>{% endif %}
+                {% if data.get('weibo') %}<a href="{% if 'http' in data.get('weibo') %}{{ data.get('weibo') }}{% else %}{{ 'http://' + data.get('weibo') }}{% endif %}" target="_blank">Weibo</a>{% endif %}
+                {% if data.get('github') %}<a href="{% if 'http' in data.get('github') %}{{ data.get('github') }}{% else %}{{ 'http://' + data.get('github') }}{% endif %}" target="_blank">GitHub</a>{% endif %}
+            </p>
+            <p>If you <a href="{{ url_for('logout') }}">quit</a>, we are sad.</p>
+  </div>
+</article>
+
+{% endblock %}
