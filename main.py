@@ -70,7 +70,10 @@ def blogShow(bid):
 
 @app.route('/blog/write/')
 def blogWrite():
-    return render_template("front/blogWrite.html")
+    if g.signin:
+        return render_template("front/blogWrite.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route('/login/')
 def login():
@@ -78,7 +81,7 @@ def login():
         return redirect(url_for("index"))
     else:
         logger.info("User request login to SSO")
-        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT")}))
+        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": g.requestId}))
         return redirect(SSOLoginURL)
 
 @app.route('/logout/')
