@@ -41,8 +41,7 @@
         <ul class="post-list">
         {% for _ in blog %}
           <li>
-            <span class="post-meta">{{ _.get("create_time") }}</span>
-            <h2><a class="post-link" href="/blog">{{ _.get("title") }}</a></h2>
+            <h2><a class="post-link" href="/blog">{{ _.get("title") }}</a></h2><sub class="post-meta">{{ _.get("create_time") }}</sub>
           </li>
         {% endfor %}
         </ul>
