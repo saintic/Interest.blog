@@ -20,7 +20,6 @@ else:
     print(msg)
     logger.info(msg)
 
-
 try:
     msg = "%s has been launched, %s:%d, with %s." %(ProcessName, Host, Port, ProductType)
     print(msg)
