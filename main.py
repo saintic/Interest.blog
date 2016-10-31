@@ -78,7 +78,7 @@ def blogWrite():
 @app.route('/home/<username>')
 def home(username):
     if g.signin:
-        data = requests.get("https://api.saintic.com/user", timeout=timeout, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": username}).json().get("data")
+        data = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": username}).json().get("data")
         return render_template("front/home.html", data=data)
     else:
         return redirect(url_for("login"))
