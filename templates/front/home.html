@@ -2,12 +2,16 @@
 
 {% block title %}Interest Blog Home | SaintIC{% endblock %}
 
+{% block head %}
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 
 <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Home</h1>
+    <h1 class="post-title">{{ g.username }} Home</h1>
   </header>
 
   <div class="post-content">
@@ -22,7 +26,7 @@
     <p><strong>Linkedin:</strong> <a href="#">SaintIC</a></p>
     <p>如果你想砸死我，可以扫描下面的二维码试试：</p>
     -->
-          <p><img src="{{ data.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="img-circle" title="{{ data.get('cname') or 'Oh' }}"></p>
+          <p><img src="{{ data.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square" title="{{ data.get('cname') or 'Oh' }}"></p>
             {% if data.get('cname') %}<p><attr title="{% if data.get('gender') == '男' %}A handsome boy{% elif data.get('gender') == '女' %}A pretty girl{% else %}{% endif %} Joined on {{ data.get('time') }}">{{ data.get('cname') }}</attr></p>{% endif %}
             {% if data.get('motto') %}<p>{{ data.get('motto') }}</p>{% endif %}
             <p>

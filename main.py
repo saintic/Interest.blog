@@ -75,10 +75,11 @@ def blogWrite():
     else:
         return redirect(url_for("login"))
 
-@app.route('/home/<username>')
-def home(username):
-    if g.signin:
-        data = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": username}).json().get("data")
+@app.route('/home/')
+def home():
+    #if g.signin:
+    if True:
+        data = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         return render_template("front/home.html", data=data)
     else:
         return redirect(url_for("login"))
