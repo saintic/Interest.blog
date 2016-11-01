@@ -26,10 +26,7 @@
         <textarea id="editor" style="height:400px; max-height:500px;" name="content">
            <p>请输入文章内容...</p>
         </textarea>
-        <!--
-        <button id="btn1">获取内容 </button>
-        <button id="btn2">清空内容 </button>
-        -->
+        <input type="hidden" name="author" value="{{ g.username }}"> 
         <input onclick=postForm() type="button" value="提交博客">
         <p style="color:red; text-align: center" id="result"></p>
     </form>
