@@ -1,11 +1,13 @@
 # -*- coding:utf8 -*-
 
 import requests
+import hashlib
 from uuid import uuid4
 from log import Syslog
 from config import SSO
 
 #Something public variable
+md5            = lambda pwd:hashlib.md5(pwd).hexdigest()
 logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 

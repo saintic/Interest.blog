@@ -10,7 +10,7 @@ import json, requests
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
 from config import GLOBAL, SSO, PLUGINS
-from utils.public import logger, gen_requestId, isLogged_in
+from utils.public import logger, gen_requestId, isLogged_in, md5
 from views.admin import admin_page
 from views.upload import upload_page
 
