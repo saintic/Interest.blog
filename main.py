@@ -101,6 +101,7 @@ def logout():
 def sso():
     ticket = request.args.get("ticket")
     username, expires, sessionId = ticket.split('.')
+    logger.info(expires)
     resp = make_response(redirect(url_for("index")))
     resp.set_cookie(key='logged_in', value="yes", expires=expires)
     resp.set_cookie(key='username',  value=username, expires=expires)
