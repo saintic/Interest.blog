@@ -38,6 +38,11 @@
 }
 
 /* 徽章 */
+.badge-fix {
+  display: block;
+  position: relative;
+
+}
 .badge {
   display: block;
   position: absolute;

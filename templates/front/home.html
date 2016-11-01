@@ -51,7 +51,7 @@
 
     {% if blog %}
     <div>
-        <h1 class="page-heading">我的文章<span class="badge green">{{ blog|length }}</span></h1>
+        <h1 class="page-heading badge-fix">我的文章<span class="badge green">{{ blog|length }}</span></h1>
         <ul class="post-list">
         {% for _ in blog %}
           <li>
