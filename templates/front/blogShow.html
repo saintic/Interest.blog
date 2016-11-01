@@ -29,6 +29,7 @@
     {% endif %}
   </div>
 </article>
+
 <div class="Share">
   {% if EnableWeiboShare %}
     <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
@@ -36,4 +37,21 @@
   {% endif %}
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 {% endblock %}
