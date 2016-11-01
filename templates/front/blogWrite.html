@@ -26,7 +26,7 @@
         <textarea id="editor" style="height:400px; max-height:500px;" name="content">
            <p>请输入文章内容...</p>
         </textarea>
-        <input type="hidden" name="author" value="{{ g.username }}"> 
+        <input type="hidden" name="author" value="{{ g.username }}">
         <input onclick=postForm() type="button" value="提交博客">
         <p style="color:red; text-align: center" id="result"></p>
     </form>
@@ -114,7 +114,11 @@
                 console.log(res);
                 if (res.code == 0){
                     alert("提交文章成功！")
-                    location.reload(true);
+                    if ( isNaN(res.data) ) {
+                        location.reload(true);
+                    } else {
+                        window.location={{ url_for("blogShow", bid=res.data) }};
+                    }
                 } else {
                     alert("提交文章失败，请重试提交或报告错误！\n错误原因是：" + res.msg);
                 }

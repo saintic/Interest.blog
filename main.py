@@ -49,10 +49,6 @@ def add_header(response):
 def page_not_found(e):
     return render_template("public/404.html"), 404
 
-@app.route('/robots.txt')
-def robots():
-    return render_template('public/robots.txt')
-
 @app.route("/")
 def index():
     return render_template("front/index.html")
