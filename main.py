@@ -1,11 +1,10 @@
 # -*- coding: utf8 -*-
 #
 #Interest.blog Front, a development of a team blog driven by interests and hobbies.
-#Powered by flask and Bootstrap.
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "0.2"
+__version__ = "0.3"
 
 import json, requests
 from urllib import urlencode
@@ -50,10 +49,6 @@ def add_header(response):
 def page_not_found(e):
     return render_template("public/404.html"), 404
 
-@app.route('/robots.txt')
-def robots():
-    return render_template('public/robots.txt')
-
 @app.route("/")
 def index():
     return render_template("front/index.html")
@@ -79,7 +74,7 @@ def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
-        return render_template("front/home.html", user=user, blog=blog)
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
     else:
         return redirect(url_for("login"))
 
