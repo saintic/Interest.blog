@@ -74,7 +74,7 @@ def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
-        return render_template("front/home.html", user=user, blog=blog)
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
     else:
         return redirect(url_for("login"))
 
