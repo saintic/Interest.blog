@@ -23,4 +23,5 @@ def isLogged_in(cookie_str):
         logger.info("check login request, cookie_str: %s, success:%s" %(cookie_str, success))
         return success
     else:
+        logger.info("Not Logged in")
         return False
