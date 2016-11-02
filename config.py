@@ -35,7 +35,6 @@ SSO={
     #SSO request application.
 }
 
-
 PLUGINS={
 
     "CodeHighlighting": True,
@@ -49,4 +48,8 @@ PLUGINS={
     "BaiduAutoPush": True,
 
     "DuoshuoComment": True,
+
+    "Weather": True,
+
+    "RealProbability": False,
 }
