@@ -40,9 +40,13 @@ PLUGINS={
 
     "CodeHighlighting": True,
 
-    "WeiboShare": True,
+    "WeiboShare": False,
 
     "QQShare": True,
 
     "QzoneShare": True,
+
+    "BaiduAutoPush": True,
+
+    "DuoshuoComment": True,
 }

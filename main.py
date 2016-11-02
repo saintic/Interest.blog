@@ -60,7 +60,7 @@ def about():
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
-    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'])
+    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
 
 @app.route('/blog/write/')
 def blogWrite():
