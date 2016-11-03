@@ -6,11 +6,11 @@ __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.3"
 
-import json, requests
+import json, requests, datetime
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
 from config import GLOBAL, SSO, PLUGINS
-from utils.public import logger, gen_requestId, isLogged_in
+from utils.public import logger, gen_requestId, isLogged_in, md5
 from views.admin import admin_page
 from views.upload import upload_page
 
@@ -60,7 +60,7 @@ def about():
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
-    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'])
+    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
 
 @app.route('/blog/write/')
 def blogWrite():
@@ -74,7 +74,7 @@ def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
-        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for("login"))
 
@@ -83,7 +83,7 @@ def login():
     if g.signin:
         return redirect(url_for("index"))
     else:
-        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": g.requestId}))
+        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": md5("%s:%s" %(SSO.get("SSO.PROJECT"), SSO.get("SSO.REDIRECT") + "/sso/"))}))
         logger.info("User request login to SSO: %s" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
@@ -101,12 +101,15 @@ def logout():
 def sso():
     ticket = request.args.get("ticket")
     username, expires, sessionId = ticket.split('.')
+    UnixExpires = datetime.datetime.strptime(expires,"%Y-%m-%d")
     resp = make_response(redirect(url_for("index")))
-    resp.set_cookie(key='logged_in', value="yes", expires=expires)
-    resp.set_cookie(key='username',  value=username, expires=expires)
-    resp.set_cookie(key='sessionId', value=sessionId, expires=expires)
-    resp.set_cookie(key='time', value=expires, expires=expires)
-    resp.set_cookie(key='Azone', value="sso", expires=expires)
+    #resp.set_cookie(key="test", value="ok", expires=datetime.datetime.strptime(expires,"%Y-%m-%d"))
+    #resp.set_cookie(key='test', value="ok", max_age=ISOString2Time(expires))
+    resp.set_cookie(key='logged_in', value="yes", expires=UnixExpires)
+    resp.set_cookie(key='username',  value=username, expires=UnixExpires)
+    resp.set_cookie(key='sessionId', value=sessionId, expires=UnixExpires)
+    resp.set_cookie(key='time', value=expires, expires=UnixExpires)
+    resp.set_cookie(key='Azone', value="sso", expires=UnixExpires)
     return resp
 
 if __name__ == "__main__":
