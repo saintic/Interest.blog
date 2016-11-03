@@ -16,7 +16,7 @@ def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''
 
     SSOURL = SSO.get("SSO.URL")
-    if cookie_str and not cookie_str == '...':
+    if cookie_str and not cookie_str == '..':
         username, expires, sessionId = cookie_str.split('.')
         #success = Requests(SSOURL+"/sso/").post(data={"username": username, "time": expires, "sessionId": sessionId}).get("success", False)
         success = requests.post(SSOURL+"/sso/", data={"username": username, "time": expires, "sessionId": sessionId}, timeout=5, verify=False).json().get("success", False)
