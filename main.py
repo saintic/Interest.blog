@@ -8,7 +8,7 @@ __version__ = "0.3"
 
 import json, requests, datetime
 from urllib import urlencode
-from flask import Flask, g, render_template, request, redirect, url_for, make_response
+from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS
 from utils.public import logger, gen_requestId, isLogged_in, md5
 from views.admin import admin_page
@@ -53,14 +53,17 @@ def page_not_found(e):
 def index():
     return render_template("front/index.html")
 
-@app.route("/about")
+@app.route("/about/")
 def about():
     return render_template("front/about.html")
 
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
-    return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
+    if data:
+        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
+    else:
+        return abort(404)
 
 @app.route('/blog/write/')
 def blogWrite():

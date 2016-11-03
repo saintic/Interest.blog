@@ -117,7 +117,7 @@
                     if ( isNaN(res.data) ) {
                         location.reload(true);
                     } else {
-                        window.location={{ url_for("blogShow", bid=res.data) }};
+                        window.location="/blog/" + res.data + ".html";
                     }
                 } else {
                     alert("提交文章失败，请重试提交或报告错误！\n错误原因是：" + res.msg);
