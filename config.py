@@ -53,3 +53,7 @@ PLUGINS={
 
     "RealProbability": False,
 }
+
+BLOG={
+    "AdminGroup": []
+}
