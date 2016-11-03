@@ -6,7 +6,7 @@ __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.3"
 
-import json, requests
+import json, requests, datetime
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response
 from config import GLOBAL, SSO, PLUGINS
@@ -101,13 +101,15 @@ def logout():
 def sso():
     ticket = request.args.get("ticket")
     username, expires, sessionId = ticket.split('.')
-    logger.info(expires)
+    UnixExpires = datetime.datetime.strptime(expires,"%Y-%m-%d")
     resp = make_response(redirect(url_for("index")))
-    resp.set_cookie(key='logged_in', value="yes", expires=expires)
-    resp.set_cookie(key='username',  value=username, expires=expires)
-    resp.set_cookie(key='sessionId', value=sessionId, expires=expires)
-    resp.set_cookie(key='time', value=expires, expires=expires)
-    resp.set_cookie(key='Azone', value="sso", expires=expires)
+    #resp.set_cookie(key="test", value="ok", expires=datetime.datetime.strptime(expires,"%Y-%m-%d"))
+    #resp.set_cookie(key='test', value="ok", max_age=ISOString2Time(expires))
+    resp.set_cookie(key='logged_in', value="yes", expires=UnixExpires)
+    resp.set_cookie(key='username',  value=username, expires=UnixExpires)
+    resp.set_cookie(key='sessionId', value=sessionId, expires=UnixExpires)
+    resp.set_cookie(key='time', value=expires, expires=UnixExpires)
+    resp.set_cookie(key='Azone', value="sso", expires=UnixExpires)
     return resp
 
 if __name__ == "__main__":
