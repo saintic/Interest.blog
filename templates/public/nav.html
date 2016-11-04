@@ -10,13 +10,13 @@
           </svg>
         </a>
         <div class="trigger">
-          <a class="page-link" href="{{ url_for('about') }}">About</a>
+          <a class="page-link" href="{{ url_for('about') }}">关于</a>
           {% if g.signin %}
-              <a class="page-link" href="{{ url_for('logout') }}">Logout</a>
-              <a class="page-link" href="{{ url_for('blogWrite') }}">Write</a>
-              <a class="page-link" href="{{ url_for('home') }}">Home</a>
+              <a class="page-link" href="{{ url_for('logout') }}">注销</a>
+              <a class="page-link" href="{{ url_for('blogWrite') }}">创作</a>
+              <a class="page-link" href="{{ url_for('home') }}">个人中心</a>
           {% else %}
-              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome {{ g.username }}">Login</attr></a>
+              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome {{ g.username }}">登录</attr></a>
           {% endif %}
           <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新日志</a>
         </div>
