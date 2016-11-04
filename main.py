@@ -53,6 +53,17 @@ def page_not_found(e):
 def index():
     return render_template("front/index.html")
 
+@app.route("/google32fd52b6c900160b.html")
+def google_search_console():
+    return render_template("public/google32fd52b6c900160b.html")
+
+@app.route("/robots.txt")
+def robots():
+    return """
+User-agent: *
+Allow:/
+    """
+
 @app.route("/about/")
 def about():
     return render_template("front/about.html")
