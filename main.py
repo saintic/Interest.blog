@@ -76,6 +76,16 @@ def blogShow(bid):
     else:
         return abort(404)
 
+@app.route('/blog/edit/')
+def blogEdit():
+    blogId = request.args.get("blogId")
+    if g.signin and blogId:
+        data = requests.get("https://api.saintic.com/blog?blogId=%s" %blogId, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
+        if data:
+            return render_template("front/blogEdit.html", blogId=blogId, data=data)
+    else:
+        return redirect(url_for("login"))
+
 @app.route('/blog/write/')
 def blogWrite():
     if g.signin:
