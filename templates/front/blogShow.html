@@ -16,7 +16,13 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ data['title'] }}</h1>
-    <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">{{ data['create_time'] }}</time></p>
+    <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">Create: {{ data['create_time'] }}</time></p>
+    {% if data.get("update_time") %}
+    <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">Update: {{ data['update_time'] }}</time></p>
+    {% endif %}
+    {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
+    <p class="post-meta"><a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a></p>
+    {% endif %}
   </header>
 
   <div class="post-content" itemprop="articleBody">

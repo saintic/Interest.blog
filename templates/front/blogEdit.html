@@ -36,7 +36,11 @@
         <textarea id="editor" style="height:400px; max-height:500px;" name="content">
            <p>{{ data.get("content") }}</p>
         </textarea>
-        <input type="hidden" name="author" value="{{ g.username }}">
+        {% if g.username == data.get('author') %}
+            <input type="hidden" name="author" value="{{ g.username }}">
+        {% else %}
+            <input type="hidden" name="author" value="{{ data.get('author') }}">
+        {% endif %}
         <input type="hidden" name="blogId" value="{{ blogId }}">
         <input onclick=postForm() type="button" value="更新博客">
     </form>
