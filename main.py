@@ -66,7 +66,7 @@ Allow:/
 
 @app.route("/about/")
 def about():
-    return render_template("front/about.html")
+    return redirect(url_for('blogShow', bid=113))
 
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
