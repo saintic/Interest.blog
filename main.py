@@ -97,7 +97,7 @@ def blogWrite():
 def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
-        blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username}).json().get("data") or []
+        blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username, "limit": "all"}).json().get("data") or []
         return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for("login"))
@@ -113,9 +113,10 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).text
-    logger.info({"sso logout": data})
-    resp = make_response(redirect(url_for('index')))
+    #data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).text
+    #logger.info({"sso logout": data})
+    SSOLogoutURL = SSO.get("SSO.URL") + "/sso/?nextUrl=" + SSO.get("SSO.REDIRECT")
+    resp = make_response(redirect(SSOLogoutURL))
     resp.set_cookie(key='logged_in', value='', expires=0)
     resp.set_cookie(key='username',  value='', expires=0)
     resp.set_cookie(key='sessionId',  value='', expires=0)
