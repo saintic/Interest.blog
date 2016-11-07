@@ -19,7 +19,7 @@ def isLogged_in(cookie_str):
     if cookie_str and not cookie_str == '..':
         username, expires, sessionId = cookie_str.split('.')
         #success = Requests(SSOURL+"/sso/").post(data={"username": username, "time": expires, "sessionId": sessionId}).get("success", False)
-        success = requests.post(SSOURL+"/sso/", data={"username": username, "time": expires, "sessionId": sessionId}, timeout=5, verify=False).json().get("success", False)
+        success = requests.post(SSOURL+"/sso/", data={"username": username, "time": expires, "sessionId": sessionId}, timeout=5, verify=False, headers={"User-Agent": SSO.get("SSO.PROJECT")}).json().get("success", False)
         logger.info("check login request, cookie_str: %s, success:%s" %(cookie_str, success))
         return success
     else:
