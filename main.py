@@ -113,7 +113,7 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).json()
+    data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).text
     logger.info({"sso logout": data})
     resp = make_response(redirect(url_for('index')))
     resp.set_cookie(key='logged_in', value='', expires=0)

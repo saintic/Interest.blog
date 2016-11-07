@@ -26,9 +26,11 @@ PRODUCT={
 SSO={
 
     "SSO.URL": "https://passport.saintic.com",
+    #"SSO.URL": "http://101.200.125.9:10030",
     #The passport(SSO Authentication System) Web Site URL.
 
     "SSO.REDIRECT": "https://www.saintic.com",
+    #"SSO.REDIRECT": "http://101.200.125.9:10140",
     #SSO callback address.
 
     "SSO.PROJECT": PRODUCT["ProcessName"],
