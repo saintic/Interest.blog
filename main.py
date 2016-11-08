@@ -81,10 +81,9 @@ def blogEdit():
     blogId = request.args.get("blogId")
     if g.signin and blogId:
         data = requests.get("https://api.saintic.com/blog?blogId=%s" %blogId, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
-        if data:
+        if data and g.username == data.get("author") or g.username == "admin":
             return render_template("front/blogEdit.html", blogId=blogId, data=data)
-    else:
-        return redirect(url_for("login"))
+    return redirect(url_for("login"))
 
 @app.route('/blog/write/')
 def blogWrite():
