@@ -52,6 +52,8 @@ PLUGINS={
     "Weather": True,
 
     "RealProbability": False,
+
+    "BaiduStatistics": True,
 }
 
 BLOG={

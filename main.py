@@ -51,7 +51,7 @@ def page_not_found(e):
 
 @app.route("/")
 def index():
-    return render_template("front/index.html")
+    return render_template("front/index.html", EnableBaiduStatistics=PLUGINS['BaiduStatistics'])
 
 @app.route("/google32fd52b6c900160b.html")
 def google_search_console():
