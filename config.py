@@ -41,9 +41,9 @@ PLUGINS={
 
     "WeiboShare": False,
 
-    "QQShare": True,
+    "QQShare": False,
 
-    "QzoneShare": True,
+    "QzoneShare": False,
 
     "BaiduAutoPush": True,
 
