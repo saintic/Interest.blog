@@ -22,7 +22,13 @@
     <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">Update: {{ data['update_time'] }}</time></p>
     {% endif %}
     <p class="post-meta">Catalog: {{ data['catalog'] }}</p>
-    <p class="post-meta">Sources: {% if data.get("sources") == "原创" %}<img src="{{ url_for('static', filename='img/icon/Original.jpg') }}" />{% else %}{{ data.get("sources") }}{% endif %}</p>
+    {% if data.get("sources") == "原创" %}
+    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Original.gif') }}" /></p>
+    {% elif data.get("sources") == "转载" %}
+    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Reprint.gif') }}" /></p>
+    {% elif data.get("sources") == "翻译" %}
+    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Translate.gif') }}" /></p>
+    {% endif %}
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
         <a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a>
