@@ -4,9 +4,9 @@
 
 {% block head %}
   {% if EnableCodeHighlighting %}
-    <link href="{{ url_for('static', filename='highlight/styles/googlecode.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='highlight/highlight.pack.js') }}"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+  <link href="{{ url_for('static', filename='highlight/styles/googlecode.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='highlight/highlight.pack.js') }}"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   {% endif %}
 {% endblock %}
 
@@ -21,8 +21,8 @@
     {% if data.get("update_time") %}
     <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">Update: {{ data['update_time'] }}</time></p>
     {% endif %}
-    <p class="post-meta">Sources: {{ data['sources'] }}</p>
     <p class="post-meta">Catalog: {{ data['catalog'] }}</p>
+    <p class="post-meta">Sources: {% if data.get("sources") == "原创" %}<img src="{{ url_for('static', filename='img/icon/Original.jpg') }}" />{% else %}{{ data.get("sources") }}{% endif %}</p>
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
         <a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a>
