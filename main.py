@@ -28,7 +28,6 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    app.logger.debug("THE REQUEST IS: " + request.url_root)
     logger.debug(request.path)
     logger.debug(request.full_path)
     logger.debug(request.script_root)
@@ -79,7 +78,7 @@ def about():
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
     if data:
-        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableWeiboShare=PLUGINS['WeiboShare'], EnableQQShare=PLUGINS['QQShare'], EnableQzoneShare=PLUGINS['QzoneShare'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
+        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
     else:
         return abort(404)
 
@@ -113,21 +112,17 @@ def login():
     if g.signin:
         return redirect(url_for("index"))
     else:
-        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": request.url_root.strip("/") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": md5("%s:%s" %(SSO.get("SSO.PROJECT"), request.url_root.strip("/") + "/sso/"))}))
-        path  = SSO["SSO.URL"].strip("/") + "/login/"
         query = {"sso": True,
-           "sso_r": request.url_root.strip("/") + "/sso/",
+           "sso_r": SpliceURL.Modify(request.url_root, "/sso/").geturl,
            "sso_p": SSO["SSO.PROJECT"],
-           "sso_t": md5("%s:%s" %(SSO["SSO.PROJECT"], request.url_root.strip("/") + "/sso/"))
+           "sso_t": md5("%s:%s" %(SSO["SSO.PROJECT"], SpliceURL.Modify(request.url_root, "/sso/").geturl))
         }
-        #SSOLoginURL = SpliceURL.Modify(path, **query).geturl
+        SSOLoginURL = SpliceURL.Modify(url=SSO["SSO.URL"], path="/login/", query=query).geturl
         logger.info("User request login to SSO: %s" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
 @app.route('/logout/')
 def logout():
-    #data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).text
-    #logger.info({"sso logout": data})
     SSOLogoutURL = SSO.get("SSO.URL") + "/sso/?nextUrl=" + request.url_root.strip("/")
     resp = make_response(redirect(SSOLogoutURL))
     resp.set_cookie(key='logged_in', value='', expires=0)

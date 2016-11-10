@@ -25,8 +25,7 @@ PRODUCT={
 
 SSO={
 
-    #"SSO.URL": "https://passport.saintic.com",
-    "SSO.URL": "http://127.0.0.1:10030",
+    "SSO.URL": "https://passport.saintic.com",
     #The passport(SSO Authentication System) Web Site URL.
 
     "SSO.PROJECT": PRODUCT["ProcessName"],
@@ -36,12 +35,6 @@ SSO={
 PLUGINS={
 
     "CodeHighlighting": True,
-
-    "WeiboShare": False,
-
-    "QQShare": False,
-
-    "QzoneShare": False,
 
     "BaiduAutoPush": True,
 

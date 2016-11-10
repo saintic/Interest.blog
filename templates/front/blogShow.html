@@ -48,13 +48,6 @@
   </div>
 </article>
 
-<div class="Share">
-  {% if EnableWeiboShare %}
-    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
-    <wb:share-button appkey="1746902937" addition="number" type="button"></wb:share-button>
-  {% endif %}
-</div>
-
 {% if EnableDuoshuoComment %}
 <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="{{ blogId }}" data-title="{{ data['title'] }}" data-url="{{ request.url }}"></div>
