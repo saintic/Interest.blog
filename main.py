@@ -10,7 +10,7 @@ import json, requests, datetime, SpliceURL
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS
-from utils.public import logger, gen_requestId, isLogged_in, md5
+from utils.public import logger, gen_requestId, isLogged_in, md5, ClickRedisWrite
 from views.admin import admin_page
 from views.upload import upload_page
 
@@ -28,19 +28,12 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    logger.debug(request.path)
-    logger.debug(request.full_path)
-    logger.debug(request.script_root)
-    logger.debug(request.url)
-    logger.debug(request.base_url)
-    logger.debug(request.url_root)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
 def add_header(response):
     response.headers["X-Interest-Request-Id"] = g.requestId
-    logger.info(json.dumps({
-            "AccessLog": True,
+    AccessLog = {
             "status_code": response.status_code,
             "method": request.method,
             "ip": request.headers.get('X-Real-Ip', request.remote_addr),
@@ -48,7 +41,10 @@ def add_header(response):
             "referer": request.headers.get('Referer'),
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
-    }))
+    }
+    ClickLog = AccessLog.update(username=g.username, sessionId=g.sessionId)
+    logger.info(json.dumps(AccessLog))
+    ClickRedisWrite(ClickLog)
     return response
 
 @app.errorhandler(404)

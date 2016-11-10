@@ -11,6 +11,14 @@ md5            = lambda pwd:hashlib.md5(pwd).hexdigest()
 logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 
+from redis import Redis
+rc = Redis(host="127.0.0.1", port=16379, password="SaintIC", socket_connect_timeout=2)
+def ClickRedisWrite(data):
+    """data is a dict"""
+    key="Interest.blog.click.log"
+    if isinstance(data, dict):
+        for k,v in data.iteritems():
+            rc.hset(key, k, v)
 
 def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''
