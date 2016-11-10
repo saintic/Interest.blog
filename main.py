@@ -33,7 +33,7 @@ def before_request():
 @app.after_request
 def add_header(response):
     response.headers["X-Interest-Request-Id"] = g.requestId
-    AccessLog = {
+    ClickLog = {
             "status_code": response.status_code,
             "method": request.method,
             "ip": request.headers.get('X-Real-Ip', request.remote_addr),
@@ -41,9 +41,10 @@ def add_header(response):
             "referer": request.headers.get('Referer'),
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
+            "username": g.username,
+            "sessionId": g.sessionId
     }
-    ClickLog = AccessLog.update(username=g.username, sessionId=g.sessionId)
-    logger.info(json.dumps(AccessLog))
+    logger.info(json.dumps(ClickLog))
     ClickRedisWrite(ClickLog)
     return response
 
