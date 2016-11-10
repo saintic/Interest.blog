@@ -10,7 +10,7 @@ import json, requests, datetime, SpliceURL
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS
-from utils.public import logger, gen_requestId, isLogged_in, md5, ClickRedisWrite
+from utils.public import logger, gen_requestId, isLogged_in, md5, ClickRedisWrite, ClickMysqlWrite
 from views.admin import admin_page
 from views.upload import upload_page
 
