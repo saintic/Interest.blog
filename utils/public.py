@@ -19,6 +19,13 @@ def ClickRedisWrite(key, data):
         if data.get("agent"):
             for k,v in data.iteritems():
                 rc.hset(key, k, v)
+from torndb import Connection
+mysql=Connection(host="127.0.0.1", port=3306, database='interestBlog', user='root', password="123456", time_zone='+8:00', charset='utf8', connect_timeout=2)
+def ClickMysqlWrite(data):
+    if isinstance(data, dict):
+        if data.get("agent"):
+            sql = "insert into interestBlog.clickLog set requestId=%s, url=%s, ip=%s, agent=%s, method=%s, status_code=%s, referer=%s"
+            mysql.insert(sql, data.get("requestId"), data.get("url"), data.get("ip"), data.get("agent"), data.get("method"), data.get("status_code"), data.get("referer"))
 
 def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''
