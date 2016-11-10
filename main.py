@@ -41,11 +41,9 @@ def add_header(response):
             "referer": request.headers.get('Referer'),
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
-            "username": g.username,
-            "sessionId": g.sessionId
     }
     logger.info(json.dumps(ClickLog))
-    ClickRedisWrite(ClickLog)
+    ClickRedisWrite(g.sessionId, ClickLog)
     return response
 
 @app.errorhandler(404)

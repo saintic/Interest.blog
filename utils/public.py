@@ -13,9 +13,8 @@ gen_requestId  = lambda :str(uuid4())
 
 from redis import Redis
 rc = Redis(host="127.0.0.1", port=16379, password="SaintIC", socket_connect_timeout=2)
-def ClickRedisWrite(data):
-    """data is a dict"""
-    key="Interest.blog.click.log"
+def ClickRedisWrite(key, data):
+    key ="Interest_blog_clickLog_"  + key
     if isinstance(data, dict):
         for k,v in data.iteritems():
             rc.hset(key, k, v)
