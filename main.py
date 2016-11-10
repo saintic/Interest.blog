@@ -6,7 +6,7 @@ __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
 __version__ = "0.5"
 
-import json, requests, datetime
+import json, requests, datetime, SpliceURL
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS
@@ -28,6 +28,13 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
+    app.logger.debug("THE REQUEST IS: " + request.url_root)
+    logger.debug(path)
+    logger.debug(full_path)
+    logger.debug(script_root)
+    logger.debug(url)
+    logger.debug(base_url)
+    logger.debug(url_root)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
@@ -106,7 +113,14 @@ def login():
     if g.signin:
         return redirect(url_for("index"))
     else:
-        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": SSO.get("SSO.REDIRECT") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": md5("%s:%s" %(SSO.get("SSO.PROJECT"), SSO.get("SSO.REDIRECT") + "/sso/"))}))
+        SSOLoginURL = "%s/login/?%s" %(SSO.get("SSO.URL"), urlencode({"sso": True, "sso_r": request.url_root.strip("/") + "/sso/", "sso_p": SSO.get("SSO.PROJECT"), "sso_t": md5("%s:%s" %(SSO.get("SSO.PROJECT"), request.url_root.strip("/") + "/sso/"))}))
+        path  = SSO["SSO.URL"].strip("/") + "/login/"
+        query = {"sso": True,
+           "sso_r": request.url_root.strip("/") + "/sso/",
+           "sso_p": SSO["SSO.PROJECT"],
+           "sso_t": md5("%s:%s" %(SSO["SSO.PROJECT"], request.url_root.strip("/") + "/sso/"))
+        }
+        #SSOLoginURL = SpliceURL.Modify(path, **query).geturl
         logger.info("User request login to SSO: %s" %SSOLoginURL)
         return redirect(SSOLoginURL)
 
@@ -114,7 +128,7 @@ def login():
 def logout():
     #data = requests.delete(SSO.get("SSO.URL") + "/sso/", timeout=6, headers={"User-Agent": "Interest.blog/%s" %__version__}, verify=False, data={"username": g.username, "time": g.expires, "sessionId": g.sessionId}).text
     #logger.info({"sso logout": data})
-    SSOLogoutURL = SSO.get("SSO.URL") + "/sso/?nextUrl=" + SSO.get("SSO.REDIRECT")
+    SSOLogoutURL = SSO.get("SSO.URL") + "/sso/?nextUrl=" + request.url_root.strip("/")
     resp = make_response(redirect(SSOLogoutURL))
     resp.set_cookie(key='logged_in', value='', expires=0)
     resp.set_cookie(key='username',  value='', expires=0)
