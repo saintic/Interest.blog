@@ -20,7 +20,7 @@ def ClickRedisWrite(key, data):
             for k,v in data.iteritems():
                 rc.hset(key, k, v)
 from torndb import Connection
-mysql=Connection(host="127.0.0.1", port=3306, database='interestBlog', user='root', password="123456", time_zone='+8:00', charset='utf8', connect_timeout=2)
+mysql=Connection(host="127.0.0.1", database='interestBlog', user='root', password="123456", time_zone='+8:00', charset='utf8', connect_timeout=2)
 def ClickMysqlWrite(data):
     if isinstance(data, dict):
         if data.get("agent"):
