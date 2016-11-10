@@ -43,7 +43,7 @@ def add_header(response):
             "requestId": g.requestId,
     }
     logger.info(json.dumps(ClickLog))
-    ClickRedisWrite(g.sessionId, ClickLog)
+    ClickRedisWrite(g.requestId, ClickLog)
     return response
 
 @app.errorhandler(404)
