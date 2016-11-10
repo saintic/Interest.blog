@@ -29,12 +29,12 @@ def before_request():
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
     app.logger.debug("THE REQUEST IS: " + request.url_root)
-    logger.debug(path)
-    logger.debug(full_path)
-    logger.debug(script_root)
-    logger.debug(url)
-    logger.debug(base_url)
-    logger.debug(url_root)
+    logger.debug(request.path)
+    logger.debug(request.full_path)
+    logger.debug(request.script_root)
+    logger.debug(request.url)
+    logger.debug(request.base_url)
+    logger.debug(request.url_root)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
