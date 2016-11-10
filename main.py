@@ -59,21 +59,6 @@ def page_not_found(e):
 def index():
     return render_template("front/index.html", EnableBaiduStatistics=PLUGINS['BaiduStatistics'])
 
-@app.route("/google32fd52b6c900160b.html")
-def google_search_console():
-    return render_template("public/google32fd52b6c900160b.html")
-
-@app.route("/robots.txt")
-def robots():
-    return """
-User-agent: *
-Allow:/
-    """
-
-@app.route("/about/")
-def about():
-    return redirect(url_for('blogShow', bid=113))
-
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
@@ -146,6 +131,17 @@ def sso():
     resp.set_cookie(key='time', value=expires, expires=UnixExpires)
     resp.set_cookie(key='Azone', value="sso", expires=UnixExpires)
     return resp
+
+@app.route("/google32fd52b6c900160b.html")
+def google_search_console():
+    return render_template("public/google32fd52b6c900160b.html")
+
+@app.route("/robots.txt")
+def robots():
+    return """
+User-agent: *
+Allow:/
+    """
 
 if __name__ == "__main__":
     Host = GLOBAL.get('Host')
