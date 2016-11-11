@@ -15,6 +15,8 @@ tornado
 gevent
 setproctitle
 requests
+torndb
+MySQL-python
 ```
 
 ## Usage

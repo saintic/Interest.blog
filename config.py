@@ -49,5 +49,16 @@ PLUGINS={
 
 BLOG={
 
-    "AdminPrefix": "/m",
+    "AdminPrefix": "/admin",
+}
+
+MYSQL={
+    "Host": "101.200.125.9",
+    "Port": 3306,
+    "Database": "saintic",
+    "User": "root",
+    "Passwd": "123456",
+    "Charset": "utf8",
+    "Timezone": "+8:00",
+    #MySQL连接信息，格式可包括在()、[]、{}内，分别填写主机名或IP、端口、数据库、用户、密码、字符集、时区等，其中port默认3306、字符集默认utf8、时区默认东八区，注意必须写在一行内！
 }
