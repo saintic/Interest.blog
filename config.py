@@ -49,5 +49,5 @@ PLUGINS={
 
 BLOG={
 
-    "AdminPrefix": "/admin",
+    "AdminPrefix": "/m",
 }

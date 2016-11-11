@@ -11,19 +11,11 @@ md5            = lambda pwd:hashlib.md5(pwd).hexdigest()
 logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 
-from redis import Redis
-rc = Redis(host="127.0.0.1", port=16379, password="SaintIC", socket_connect_timeout=2)
-def ClickRedisWrite(key, data):
-    key ="Interest_blog_clickLog_"  + key
-    if isinstance(data, dict):
-        if data.get("agent"):
-            for k,v in data.iteritems():
-                rc.hset(key, k, v)
 from torndb import Connection
-mysql=Connection(host="127.0.0.1", database='interestBlog', user='root', password="123456", time_zone='+8:00', charset='utf8', connect_timeout=2)
+mysql=Connection(host="101.200.125.9", database='interestBlog', user='root', password="123456", time_zone='+8:00', charset='utf8', connect_timeout=2)
 def ClickMysqlWrite(data):
     if isinstance(data, dict):
-        if data.get("agent"):
+        if data.get("agent") and data.get("method") in ("GET", "POST", "PUT", "DELETE", "OPTIONS"):
             sql = "insert into interestBlog.clickLog set requestId=%s, url=%s, ip=%s, agent=%s, method=%s, status_code=%s, referer=%s"
             mysql.insert(sql, data.get("requestId"), data.get("url"), data.get("ip"), data.get("agent"), data.get("method"), data.get("status_code"), data.get("referer"))
 

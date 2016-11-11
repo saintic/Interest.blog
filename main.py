@@ -9,14 +9,14 @@ __version__ = "0.5"
 import json, requests, datetime, SpliceURL
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
-from config import GLOBAL, SSO, PLUGINS
-from utils.public import logger, gen_requestId, isLogged_in, md5, ClickRedisWrite, ClickMysqlWrite
+from config import GLOBAL, SSO, PLUGINS, BLOG
+from utils.public import logger, gen_requestId, isLogged_in, md5, ClickMysqlWrite
 from views.admin import admin_page
 from views.upload import upload_page
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-app.register_blueprint(admin_page, url_prefix="/admin")
+app.register_blueprint(admin_page, url_prefix=BLOG.get("AdminPrefix", "/admin"))
 app.register_blueprint(upload_page, url_prefix="/upload")
 
 #Before each URL request, define the initialization time, requestId, user authentication results and other related information and bind to g
@@ -42,7 +42,7 @@ def add_header(response):
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
     }
-    logger.info(json.dumps(ClickLog))
+    #logger.info(json.dumps(ClickLog))
     ClickMysqlWrite(ClickLog)
     return response
 
