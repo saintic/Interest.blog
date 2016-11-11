@@ -48,5 +48,6 @@ PLUGINS={
 }
 
 BLOG={
-    "AdminGroup": []
+
+    "AdminPrefix": "/admin",
 }

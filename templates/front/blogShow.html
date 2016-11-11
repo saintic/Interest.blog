@@ -32,7 +32,6 @@
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
         <a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a>
-        <a href="#">删除文章</a>
     </p>
     {% endif %}
   </header>

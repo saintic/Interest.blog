@@ -43,7 +43,6 @@ def add_header(response):
             "requestId": g.requestId,
     }
     logger.info(json.dumps(ClickLog))
-    ClickRedisWrite(g.requestId, ClickLog)
     ClickMysqlWrite(ClickLog)
     return response
 
