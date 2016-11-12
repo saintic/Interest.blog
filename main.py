@@ -115,8 +115,12 @@ def logout():
 @app.route('/sso/')
 def sso():
     ticket = request.args.get("ticket")
+    logger.info("ticket: %s" %ticket)
     username, expires, sessionId = ticket.split('.')
-    UnixExpires = datetime.datetime.strptime(expires,"%Y-%m-%d")
+    if expires == 'None':
+        UnixExpires = None
+    else:
+        UnixExpires = datetime.datetime.strptime(expires,"%Y-%m-%d")
     resp = make_response(redirect(url_for("index")))
     #resp.set_cookie(key="test", value="ok", expires=datetime.datetime.strptime(expires,"%Y-%m-%d"))
     #resp.set_cookie(key='test', value="ok", max_age=ISOString2Time(expires))
