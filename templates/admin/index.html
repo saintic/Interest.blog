@@ -1,19 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to SaintIC!</title>
-  　<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<p>Interest.blog Admin 即将发布新版，请持续关注！</p>
+{% extends "base.html" %}
 
-<p><em>Thank you.</em></p>
-</body>
-</html>
+{% block title %}Interest Blog Admin | SaintIC{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+
+{% if request.args.get("user") in ("true", "True") %}
+<table class="table table-hover">
+	<caption>用户属性管理</caption>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>username</th>
+			<th>email</th>
+			<th>cname</th>
+			<th>avatar</th>
+			<th>motto</th>
+			<th>url</th>
+			<th>time</th>
+			<th>weibo</th>
+			<th>github</th>
+			<th>gender</th>
+			<th>extra</th>
+			<th>isAdmin</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>id</th>
+			<th>username</th>
+			<th>email</th>
+			<th>cname</th>
+			<th>avatar</th>
+			<th>motto</th>
+			<th>url</th>
+			<th>time</th>
+			<th>weibo</th>
+			<th>github</th>
+			<th>gender</th>
+			<th>extra</th>
+			<th>isAdmin</th>
+		</tr>
+	</tbody>
+</table>
+{% endif %}
+{% if request.args.get("blog") in ("true", "True") %}
+<table class="table table-hover">
+	<caption>博客文章管理</caption>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>title</th>
+			<th>content</th>
+			<th>create_time</th>
+			<th>update_time</th>
+			<th>tag</th>
+			<th>catalog</th>
+			<th>sources</th>
+			<th>author</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>id</th>
+			<th>title</th>
+			<th>content</th>
+			<th>create_time</th>
+			<th>update_time</th>
+			<th>tag</th>
+			<th>catalog</th>
+			<th>sources</th>
+			<th>author</th>
+		</tr>
+	</tbody>
+</table>
+{% endif %}
+{% endblock %}
