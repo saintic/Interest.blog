@@ -3,6 +3,7 @@
 		<div id="wrapper">
 			<div id="minwidth">
 				<div id="holder">
+
 					<div id="menu">
 						<div id="left"></div>
 						<div id="right"></div>
@@ -19,6 +20,7 @@
 						</ul>
 						<div class="clear"></div>
 					</div>
+
 					<div id="submenu">
 						<div class="modules_left">
 							<div class="module buttons">
@@ -54,6 +56,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div id="desc">
 						<div class="body">
 							<div class="col w2">
@@ -70,201 +73,29 @@
 							</div>
 							<div class="col w8 last">
 								<div class="content">
+								{% for block in data %}
+   								    <!-- A line blog data start -->
 									<div class="shelf">
 										<div class="left"></div>
 										<div class="right"></div>
 										<div class="inside">
 											<div class="books articles">
+								            {% for blog in block %}
+ 								                <!-- A blog data start -->
 												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
+													<a href="{{ url_for('blogShow', bid=blog.id) }}">
+														<span>{{ blog.create_time }}</span>
+														<small>{{ blog.title }}</small>
 													</a>
 												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2 last">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
+                 							    <!-- A blog data end -->
+           								    {% endfor %}
 											</div>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="shelf">
-										<div class="left"></div>
-										<div class="right"></div>
-										<div class="inside">
-											<div class="books articles">
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2 last">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-											</div>
-										</div>
-										<div class="clear"></div>
-									</div>
-									<div class="shelf">
-										<div class="left"></div>
-										<div class="right"></div>
-										<div class="inside">
-											<div class="books articles">
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2 last">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-											</div>
-										</div>
-										<div class="clear"></div>
-									</div>
-									<div class="shelf">
-										<div class="left"></div>
-										<div class="right"></div>
-										<div class="inside">
-											<div class="books articles">
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2 last">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-											</div>
-										</div>
-										<div class="clear"></div>
-									</div>
-									<div class="shelf">
-										<div class="left"></div>
-										<div class="right"></div>
-										<div class="inside">
-											<div class="books articles">
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-												<div class="col w2 last">
-													<a href="">
-														<span>Here is the title, two lines</span>
-														<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-													</a>
-												</div>
-											</div>
-										</div>
-										<div class="clear"></div>
-									</div>
+                                    <!-- A line blog data end -->
+								{% endfor %}
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -275,6 +106,7 @@
 							<div id="bottom_left"><div id="bottom_right"></div></div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
