@@ -43,3 +43,7 @@ def isLogged_in(cookie_str):
     else:
         logger.info("Not Logged in")
         return False
+
+def chunks(arr, n):
+    """arr是被分割的list，n是每个chunk中含n元素。"""
+    return [arr[i:i+n] for i in range(0, len(arr), n)]
