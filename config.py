@@ -53,7 +53,7 @@ BLOG={
 }
 
 MYSQL={
-    "Host": "101.200.125.9",
+    "Host": "127.0.0.1",
     "Port": 3306,
     "Database": "saintic",
     "User": "root",
