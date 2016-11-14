@@ -28,22 +28,7 @@
 			<th>isAdmin</th>
 		</tr>
 	</thead>
-	<tbody>
-		<tr>
-			<th>id</th>
-			<th>username</th>
-			<th>email</th>
-			<th>cname</th>
-			<th>avatar</th>
-			<th>motto</th>
-			<th>url</th>
-			<th>time</th>
-			<th>weibo</th>
-			<th>github</th>
-			<th>gender</th>
-			<th>extra</th>
-			<th>isAdmin</th>
-		</tr>
+	<tbody id="user-profile">
 	</tbody>
 </table>
 {% endif %}
@@ -63,19 +48,56 @@
 			<th>author</th>
 		</tr>
 	</thead>
-	<tbody>
-		<tr>
-			<th>id</th>
-			<th>title</th>
-			<th>content</th>
-			<th>create_time</th>
-			<th>update_time</th>
-			<th>tag</th>
-			<th>catalog</th>
-			<th>sources</th>
-			<th>author</th>
-		</tr>
+	<tbody id="blog-profile">
 	</tbody>
 </table>
 {% endif %}
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript">
+{% if request.args.get("user") in ("true", "True") %}
+    // 获取用户属性
+    $.ajax({
+        url: "https://api.saintic.com/user?getalluser=true",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var user = '';
+            for(i=0; i<data.length; i++) {
+            	console.log(data[i]);
+			    user += "<tr><th>" + data[i].id + "</th><th>" + data[i].username + "</th><th>" + data[i].email + "</th><th>" + data[i].cname +"</th><th>" + data[i].avatar + "</th><th>" + data[i].motto + "</th><th>" + data[i].url + "</th><th>" + data[i].time + "</th><th>" + data[i].weibo + "</th><th>" + data[i].github + "</th><th>" + data[i].gender + "</th><th>" + data[i].extra + "</th><th>" + data[i].isAdmin + "</th></tr>";
+            };
+            document.getElementById('user-profile').innerHTML = user;
+        },
+        error: function(error){
+            alert("获取用户属性失败");
+        }
+    });
+{% endif %}
+
+{% if request.args.get("blog") in ("true", "True") %}
+    // 获取博客属性
+    $.ajax({
+        url: "https://api.saintic.com/blog?limit=all",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var blog = '';
+            for(i=0; i<data.length; i++) {
+            	console.log(data[i]);
+			    blog += "<tr><th>" + data[i].id + "</th><th>" + data[i].title + "</th><th>" + "略" + "</th><th>" + data[i].create_time +"</th><th>" + data[i].update_time + "</th><th>" + data[i].tag + "</th><th>" + data[i].catalog + "</th><th>" + data[i].sources + "</th><th>" + data[i].author + "</th></tr>";
+            };
+            document.getElementById('blog-profile').innerHTML = blog;
+        },
+        error: function(error){
+            alert("获取博客属性失败");
+        }
+    });
+{% endif %}
+</script>
 {% endblock %}
