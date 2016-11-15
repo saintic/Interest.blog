@@ -148,7 +148,9 @@ Sitemap: http://www.saintic.com/sitemap.xml
 
 @app.route("/sitemap.xml")
 def sitemap():
-    return render_template("public/sitemap.xml")
+    response = make_response(render_template("public/sitemap.xml"))
+    response.headers["Content-Type"] = "application/xml"    
+    return response
 
 if __name__ == "__main__":
     Host = GLOBAL.get('Host')
