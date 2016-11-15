@@ -10,7 +10,7 @@ import json, requests, datetime, SpliceURL
 from urllib import urlencode
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS, BLOG
-from utils.public import logger, gen_requestId, isLogged_in, md5, ClickMysqlWrite
+from utils.public import logger, gen_requestId, isLogged_in, md5, ClickMysqlWrite, isAdmin
 from views.admin import admin_page
 from views.upload import upload_page
 
@@ -84,7 +84,7 @@ def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username, "limit": "all"}).json().get("data") or []
-        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
+        return render_template("front/home.html", user=user, blog=blog, isAdmin=isAdmin(g.username), blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for("login"))
 
