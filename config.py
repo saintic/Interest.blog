@@ -49,7 +49,7 @@ PLUGINS={
 
 BLOG={
 
-    "AdminPrefix": "/ManagementCenter",
+    "AdminPrefix": "/admin",
 }
 
 MYSQL={

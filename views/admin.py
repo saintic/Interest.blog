@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 import requests
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, g
 from utils.public import chunks
 
 admin_page = Blueprint("admin", __name__)
