@@ -18,9 +18,9 @@
           {% else %}
               <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome">登录</attr></a>
           {% endif %}
-          <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新日志</a>\
+          <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新日志</a>
           {% if isAdmin %}
-          <a class="page-link" href="{{ url_for('admin_page.AdminIndex') }}">管理后台</a>\
+          <a class="page-link" href="{{ url_for('admin.AdminIndex') }}">管理后台</a>
           {% endif %}
         </div>
       </nav>
