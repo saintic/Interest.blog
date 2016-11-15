@@ -139,9 +139,16 @@ def google_search_console():
 @app.route("/robots.txt")
 def robots():
     return """
+# robots.txt generated at http://www.51240.com
 User-agent: *
-Allow:/
+Disallow: 
+Disallow: /admin/
+Sitemap: http://www.saintic.com/sitemap.xml
     """
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return render_template("public/sitemap.xml")
 
 if __name__ == "__main__":
     Host = GLOBAL.get('Host')
