@@ -12,6 +12,7 @@
         <div class="trigger">
           <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于</a>
           <a class="page-link" href="{{ url_for('blogShow', bid=121) }}">时间轴</a>
+          <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新日志</a>
           {% if g.signin %}
               <a class="page-link" href="{{ url_for('logout') }}"><attr title="Byebye {{ g.username }}">注销</attr></a>
               <a class="page-link" href="{{ url_for('blogWrite') }}">创作</a>
@@ -19,7 +20,6 @@
           {% else %}
               <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome">登录</attr></a>
           {% endif %}
-          <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新日志</a>
           {% if isAdmin %}
           <a class="page-link" href="{{ url_for('admin.AdminIndex') }}">管理后台</a>
           {% endif %}
