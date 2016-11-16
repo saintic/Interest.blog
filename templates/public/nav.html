@@ -11,6 +11,7 @@
         </a>
         <div class="trigger">
           <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于</a>
+          <a class="page-link" href="{{ url_for('blogShow', bid=121) }}">时间轴</a>
           {% if g.signin %}
               <a class="page-link" href="{{ url_for('logout') }}"><attr title="Byebye {{ g.username }}">注销</attr></a>
               <a class="page-link" href="{{ url_for('blogWrite') }}">创作</a>
