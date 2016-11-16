@@ -45,6 +45,8 @@ PLUGINS={
     "RealProbability": False,
 
     "BaiduStatistics": True,
+
+    "BaiduShare": True,
 }
 
 BLOG={

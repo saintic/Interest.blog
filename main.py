@@ -59,7 +59,7 @@ def index():
 def blogShow(bid):
     data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
     if data:
-        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'])
+        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'], EnableBiaduShare=PLUGINS['BaiduShare'])
     else:
         return abort(404)
 
@@ -142,6 +142,7 @@ def robots():
 # robots.txt generated at http://www.51240.com
 User-agent: *
 Disallow: 
+Disallow: /admin
 Disallow: /admin/
 Sitemap: http://www.saintic.com/sitemap.xml
     """
