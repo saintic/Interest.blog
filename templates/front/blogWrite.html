@@ -149,10 +149,8 @@
         {%- if request.args.get("editor", "wangEditor") == "wangEditor" %}
         blog = $('#CreateBlogFormId').serialize();
         {% else %}
-        data    = $('#CreateBlogFormId').serializeArray();
-        content = Editor.getHTML();
-        alert(content);
-        blog    = {"title": data[0].value, "tag": data[1].value, "catalog": data[2].value, "sources": data[3].value, "content": content, "author": data[6].value};
+        data = $('#CreateBlogFormId').serializeArray();
+        blog = {"title": data[0].value, "tag": data[1].value, "catalog": data[2].value, "sources": data[3].value, "content": Editor.getHTML(), "author": data[6].value};
         {% endif -%}
         console.log(blog);
         $.ajax({

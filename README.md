@@ -17,6 +17,7 @@ setproctitle
 requests
 torndb
 MySQL-python
+SpliceURL>=1.2
 ```
 
 ## Usage
