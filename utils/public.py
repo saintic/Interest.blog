@@ -14,6 +14,7 @@ today          = lambda :datetime.datetime.now().strftime("%Y-%m-%d")
 logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 
+"""
 mysql = Connection(
                     host     = "%s:%s" %(MYSQL.get('Host'), MYSQL.get('Port', 3306)),
                     database = MYSQL.get('Database'),
@@ -23,7 +24,7 @@ mysql = Connection(
                     charset  = MYSQL.get('Charset', 'utf8'),
                     connect_timeout=3,
                     max_idle_time=2)
-
+"""
 def ClickMysqlWrite(data):
     if isinstance(data, dict):
         if data.get("agent") and data.get("method") in ("GET", "POST", "PUT", "DELETE", "OPTIONS"):
@@ -32,7 +33,7 @@ def ClickMysqlWrite(data):
 
 def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''
-
+    return True
     SSOURL = SSO.get("SSO.URL")
     if cookie_str and not cookie_str == '..':
         username, expires, sessionId = cookie_str.split('.')

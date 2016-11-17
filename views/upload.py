@@ -19,7 +19,8 @@ gen_rnd_filename = lambda :"%s%s" %(datetime.datetime.now().strftime('%Y%m%d%H%M
 #对图片上传进行响应
 @upload_page.route("/image/", methods=["POST",])
 def UploadImage():
-    f = request.files.get("WriteBlogImage")
+    logger.debug(request.files)
+    f = request.files.get("WriteBlogImage", "editormd-image-file")
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))

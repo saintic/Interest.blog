@@ -44,7 +44,7 @@ def add_header(response):
             "requestId": g.requestId,
     }
     #logger.info(json.dumps(ClickLog))
-    ClickMysqlWrite(ClickLog)
+    #ClickMysqlWrite(ClickLog)
     return response
 
 @app.errorhandler(404)
