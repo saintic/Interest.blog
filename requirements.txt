@@ -5,4 +5,4 @@ setproctitle
 requests
 torndb
 MySQL-python
-SpliceURL
+SpliceURL>=v1.2
