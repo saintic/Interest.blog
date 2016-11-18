@@ -14,8 +14,8 @@
 
 {% block content %}
 <div>
-    {%- if request.args.get("editor", "wangEditor") == "wangEditor" %}
     <h1>创作文章</h1>
+    {%- if request.args.get("editor", "wangEditor") == "wangEditor" %}
     <h3>当前使用<a href="http://www.wangeditor.com/" target="_blank">wangEditor</a>富文本编辑器<sub><a href="{{ url_for('blogWrite', editor='Editor.md') }}">&nbsp;切换&nbsp;</a></sub></h3>
     <form id="CreateBlogFormId" method="" action="">
         <p>标题：<input type="text" name="title" placeholder="文章标题" required /><em style="color:red; front-size:bold">*</em></p>
@@ -37,7 +37,6 @@
         <input onclick=postForm() type="button" value="提交博客">
     </form>
     {% else%}
-    <h1>创作文章</h1>
     <h3>当前使用<a href="http://pandao.github.io/editor.md/" target="_blank">Markdown</a>富文本编辑器<sub><a href="{{ url_for('blogWrite', editor='wangEditor') }}">&nbsp;切换&nbsp;</a></sub></h3>
     <form id="CreateBlogFormId" method="" action="">
         <p>标题：<input type="text" name="title" placeholder="文章标题" required /><em style="color:red; front-size:bold">*</em></p>

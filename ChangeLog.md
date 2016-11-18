@@ -26,3 +26,13 @@
 4. 博客详情页增加信息显示
 5. 增加百度统计插件
 6. 在README中更新了简单使用文档
+
+**v0.5**
+1. 优化了SSO登录
+2. 点击数据记录到MySQL中
+3. 调整了requirements.txt
+4. 修复了SSO登录时不允许remember时的问题(登录在一次浏览器session有效)
+5. 增加了admin后台蓝图，获取user、blog数据，User数据表增加isAdmin字段设置是否为管理员，管理员可在个人中心进入后台管理
+6. 增加sitemap.xml
+7. 增加百度社会化分享插件
+8. 增加markdown富文本编辑器，使用开源软件Editor.md

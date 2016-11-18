@@ -25,8 +25,7 @@ PRODUCT={
 
 SSO={
 
-    #"SSO.URL": "https://passport.saintic.com",
-    "SSO.URL": "http://127.0.0.1:10030",
+    "SSO.URL": "https://passport.saintic.com",
     #The passport(SSO Authentication System) Web Site URL.
 
     "SSO.PROJECT": PRODUCT["ProcessName"],
@@ -56,7 +55,7 @@ BLOG={
 }
 
 MYSQL={
-    "Host": "101.200.125.9",
+    "Host": "127.0.0.1",
     "Port": 3306,
     "Database": "saintic",
     "User": "root",
