@@ -32,8 +32,14 @@
 }
 
 .home-avatar {
-  max-height:100px;
-  max-width:100px;
+  max-height:170px;
+  max-width:170px;
+  overflow: hidden;
+}
+
+.profile-avatar {
+  max-height:300px;
+  max-width:300px;
   overflow: hidden;
 }
 

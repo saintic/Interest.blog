@@ -88,6 +88,14 @@ def home():
     else:
         return redirect(url_for("login"))
 
+@app.route('/home/profile/')
+def profile():
+    if g.signin:
+        user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
+        return render_template("front/profile.html", user=user)
+    else:
+        return redirect(url_for("login"))
+
 @app.route('/login/')
 def login():
     if g.signin:

@@ -1,8 +1,8 @@
 # -*- coding: utf8 -*-
 
-import os
-from utils.public import logger
-from flask import Blueprint, request, Response, url_for
+import os, requests
+from utils.public import logger, gen_filename
+from flask import Blueprint, request, Response, url_for, redirect, g
 from werkzeug import secure_filename
 
 upload_page        = Blueprint("upload", __name__)
@@ -12,9 +12,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 #文件名合法性验证
 allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-# 文本编辑器上传定义随机命名
-gen_rnd_filename = lambda :"%s%s" %(datetime.datetime.now().strftime('%Y%m%d%H%M%S'), str(random.randrange(1000, 10000)))
 
 #对图片上传进行响应
 @upload_page.route("/image/", methods=["POST",])
@@ -40,3 +37,21 @@ def UploadImage():
         res.headers["ContentType"] = "text/html"
         res.headers["Charset"] = "utf-8"
         return res        
+
+@upload_page.route('/avatar/', methods=['POST','OPTIONS'])
+def UploadProfileAvatar():
+    logger.debug(request.files)
+    f = request.files.get('file')
+    # Check if the file is one of the allowed types/extensions
+    if f and allowed_file(f.filename):
+        filename = secure_filename(gen_filename() + "." + f.filename.split('.')[-1]) #随机命名
+        logger.info("get allowed file %s, its name is %s" %(f, filename))
+        filedir  = os.path.join(upload_page.root_path, UPLOAD_FOLDER)
+        if not os.path.exists(filedir): os.makedirs(filedir)
+        f.save(os.path.join(filedir, filename))
+        imgUrl   = "/" + IMAGE_UPLOAD_DIR + filename
+        logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
+        # return user home and write avatar url into mysql db.
+        res = requests.put("https://api.saintic.com/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()
+        logger.info(res)
+    return redirect(url_for('home'))

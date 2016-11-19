@@ -3,6 +3,7 @@
 import requests
 import hashlib
 import datetime
+import random
 from uuid import uuid4
 from log import Syslog
 from config import SSO, MYSQL
@@ -13,6 +14,7 @@ md5            = lambda pwd:hashlib.md5(pwd).hexdigest()
 today          = lambda :datetime.datetime.now().strftime("%Y-%m-%d")
 logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
+gen_filename   = lambda :"%s%s" %(datetime.datetime.now().strftime('%Y%m%d%H%M%S'), str(random.randrange(1000, 10000)))
 
 mysql = Connection(
                     host     = "%s:%s" %(MYSQL.get('Host'), MYSQL.get('Port', 3306)),

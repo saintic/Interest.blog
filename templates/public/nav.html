@@ -17,10 +17,10 @@
           {% else %}
               <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome">登录</attr></a>
           {% endif -%}
-          <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新记录</a>
-          <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于本站</a>
+              <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新记录</a>
+              <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于本站</a>
           {%- if isAdmin %}
-          <a class="page-link" href="{{ url_for('admin.AdminIndex') }}">后台管理</a>
+              <a class="page-link" href="{{ url_for('admin.AdminIndex') }}">后台管理</a>
           {% endif -%}
         </div>
       </nav>

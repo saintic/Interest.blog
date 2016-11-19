@@ -1,0 +1,34 @@
+{% extends "base/front.html" %}
+
+{% block title %}Interest Blog User Profile | SaintIC{% endblock %}
+
+{% block content %}
+
+<article class="post">
+
+  <header class="post-header">
+    <p>
+        <strong><h2>User Profile Change</h2></strong>
+    </p>
+  </header>
+
+  <div class="post-content">
+
+    {% if request.args.get("change") == "avatar" %}
+        <p>
+        {%- if user.get('avatar') == url_for('static', filename='img/avatar/default.jpg') %}
+            <scan>{{ user.get('cname') }}，你当前使用系统默认头像。</scan>
+        {% else %}
+            <img src="{{ user.get('avatar') }}" onload="if(this.width >= 320){this.width = 320}">
+        {% endif -%}
+        </p>
+        <form action="{{ url_for('upload.UploadProfileAvatar') }}" method="post" enctype="multipart/form-data">
+            <p>选择头像图片(仅支持jpg/jpeg/png/gif)：</p>
+            <p><input type="file" name="file" /><p />
+            <input type="submit" name="submit" value="提交" />
+        </form>
+    {% endif %}
+
+</article>
+
+{% endblock %}
