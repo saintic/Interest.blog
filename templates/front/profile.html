@@ -17,7 +17,7 @@
     {% if request.args.get("change") == "avatar" %}
         <p>
         {%- if user.get('avatar') == url_for('static', filename='img/avatar/default.jpg') %}
-            <scan>{{ user.get('cname') }}，你当前使用系统默认头像。</scan>
+            <scan>{{ user.get('cname') or '' }}，你当前使用系统默认头像。</scan>
         {% else %}
             <img src="{{ user.get('avatar') }}" onload="if(this.width >= 320){this.width = 320}">
         {% endif -%}
