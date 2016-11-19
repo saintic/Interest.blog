@@ -12,7 +12,7 @@
 
   <header class="post-header">
     <p>
-        <img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar" title="{{ user.get('cname') or 'Oh' }}">
+        <a href="{{ url_for('profile', change='avatar') }}" title="Change your avatar"><img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar"></a>
     </p>
   </header>
 
