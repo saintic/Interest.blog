@@ -34,7 +34,7 @@
         </textarea>
         <input type="hidden" name="author" value="{{ g.username }}">
         <input type="hidden" name="editor" value="wangEditor">
-        <input onclick=postForm() type="button" value="提交博客">
+        <input onclick=postForm() type="button" value="提交博客" class="button green" />
     </form>
     {% else%}
     <h3>当前使用<a href="http://pandao.github.io/editor.md/" target="_blank">Markdown</a>富文本编辑器<sub><a href="{{ url_for('blogWrite', editor='wangEditor') }}">&nbsp;切换&nbsp;</a></sub></h3>
@@ -55,7 +55,7 @@
         </div>
         <input type="hidden" name="author" value="{{ g.username }}">
         <input type="hidden" name="editor" value="Editor.md">
-        <input onclick=postForm() type="button" value="提交博客">
+        <input onclick=postForm() type="button" value="提交博客" class="button green" />
     </form>
     {% endif -%}
 </div>

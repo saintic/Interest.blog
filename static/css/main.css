@@ -186,3 +186,45 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 .highlight .vg { color: #008080; }
 .highlight .vi { color: #008080; }
 .highlight .il { color: #099; }
+
+
+/* Default button styling - this applies to all anchors with the .button class */
+.button {
+  display: block; 
+  font-size: 12px; 
+  text-decoration: none!important; 
+  font-family: Helvetica, Arial, sans serif;
+  padding: 8px 12px; 
+  border-radius: 3px; 
+  -moz-border-radius: 3px; 
+  box-shadow: inset 0px 0px 2px #fff;
+  -o-box-shadow: inset 0px 0px 2px #fff;
+  -webkit-box-shadow: inset 0px 0px 2px #fff;
+  -moz-box-shadow: inset 0px 0px 2px #fff;
+}
+.button:active {
+  box-shadow: inset 0px 0px 3px #999;
+  -o-box-shadow: inset 0px 0px 3px #999;
+  -webkit-box-shadow: inset 0px 0px 3px #999;
+  -moz-box-shadow: inset 0px 0px 3px #999;
+}
+/* The styles for the green button */
+.green {
+  color: #5a742d;
+  border: 1px solid #95b959;
+  background-image: -moz-linear-gradient(#cae387, #a5cb5e);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a5cb5e), to(#cae387));
+  background-image: -webkit-linear-gradient(#cae387, #a5cb5e);
+  background-image: -o-linear-gradient(#cae387, #a5cb5e);
+  text-shadow: 1px 1px 1px #dff4bc;
+  background-color: #a5cb5e;
+}
+.green:hover {
+  border: 1px solid #687e30;
+  background-image: -moz-linear-gradient(#a5cb5e, #cae387);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cae387), to(#a5cb5e));
+  background-image: -webkit-linear-gradient(#a5cb5e, #cae387);
+  background-image: -o-linear-gradient(#a5cb5e, #cae387);
+  background-color: #cae387;
+}
+.green:active {border: 1px solid #506320;}
