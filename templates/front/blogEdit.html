@@ -42,7 +42,7 @@
             <input type="hidden" name="author" value="{{ data.get('author') }}">
         {% endif %}
         <input type="hidden" name="blogId" value="{{ blogId }}">
-        <input onclick=postForm() type="button" value="更新博客">
+        <input onclick=postForm() type="button" value="更新博客" class="button green" />
     </form>
 </div>
 
@@ -71,7 +71,7 @@
     /*
        上传图片功能，文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/113990；
        后台文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/115736;
-       后台需要配置一个获取表单上传图片并保存的路由。
+       后台需要配置一个获取表单上传图片并保存的路由，demo地址：https://github.com/staugur/flask-wangEditor-demo
     */
     editor.config.uploadImgUrl = '/upload/image/';
     editor.config.uploadImgFileName = 'WriteBlogImage';
