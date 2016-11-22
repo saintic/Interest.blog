@@ -5,9 +5,11 @@ from utils.public import logger, gen_filename
 from flask import Blueprint, request, Response, url_for, redirect, g
 from werkzeug import secure_filename
 
-upload_page        = Blueprint("upload", __name__)
-IMAGE_UPLOAD_DIR   = 'static/img/ImageUploads/'
-UPLOAD_FOLDER      = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), IMAGE_UPLOAD_DIR)
+upload_page             = Blueprint("upload", __name__)
+BLOG_IMAGE_UPLOAD_DIR   = 'static/img/ImageUploads/'
+AVATAR_IMAGE_UPLOAD_DIR = 'static/img/avatar/ImageUploads/'
+BLOG_UPLOAD_FOLDER      = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), BLOG_IMAGE_UPLOAD_DIR)
+AVATAR_UPLOAD_FOLDER    = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), AVATAR_IMAGE_UPLOAD_DIR)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 #文件名合法性验证
@@ -21,10 +23,10 @@ def UploadImage():
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))
-        filedir  = os.path.join(upload_page.root_path, UPLOAD_FOLDER)
+        filedir  = os.path.join(upload_page.root_path, BLOG_UPLOAD_FOLDER)
         if not os.path.exists(filedir): os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
-        imgUrl = request.url_root + IMAGE_UPLOAD_DIR + filename
+        imgUrl = request.url_root + BLOG_IMAGE_UPLOAD_DIR + filename
         logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
         res =  Response(imgUrl)
         res.headers["ContentType"] = "text/html"
@@ -46,10 +48,10 @@ def UploadProfileAvatar():
     if f and allowed_file(f.filename):
         filename = secure_filename(gen_filename() + "." + f.filename.split('.')[-1]) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))
-        filedir  = os.path.join(upload_page.root_path, UPLOAD_FOLDER)
+        filedir  = os.path.join(upload_page.root_path, AVATAR_UPLOAD_FOLDER)
         if not os.path.exists(filedir): os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
-        imgUrl   = "/" + IMAGE_UPLOAD_DIR + filename
+        imgUrl   = "/" + AVATAR_IMAGE_UPLOAD_DIR + filename
         logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
         # return user home and write avatar url into mysql db.
         res = requests.put("https://api.saintic.com/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()

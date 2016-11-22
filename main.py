@@ -96,6 +96,12 @@ def profile():
     else:
         return redirect(url_for("login"))
 
+@app.route('/blog/catalogs/')
+@app.route('/blog/sources/')
+@app.route('/blog/tags/')
+def blogMisc():
+    return render_template("front/misc.html")
+
 @app.route('/login/')
 def login():
     if g.signin:
