@@ -11,11 +11,11 @@
         </a>
         <div class="trigger">
           {%- if g.signin %}
-              <a class="page-link" href="{{ url_for('logout') }}"><attr title="Dear {{ g.username }}">注销</attr></a>
+              <a class="page-link" href="{{ url_for('logout') }}"><attr title="Are you going to leave?">注销</attr></a>
               <a class="page-link" href="{{ url_for('blogWrite') }}">创作</a>
               <a class="page-link" href="{{ url_for('home') }}">个人中心</a>
           {% else %}
-              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome">登录</attr></a>
+              <a class="page-link" href="{{ url_for('login') }}"><attr title="Welcome to join us!">登录</attr></a>
           {% endif -%}
               <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新记录</a>
               <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于本站</a>
