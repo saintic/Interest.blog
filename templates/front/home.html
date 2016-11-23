@@ -29,19 +29,19 @@
     {% endif %}
 
     {% if user.get('url') %}
-        <p><a href="{{ user.get('url') }}" target="_blank">Website</a></p>
+        <p>My Website: <a href="{{ user.get('url') }}" target="_blank">{{ user.get('url') }}</a></p>
     {% endif %}
 
     {% if user.get('email') %}
-        <p><a href="mailto:{{ user.get('email') }}">Email</a></p>
+        <p>My Email: <a href="mailto:{{ user.get('email') }}">{{ user.get('email') }}</a></p>
     {% endif %}
 
     {% if user.get('weibo') %}
-        <p><a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">Weibo</a></p>
+        <p>My Weibo: <a href="{% if 'http' in user.get('weibo') %}{{ user.get('weibo') }}{% else %}{{ 'http://' + user.get('weibo') }}{% endif %}" target="_blank">{{ user.get('weibo') }}</a></p>
     {% endif %}
 
     {% if user.get('github') %}
-        <p><a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">GitHub</a></p>
+        <p>My GitHub: <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">{{ user.get('github') }}</a></p>
     {% endif %}
 
     {% if blog %}

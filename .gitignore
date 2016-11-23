@@ -89,3 +89,4 @@ logs/*.log
 
 # Rope project settings
 .ropeproject
+config.py

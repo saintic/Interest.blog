@@ -29,6 +29,13 @@
     {% elif data.get("sources") == "翻译" %}
     <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Translate.gif') }}" /></p>
     {% endif %}
+    {% if data['tag'] %}
+    <p class="post-meta">Tags: 
+        {% for tag in data['tag'].split() %}
+        <scan class="badge green">{{ tag }}</scan>&nbsp;
+        {% endfor %}
+    </p>
+    {% endif %}
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
         <a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a>
