@@ -5,7 +5,7 @@ Development of a team blog driven by interests and hobbies.
 MIT
 
 ## Environment
-> 1. Python Version: 2.6, 2.7
+> 1. Python Version: 2.7
 > 2. Web Framework: Flask
 > 3. Required Modules:
 
