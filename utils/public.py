@@ -16,13 +16,26 @@ logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 gen_filename   = lambda :"%s%s" %(datetime.datetime.now().strftime('%Y%m%d%H%M%S'), str(random.randrange(1000, 10000)))
 
+def ParseMySQL(mysql, callback="dict"):
+    protocol, dburl = mysql.split("://")
+    if "?" in mysql:
+        dbinfo, dbargs  = dburl.split("?")
+    else:
+        dbinfo, dbargs  = dburl, "charset=utf8&timezone=+8:00"
+    host,port,user,password,database = dbinfo.split(":")
+    charset, timezone = dbargs.split("&")[0].split("charset=")[-1] or "utf8", dbargs.split("&")[-1].split("timezone=")[-1] or "+8:00"
+    if callback in ("list", "tuple"):
+        return protocol,host,port,user,password,database,charset, timezone
+    else:
+        return {"Protocol": protocol, "Host": host, "Port": port, "Database": database, "User": user, "Password": password, "Charset": charset, "Timezone": timezone}
+
 mysql = Connection(
-                    host     = "%s:%s" %(MYSQL.get('Host'), MYSQL.get('Port', 3306)),
-                    database = MYSQL.get('Database'),
-                    user     = MYSQL.get('User'),
-                    password = MYSQL.get('Passwd'),
-                    time_zone= MYSQL.get('Timezone','+8:00'),
-                    charset  = MYSQL.get('Charset', 'utf8'),
+                    host     = "%s:%s" %(ParseMySQL(MYSQL).get('Host'), ParseMySQL(MYSQL).get('Port', 3306)),
+                    database = ParseMySQL(MYSQL).get('Database'),
+                    user     = ParseMySQL(MYSQL).get('User'),
+                    password = ParseMySQL(MYSQL).get('Password'),
+                    time_zone= ParseMySQL(MYSQL).get('Timezone','+8:00'),
+                    charset  = ParseMySQL(MYSQL).get('Charset', 'utf8'),
                     connect_timeout=3,
                     max_idle_time=2)
 

@@ -54,5 +54,5 @@ BLOG={
     "AdminPrefix": os.environ.get("interest.blog.AdminPrefix", "/admin"),
 }
 
-MYSQL="mysql://host:port:user:password:database?charset=utf8&timezone=+8:00"
-#Format is mysql://host:port:user:password:database?charset=&timezone=
+MYSQL=""
+
