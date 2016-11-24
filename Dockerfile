@@ -4,8 +4,10 @@ MAINTAINER Mr.tao <staugur@saintic.com>
 
 ADD . /Interest.blog
 
+ADD misc/supervisord.conf /etc/
+
 WORKDIR /Interest.blog
 
 RUN pip install -r /Interest.blog/requirements.txt
 
-ENTRYPOINT ["/Interest.blog/Product.py"]
+ENTRYPOINT ["supervisord"]
