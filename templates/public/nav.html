@@ -19,9 +19,7 @@
           {% endif -%}
               <a class="page-link" href="{{ url_for('blogShow', bid=110) }}">更新记录</a>
               <a class="page-link" href="{{ url_for('blogShow', bid=113) }}">关于本站</a>
-          {%- if isAdmin %}
-              <a class="page-link" href="{{ url_for('admin.AdminIndex') }}">后台管理</a>
-          {% endif -%}
+              <a class="page-link" href="{{ url_for('blogResources') }}">标签分类</a>
         </div>
       </nav>
     </div>

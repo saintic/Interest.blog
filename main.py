@@ -27,8 +27,10 @@ def before_request():
     g.username  = request.cookies.get("username", "")
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
+    g.apiurl    = BLOG['ApiUrl']
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
     app.logger.debug(app.url_map)
+    app.logger.debug(g.apiurl)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
@@ -84,7 +86,7 @@ def home():
     if g.signin:
         user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username, "limit": "all"}).json().get("data") or []
-        return render_template("front/home.html", user=user, blog=blog, isAdmin=isAdmin(g.username), blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for("login"))
 
@@ -96,11 +98,9 @@ def profile():
     else:
         return redirect(url_for("login"))
 
-@app.route('/blog/catalogs/')
-@app.route('/blog/sources/')
-@app.route('/blog/tags/')
-def blogMisc():
-    return render_template("front/misc.html")
+@app.route('/blog/resources/')
+def blogResources():
+    return render_template("front/resources.html")
 
 @app.route('/login/')
 def login():

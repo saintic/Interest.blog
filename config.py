@@ -35,23 +35,32 @@ SSO={
 PLUGINS={
 
     "CodeHighlighting": os.getenv("interest.blog.CodeHighlighting", True),
-
-    "BaiduAutoPush": os.getenv("interest.blog.BaiduAutoPush", True),
+    #代码高亮插件
 
     "DuoshuoComment": os.getenv("interest.blog.DuoshuoComment", True),
+    #多说评论插件
 
     "Weather": os.getenv("interest.blog.Weather", True),
+    #天气显示插件
 
-    "RealProbability": os.getenv("interest.blog.RealProbability", False),
+    "BaiduAutoPush": os.getenv("interest.blog.BaiduAutoPush", True),
+    #百度自动推送插件
 
     "BaiduStatistics": os.getenv("interest.blog.BaiduStatistics", True),
+    #百度统计插件
 
     "BaiduShare": os.getenv("interest.blog.BaiduShare", True),
+    #百度分享插件
+
+    "BackupBlog": os.getenv("interest.blog.BackupBlog", True),
+    #备份文章插件
 }
 
 BLOG={
 
     "AdminPrefix": os.getenv("interest.blog.AdminPrefix", "/admin"),
+
+    "ApiUrl": os.getenv("interest.blog.ApiUrl", "https://api.saintic.com"),
 }
 
 MYSQL=os.getenv("interest.blog.MYSQL", "")

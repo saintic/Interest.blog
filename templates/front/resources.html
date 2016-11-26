@@ -4,46 +4,81 @@
 
 {% block content %}
 
+{% if request.args.get("resources_type") in ("tag", "catalog", "source") and request.args.get("resources_data") %}
 <article class="post">
 
+  <header class="post-header">
+    <scan class="post-title">
+      <font itemprop="name headline">Resources:</font>
+      <font size="6px" color="red">{{ request.args.get("resources_type") }}</font>
+    </scan>
+  </header>
+
+  <div class="post-content">
+    <div>
+        <p><font color="green" class="page-heading">{{ request.args.get("resources_data") }}&nbsp;<span class="badge green" id="resources_number"></span></font></p>
+        <ul class="post-list" id="resources_data">
+        </ul>
+    </div>
+  </div>
+</article>
+
+{% else %}
+<article class="post">
   <header class="post-header">
       <p>标签云<code>tags</code></p>
   </header>
-
   <div class="post-content" itemprop="articleBody" id="misc_tags">
   </div>
-
 </article>
 
 <article class="post">
-
   <header class="post-header">
       <p>分类目录<code>catalogs</code></p>
   </header>
-
   <div class="post-content" itemprop="articleBody" id="misc_catalogs">
   </div>
-
 </article>
 
 <article class="post">
-
   <header class="post-header">
       <p>文章类型<code>sources</code></p>
   </header>
-
   <div class="post-content" itemprop="articleBody" id="misc_sources">
     {% for source in ("原创", "转载", "翻译") %}
        <scan class="badge red">{{ source }}</scan>
     {% endfor %}
   </div>
-
 </article>
-
+{% endif %}
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+{% if request.args.get("resources_type") == "tag" and request.args.get("resources_data") %}
+<script type="text/javascript">
+    // 获取资源数据
+    $.ajax({
+        url: "{{ g.apiurl }}/blog?get_tags_data={{ request.args.get('resources_data') }}",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var str2 = '';
+            for(i=0; i<data.length; i++) {
+                tag_data  =  data[i];
+                str2 += '<li><scan><a href="/blog/' + tag_data.id + '.html" target="_blank">' + tag_data.title + '</a>&nbsp;<sub>' + tag_data.tag + '</sub></scan></li>';
+            };
+            document.getElementById('resources_number').innerHTML=data.length;
+            document.getElementById('resources_data').innerHTML=str2;
+        },
+        error: function(error){
+            alert(error);
+        }
+    });
+</script>
+{% else %}
 <script type="text/javascript">
     // 获取文章标签信息
     $.ajax({
@@ -56,7 +91,10 @@
             var str2 = '';
             for(i=0; i<data.length; i++) {
                 tag = data[i];
-                str2 += '<scan class="badge green">' + tag +'</scan>';
+                str2 += '<a href="/blog/resources/?resources_type=tag&resources_data=' + tag + '" target="_blank"><scan class="badge green">' + tag +'</scan></a>&nbsp;';
+                if(i%5==0 && i!=0) {
+                    str2 += '<br/ >';
+                }
             };
             document.getElementById('misc_tags').innerHTML=str2;
         },
@@ -84,4 +122,5 @@
         }
     });
 </script>
+{% endif %}
 {% endblock %}
