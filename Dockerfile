@@ -8,6 +8,6 @@ ADD misc/supervisord.conf /etc/
 
 WORKDIR /Interest.blog
 
-RUN pip install -r /Interest.blog/requirements.txt
+RUN pip install --index http://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
 
 ENTRYPOINT ["supervisord"]
