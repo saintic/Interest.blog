@@ -26,19 +26,19 @@
 {% else %}
 <article class="post">
   <header class="post-header">
-      <p>标签云<code>tags</code></p>
+      <p>标签云<code>tags</code><span class="badge green" id="tag_number"></span></p>
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_tags">
   </div>
 
   <header class="post-header">
-      <p>分类目录<code>catalogs</code></p>
+      <p>分类目录<code>catalogs</code><span class="badge yellow" id="catalog_number"></span></p>
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_catalogs">
   </div>
 
   <header class="post-header">
-      <p>文章类型<code>sources</code></p>
+      <p>文章类型<code>sources</code><span class="badge red" id="sources_number">3</span></p>
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_sources">
     {% for source in ("原创", "转载", "翻译") %}
@@ -55,7 +55,7 @@
 <script type="text/javascript">
     // 获取资源数据
     $.ajax({
-        url: "{{ g.apiurl }}/blog?get_tags_data={{ request.args.get('resources_data') }}",
+        url: "{{ g.apiurl }}/blog?get_tags_data={{ request.args.get('resources_data') }}&limit=all",
         method: 'GET',
         datatype: 'json',
         success: function(res) {
@@ -78,7 +78,7 @@
 <script type="text/javascript">
     // 获取资源数据
     $.ajax({
-        url: "{{ g.apiurl }}/blog?get_catalog_data={{ request.args.get('resources_data') }}",
+        url: "{{ g.apiurl }}/blog?get_catalog_data={{ request.args.get('resources_data') }}&limit=all",
         method: 'GET',
         datatype: 'json',
         success: function(res) {
@@ -101,7 +101,7 @@
 <script type="text/javascript">
     // 获取资源数据
     $.ajax({
-        url: "{{ g.apiurl }}/blog?get_sources_data={{ request.args.get('resources_data') }}",
+        url: "{{ g.apiurl }}/blog?get_sources_data={{ request.args.get('resources_data') }}&limit=all",
         method: 'GET',
         datatype: 'json',
         success: function(res) {
@@ -138,6 +138,7 @@
                     str2 += '<br/ >';
                 }
             };
+            document.getElementById('tag_number').innerHTML=data.length;
             document.getElementById('misc_tags').innerHTML=str2;
         },
         error: function(error){
@@ -157,6 +158,7 @@
                 catalog = data[i];
                 str2 += '<a href="/blog/resources/?resources_type=catalog&resources_data=' + catalog + '" target="_blank"><scan class="badge yellow">' + catalog +'</scan></a>&nbsp;';
             };
+            document.getElementById('catalog_number').innerHTML=data.length;
             document.getElementById('misc_catalogs').innerHTML=str2;
         },
         error: function(error){
