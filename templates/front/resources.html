@@ -30,23 +30,19 @@
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_tags">
   </div>
-</article>
 
-<article class="post">
   <header class="post-header">
       <p>分类目录<code>catalogs</code></p>
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_catalogs">
   </div>
-</article>
 
-<article class="post">
   <header class="post-header">
       <p>文章类型<code>sources</code></p>
   </header>
   <div class="post-content" itemprop="articleBody" id="misc_sources">
     {% for source in ("原创", "转载", "翻译") %}
-       <scan class="badge red">{{ source }}</scan>
+        <a href="/blog/resources/?resources_type=source&resources_data={{ source }}" target="_blank"><scan class="badge red">{{ source }}</scan></a>
     {% endfor %}
   </div>
 </article>
@@ -69,6 +65,52 @@
             for(i=0; i<data.length; i++) {
                 tag_data  =  data[i];
                 str2 += '<li><scan><a href="/blog/' + tag_data.id + '.html" target="_blank">' + tag_data.title + '</a>&nbsp;<sub>' + tag_data.tag + '</sub></scan></li>';
+            };
+            document.getElementById('resources_number').innerHTML=data.length;
+            document.getElementById('resources_data').innerHTML=str2;
+        },
+        error: function(error){
+            alert(error);
+        }
+    });
+</script>
+{% elif request.args.get("resources_type") == "catalog" and request.args.get("resources_data") %}
+<script type="text/javascript">
+    // 获取资源数据
+    $.ajax({
+        url: "{{ g.apiurl }}/blog?get_catalog_data={{ request.args.get('resources_data') }}",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var str2 = '';
+            for(i=0; i<data.length; i++) {
+                catalog_data  =  data[i];
+                str2 += '<li><scan><a href="/blog/' + catalog_data.id + '.html" target="_blank">' + catalog_data.title + '</a>&nbsp;<sub>' + catalog_data.catalog + '</sub></scan></li>';
+            };
+            document.getElementById('resources_number').innerHTML=data.length;
+            document.getElementById('resources_data').innerHTML=str2;
+        },
+        error: function(error){
+            alert(error);
+        }
+    });
+</script>
+{% elif request.args.get("resources_type") == "source" and request.args.get("resources_data") %}
+<script type="text/javascript">
+    // 获取资源数据
+    $.ajax({
+        url: "{{ g.apiurl }}/blog?get_sources_data={{ request.args.get('resources_data') }}",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var str2 = '';
+            for(i=0; i<data.length; i++) {
+                source_data  =  data[i];
+                str2 += '<li><scan><a href="/blog/' + source_data.id + '.html" target="_blank">' + source_data.title + '</a>&nbsp;<sub>' + source_data.sources + '</sub></scan></li>';
             };
             document.getElementById('resources_number').innerHTML=data.length;
             document.getElementById('resources_data').innerHTML=str2;
@@ -113,7 +155,7 @@
             var str2 = '';
             for(i=0; i<data.length; i++) {
                 catalog = data[i];
-                str2 += '<scan class="badge yellow">' + catalog +'</scan>&nbsp;';
+                str2 += '<a href="/blog/resources/?resources_type=catalog&resources_data=' + catalog + '" target="_blank"><scan class="badge yellow">' + catalog +'</scan></a>&nbsp;';
             };
             document.getElementById('misc_catalogs').innerHTML=str2;
         },
