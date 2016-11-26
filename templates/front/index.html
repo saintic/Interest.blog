@@ -19,7 +19,7 @@ var _hmt = _hmt || [];
 {% block content %}
 
   <div class="home">
-    <h1 class="page-heading">最新文章</h1>
+    <h1 class="page-heading">所有文章<span class="badge green" id="index_number"></span></h1>
     <ul class="post-list" id="article">
       <!--
       <li>
@@ -50,6 +50,7 @@ var _hmt = _hmt || [];
                     str += '<li><span class="post-meta">' + blog.create_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
                 };
                 document.getElementById('article').innerHTML=str;
+                document.getElementById('index_number').innerHTML=data.length;
             },
             error: function(error){
                 console.log(error);
