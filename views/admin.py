@@ -16,7 +16,7 @@ def AdminIndex():
 @admin_page.route("/user/")
 def AdminUser():
     if g.signin and isAdmin(g.username):
-        url  = "https://api.saintic.com/user?getalluser=true"
+        url  = g.apiurl + "/user?getalluser=true"
         data = requests.get(url, timeout=5, verify=False, headers={"User-Agent": "staugur/Interest.blog"}).json().get("data", [])
         data = chunks(data, 5)
         return render_template("admin/user.html", data=data)
@@ -26,7 +26,7 @@ def AdminUser():
 @admin_page.route("/blog/")
 def AdminBlog():
     if g.signin and isAdmin(g.username):
-        url  = "https://api.saintic.com/blog?limit=all&get_index_only=true"
+        url  = g.apiurl + "/blog?limit=all&get_index_only=true"
         data = requests.get(url, timeout=5, verify=False, headers={"User-Agent": "staugur/Interest.blog"}).json().get("data", [])
         data = chunks(data, 5)
         return render_template("admin/blog.html", data=data)

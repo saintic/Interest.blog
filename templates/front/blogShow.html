@@ -21,20 +21,20 @@
     {% if data.get("update_time") %}
     <p class="post-meta"><time datetime="2016-01-01T10:26:42+00:00" itemprop="datePublished">Update: {{ data['update_time'] }}</time></p>
     {% endif %}
-    <p class="post-meta">Catalog: {{ data['catalog'] }}</p>
-    {% if data.get("sources") == "原创" %}
-    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Original.gif') }}" /></p>
-    {% elif data.get("sources") == "转载" %}
-    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Reprint.gif') }}" /></p>
-    {% elif data.get("sources") == "翻译" %}
-    <p class="post-meta">Sources: <img src="{{ url_for('static', filename='img/icon/Translate.gif') }}" /></p>
-    {% endif %}
     {% if data['tag'] %}
     <p class="post-meta">Tags: 
         {% for tag in data['tag'].split() %}
-        <scan class="badge green">{{ tag }}</scan>&nbsp;
+        <a href="/blog/resources/?resources_type=tag&resources_data={{ tag }}" target="_blank"><scan class="badge green">{{ tag }}</scan></a>&nbsp;
         {% endfor %}
     </p>
+    {% endif %}
+    <p class="post-meta">Catalog: <a href="/blog/resources/?resources_type=catalog&resources_data={{ data['catalog'] }}" target="_blank"><scan class="badge yellow">{{ data['catalog'] }}</scan></a></p>
+    {% if data.get("sources") == "原创" %}
+    <p class="post-meta">Sources: <a href="/blog/resources/?resources_type=source&resources_data=原创" target="_blank"><img src="{{ url_for('static', filename='img/icon/Original.gif') }}" /></a></p>
+    {% elif data.get("sources") == "转载" %}
+    <p class="post-meta">Sources: <a href="/blog/resources/?resources_type=source&resources_data=转载" target="_blank"><img src="{{ url_for('static', filename='img/icon/Reprint.gif') }}" /></a></p>
+    {% elif data.get("sources") == "翻译" %}
+    <p class="post-meta">Sources: <a href="/blog/resources/?resources_type=source&resources_data=翻译" target="_blank"><img src="{{ url_for('static', filename='img/icon/Translate.gif') }}" /></a></p>
     {% endif %}
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">

@@ -82,7 +82,7 @@
     // 更新文章数据
     function postForm() {
         $.ajax({
-            url: 'https://api.saintic.com/blog/',
+            url: '{{ g.apiurl }}/blog/',
             method: 'PUT',
             datatype: 'json',
             data: $('#UpdateBlogFormId').serialize(),

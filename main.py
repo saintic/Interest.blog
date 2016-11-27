@@ -59,7 +59,7 @@ def index():
 
 @app.route('/blog/<int:bid>.html')
 def blogShow(bid):
-    data = requests.get("https://api.saintic.com/blog?blogId=%s" %bid, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
+    data = requests.get(g.apiurl + "/blog", params={"blogId": bid}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
     if data:
         return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'], EnableBiaduShare=PLUGINS['BaiduShare'])
     else:
@@ -69,7 +69,7 @@ def blogShow(bid):
 def blogEdit():
     blogId = request.args.get("blogId")
     if g.signin and blogId:
-        data = requests.get("https://api.saintic.com/blog?blogId=%s" %blogId, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
+        data = requests.get(g.apiurl + "/blog", params={"blogId": bid}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
         if data and g.username == data.get("author") or g.username == "admin":
             return render_template("front/blogEdit.html", blogId=blogId, data=data)
     return redirect(url_for("login"))
@@ -84,8 +84,8 @@ def blogWrite():
 @app.route('/home/')
 def home():
     if g.signin:
-        user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
-        blog = requests.get("https://api.saintic.com/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username, "limit": "all"}).json().get("data") or []
+        user = requests.get(g.apiurl + "/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
+        blog = requests.get(g.apiurl + "/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_user_blog": g.username, "limit": "all"}).json().get("data") or []
         return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for("login"))
@@ -93,7 +93,7 @@ def home():
 @app.route('/home/profile/')
 def profile():
     if g.signin:
-        user = requests.get("https://api.saintic.com/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
+        user = requests.get(g.apiurl + "/user", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"username": g.username}).json().get("data") or {}
         return render_template("front/profile.html", user=user)
     else:
         return redirect(url_for("login"))

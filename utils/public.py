@@ -8,6 +8,7 @@ from uuid import uuid4
 from log import Syslog
 from config import SSO, MYSQL
 from torndb import Connection
+from flask import g
 
 #Something public variable
 md5            = lambda pwd:hashlib.md5(pwd).hexdigest()
@@ -63,7 +64,7 @@ def chunks(arr, n):
     return [arr[i:i+n] for i in range(0, len(arr), n)]
 
 def isAdmin(username):
-    AdminUsers = requests.get("https://api.saintic.com/user/?getadminuser=true", timeout=5, verify=False, headers={"User-Agent": SSO.get("SSO.PROJECT")}).json().get("data")
+    AdminUsers = requests.get(g.apiurl + "/user/", params={"getadminuser": True}, timeout=5, verify=False, headers={"User-Agent": SSO.get("SSO.PROJECT")}).json().get("data")
     if username in AdminUsers:
         return True
     return False

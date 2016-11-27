@@ -1,6 +1,6 @@
 {% extends "base/front.html" %}
 
-{% block title %}Interest Blog Misc | SaintIC{% endblock %}
+{% block title %}Interest Blog Resources | SaintIC{% endblock %}
 
 {% block content %}
 
@@ -124,7 +124,7 @@
 <script type="text/javascript">
     // 获取文章标签信息
     $.ajax({
-        url: "https://api.saintic.com/blog?get_tags_list=true",
+        url: "{{ g.apiurl }}/blog?get_tags_list=true",
         method: 'GET',
         datatype: 'json',
         success: function(res) {
@@ -147,7 +147,7 @@
     });
     // 获取文章分类信息
     $.ajax({
-        url: "https://api.saintic.com/blog?get_catalog_list=true",
+        url: "{{ g.apiurl }}/blog?get_catalog_list=true",
         method: 'GET',
         datatype: 'json',
         success: function(res) {

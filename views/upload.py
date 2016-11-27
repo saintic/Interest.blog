@@ -54,6 +54,6 @@ def UploadProfileAvatar():
         imgUrl   = "/" + AVATAR_IMAGE_UPLOAD_DIR + filename
         logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
         # return user home and write avatar url into mysql db.
-        res = requests.put("https://api.saintic.com/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()
+        res = requests.put(g.apiurl + "/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()
         logger.info(res)
     return redirect(url_for('home'))

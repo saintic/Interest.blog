@@ -125,7 +125,7 @@
 <script type="text/javascript">
     // 获取文章分类信息
     $.ajax({
-        url: "https://api.saintic.com/blog?get_catalog_list=true",
+        url: "{{ g.apiurl }}/blog?get_catalog_list=true",
         method: 'GET',
         datatype: 'json',
         success: function(res) {
@@ -153,7 +153,7 @@
         {% endif -%}
         console.log(blog);
         $.ajax({
-            url: 'https://api.saintic.com/blog/',
+            url: '{{ g.apiurl }}/blog/',
             method: 'POST',
             datatype: 'json',
             data: blog,
