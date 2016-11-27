@@ -12,9 +12,9 @@
 <div>
     <h1>编辑文章</h1>
     <form id="UpdateBlogFormId" method="" action="">
-        <p>标题：<input type="text" name="title" value="{{ data.get('title') }}" required /></p>
-        <p>标签：<input type="text" name="tag" value="{{ data.get('tag') }}" required /></p>
-        <p>分类：<input type="text" name="catalog" value="{{ data.get('catalog') }}" list="blog_catalogs" required /></p>
+        <p>标题：<input type="text" style="width:300px;height:20px" name="title" value="{{ data.get('title') }}" required /></p>
+        <p>标签：<input type="text" style="width:300px;height:20px" name="tag" value="{{ data.get('tag') }}" required /></p>
+        <p>分类：<input type="text" style="width:300px;height:20px" name="catalog" value="{{ data.get('catalog') }}" list="blog_catalogs" required /></p>
         <datalist id="blog_catalogs">
             <option>未分类</option>
         </datalist>
@@ -33,7 +33,7 @@
             <input type="radio" name="sources" value="翻译" checked="checked">翻译
           {% endif %}
         </p>
-        <textarea id="editor" style="height:400px; max-height:500px;" name="content">
+        <textarea id="editor" style="height:500px; max-height:640px;" name="content">
            <p>{{ data.get("content") }}</p>
         </textarea>
         {% if g.username == data.get('author') %}
@@ -62,7 +62,7 @@
     editor.config.mapAk = 'rsG1HfOkrldOGdI53TMI9rAdxGuzb0PI';
 
     // 取消粘贴过滤
-    // editor.config.pasteFilter = false;
+    editor.config.pasteFilter = true;
 
     // 插入代码时的默认语言
     editor.config.codeDefaultLang = 'python'
