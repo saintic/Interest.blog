@@ -69,7 +69,7 @@ def blogShow(bid):
 def blogEdit():
     blogId = request.args.get("blogId")
     if g.signin and blogId:
-        data = requests.get(g.apiurl + "/blog", params={"blogId": bid}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
+        data = requests.get(g.apiurl + "/blog", params={"blogId": blogId}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}).json().get("data")
         if data and g.username == data.get("author") or g.username == "admin":
             return render_template("front/blogEdit.html", blogId=blogId, data=data)
     return redirect(url_for("login"))
