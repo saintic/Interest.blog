@@ -321,3 +321,15 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
   background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
   background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
 }
+
+/* 返回顶部 */
+#goTopBtn {
+  position: fixed;
+  line-height:36px;
+  width:36px;
+  bottom:35px;
+  height:36px;
+  cursor:pointer;
+  display:none;
+  background:url(/static/img/icon/gototop.png);
+}

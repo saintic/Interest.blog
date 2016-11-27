@@ -65,7 +65,6 @@
 {% block script %}
 {% if request.args.get("editor", "wangEditor") == "wangEditor" %}
 <!--引入jquery和wangEditor.js-->
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='wangEditor/js/wangEditor.min.js') }}"></script>
 <script type="text/javascript">
     // 获取元素
@@ -95,7 +94,6 @@
 </script>
 {% else %}
 <!--引入jquery和Editor.md.js-->
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='Editor.md/js/editormd.min.js') }}"></script>
 <script type="text/javascript">
     var Editor;

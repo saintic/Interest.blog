@@ -25,6 +25,26 @@
   </div>
 
   {% include "public/footer.html" %}
-  {% block script %}{% endblock %}
+
+<div id="goTopBtn"></div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+{% block script %}{% endblock %}
+<script type="text/javascript">
+    $(window).scroll(function(){
+      var sc=$(window).scrollTop();
+      var rwidth=$(window).width()
+      if(sc>0){
+        $("#goTopBtn").css("display","block");
+        $("#goTopBtn").css("left",(rwidth-36)+"px");
+      }else{
+        $("#goTopBtn").css("display","none");
+      }
+    })
+    $("#goTopBtn").click(function(){
+      var sc=$(window).scrollTop();
+      $('body,html').animate({scrollTop:0},500);
+    })
+</script>
 </body>
 </html>

@@ -50,7 +50,6 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
 {% if request.args.get("resources_type") == "tag" and request.args.get("resources_data") %}
 <script type="text/javascript">
     // 获取资源数据
