@@ -13,6 +13,8 @@ from config import GLOBAL, SSO, PLUGINS, BLOG
 from utils.public import logger, gen_requestId, isLogged_in, md5, ClickMysqlWrite, isAdmin
 from views.admin import admin_page
 from views.upload import upload_page
+from werkzeug.contrib.atom import AtomFeed
+
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -166,6 +168,19 @@ def sitemap():
     response = make_response(render_template("public/sitemap.xml", data=data))
     response.headers["Content-Type"] = "application/xml"    
     return response
+
+@app.route("/feed")
+def feed():
+    data = requests.get(g.apiurl + "/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"sort": "desc", "limit": "10"}).json().get("data") or []
+    feed = AtomFeed('The Latest Ten Articles', feed_url=request.url, url=request.url_root)
+    for article in data:
+        feed.add(article['title'], unicode(article['content']),
+                 content_type='html',
+                 author=article['author'],
+                 url=url_for("blogShow", bid=article['id']),
+                 updated=article['update_time'] or article['create_time'],
+                 published=article['create_time'])
+    return feed.get_response()
 
 if __name__ == "__main__":
     Host = GLOBAL.get('Host')
