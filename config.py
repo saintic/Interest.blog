@@ -61,6 +61,8 @@ BLOG={
     "AdminPrefix": os.getenv("interest.blog.AdminPrefix", "/admin"),
 
     "ApiUrl": os.getenv("interest.blog.ApiUrl", "https://api.saintic.com"),
+
+    "ExternalSearch": os.getenv("interest.blog.ExternalSearch", "https://cse.google.com/cse/publicurl?cx=009741766366936003815:jfv5jmieqo8"),
 }
 
 MYSQL=os.getenv("interest.blog.MYSQL", "")

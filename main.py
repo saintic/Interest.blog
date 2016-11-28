@@ -28,9 +28,8 @@ def before_request():
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
     g.apiurl    = BLOG['ApiUrl']
+    g.searchurl = BLOG['ExternalSearch'] 
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    app.logger.debug(app.url_map)
-    app.logger.debug(g.apiurl)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request

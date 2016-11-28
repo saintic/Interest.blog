@@ -35,7 +35,7 @@ var _hmt = _hmt || [];
 {% endblock %}
 
 {% block script %}
-    <script>
+    <script type="text/javascript">
         $.ajax({
             url: "{{ g.apiurl }}/blog?get_index_only=true&sort=desc&limit=all",
             method: 'GET',
