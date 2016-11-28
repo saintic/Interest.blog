@@ -163,7 +163,8 @@ Sitemap: http://www.saintic.com/sitemap.xml
 
 @app.route("/sitemap.xml")
 def sitemap():
-    response = make_response(render_template("public/sitemap.xml"))
+    data = requests.get(g.apiurl + "/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"get_index_only": True, "sort": "desc", "limit": "all"}).json().get("data") or []
+    response = make_response(render_template("public/sitemap.xml", data=data))
     response.headers["Content-Type"] = "application/xml"    
     return response
 
