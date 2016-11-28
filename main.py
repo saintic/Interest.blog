@@ -174,7 +174,7 @@ def sitemap():
 @app.route("/feed/")
 def feed():
     data = requests.get(g.apiurl + "/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"sort": "desc", "limit": "10"}).json().get("data") or []
-    feed = AtomFeed('The Latest Ten Articles', feed_url=request.url, url=request.url_root, subtitle="Interest.blog Feed(Atom)")
+    feed = AtomFeed('Interest.blog Latest Feed(Atom)', feed_url=request.url, url=request.url_root)
     for article in data:
         feed.add(article['title'], unicode(article['content']),
                  content_type='html',
