@@ -8,6 +8,7 @@ __version__ = "0.6"
 
 import json, requests, datetime, SpliceURL
 from urllib import urlencode
+from urlparse import urljoin
 from flask import Flask, g, render_template, request, redirect, url_for, make_response, abort
 from config import GLOBAL, SSO, PLUGINS, BLOG
 from utils.public import logger, gen_requestId, isLogged_in, md5, ClickMysqlWrite, isAdmin
@@ -170,16 +171,18 @@ def sitemap():
     return response
 
 @app.route("/feed")
+@app.route("/feed/")
 def feed():
     data = requests.get(g.apiurl + "/blog", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog/%s' %__version__}, params={"sort": "desc", "limit": "10"}).json().get("data") or []
-    feed = AtomFeed('The Latest Ten Articles', feed_url=request.url, url=request.url_root)
+    feed = AtomFeed('The Latest Ten Articles', feed_url=request.url, url=request.url_root, subtitle="Interest.blog Feed(Atom)")
     for article in data:
         feed.add(article['title'], unicode(article['content']),
                  content_type='html',
                  author=article['author'],
-                 url=url_for("blogShow", bid=article['id']),
-                 updated=article['update_time'] or article['create_time'],
-                 published=article['create_time'])
+                 id=article['id'],
+                 url=urljoin(request.url_root, url_for("blogShow", bid=article['id'])),
+                 updated=datetime.datetime.strptime(article['update_time'] or article['create_time'],"%Y-%m-%d"),
+                 published=datetime.datetime.strptime(article['create_time'],"%Y-%m-%d"))
     return feed.get_response()
 
 if __name__ == "__main__":
