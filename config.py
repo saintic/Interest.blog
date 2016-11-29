@@ -25,7 +25,7 @@ PRODUCT={
 
 SSO={
 
-    "SSO.URL": os.getenv("Interest_blog_SSOURL", "https://passport.saintic.com",
+    "SSO.URL": os.getenv("Interest_blog_SSOURL", "https://passport.saintic.com"),
     #The passport(SSO Authentication System) Web Site URL.
 
     "SSO.PROJECT": PRODUCT["ProcessName"],
