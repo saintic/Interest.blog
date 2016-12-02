@@ -23,11 +23,11 @@
             <input type="radio" name="sources" value="原创" checked="checked">原创
             <input type="radio" name="sources" value="转载">转载
             <input type="radio" name="sources" value="翻译">翻译
-          {% elif data.get('sources') == '转载'%}
+          {% elif data.get('sources') == '转载' %}
             <input type="radio" name="sources" value="原创">原创
             <input type="radio" name="sources" value="转载" checked="checked">转载
             <input type="radio" name="sources" value="翻译">翻译
-          {% elif data.get('sources') == '翻译'%}
+          {% elif data.get('sources') == '翻译' %}
             <input type="radio" name="sources" value="原创">原创
             <input type="radio" name="sources" value="转载">转载
             <input type="radio" name="sources" value="翻译" checked="checked">翻译
@@ -77,6 +77,26 @@
 
     // 创建编辑器
     editor.create();
+
+    // 获取文章分类信息
+    $.ajax({
+        url: "{{ g.apiurl }}/blog?get_catalog_list=true",
+        method: 'GET',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var data = res.data;
+            var str2 = '';
+            for(i=0; i<data.length; i++) {
+                catalog = data[i];
+                str2 += '<option>' + catalog + '</option>';
+            };
+            document.getElementById('blog_catalogs').innerHTML=str2;
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
 
     // 更新文章数据
     function postForm() {

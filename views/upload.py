@@ -38,7 +38,7 @@ def UploadImage():
         res =  Response(result)
         res.headers["ContentType"] = "text/html"
         res.headers["Charset"] = "utf-8"
-        return res        
+        return res
 
 @upload_page.route('/avatar/', methods=['POST','OPTIONS'])
 def UploadProfileAvatar():

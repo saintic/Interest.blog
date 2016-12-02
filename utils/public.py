@@ -44,7 +44,10 @@ def ClickMysqlWrite(data):
     if isinstance(data, dict):
         if data.get("agent") and data.get("method") in ("GET", "POST", "PUT", "DELETE", "OPTIONS"):
             sql = "insert into clickLog set requestId=%s, url=%s, ip=%s, agent=%s, method=%s, status_code=%s, referer=%s"
-            mysql.insert(sql, data.get("requestId"), data.get("url"), data.get("ip"), data.get("agent"), data.get("method"), data.get("status_code"), data.get("referer"))
+            try:
+                mysql.insert(sql, data.get("requestId"), data.get("url"), data.get("ip"), data.get("agent"), data.get("method"), data.get("status_code"), data.get("referer"))
+            except Exception, e:
+                logger.warn(e, exc_info=True)
 
 def isLogged_in(cookie_str):
     ''' To determine whether to log on with cookie '''

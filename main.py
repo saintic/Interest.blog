@@ -47,7 +47,7 @@ def add_header(response):
             "agent": request.headers.get("User-Agent"),
             "requestId": g.requestId,
     }
-    logger.info(json.dumps(ClickLog))
+    #logger.info(json.dumps(ClickLog))
     ClickMysqlWrite(ClickLog)
     return response
 

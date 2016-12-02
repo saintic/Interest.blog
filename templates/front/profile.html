@@ -27,6 +27,25 @@
             <p><input type="file" name="file" /><p />
             <input type="submit" name="submit" value="提交更新" class="button green" />
         </form>
+    {% else %}
+        <form action="{{ g.apiurl + '/user/' }}" method="put">
+            <p><label for="male">我的别名：</label><input type="text" style="width:300px;height:20px" name="cname" value="{{ user.cname or '' }}" /></p>
+            <p><label for="male">我的网址：</label><input type="url" style="width:300px;height:20px" name="url" value="{{ user.url or '' }}" /></p>
+            <p><label for="male">我的格言：</label><input type="text" style="width:300px;height:20px" name="motto" value="{{ user.motto or '' }}" /></p>
+            <p><label for="male">我的代码：</label><input type="url" style="width:300px;height:20px" name="github" value="{{ user.github or '' }}" /></p>
+            <p><label for="male">我的微博：</label><input type="url" style="width:300px;height:20px" name="weibo" value="{{ user.weibo or '' }}" /></p>
+            <p><label for="male">我的邮箱：</label><input type="email" style="width:300px;height:20px" name="email" value="{{ user.email or '' }}" /></p>
+            <p><label for="male">选择性别：</label>
+            {%- if user.gender == '女' %}
+                <input type="radio" name="gender" value="男">男
+                <input type="radio" name="gender" value="女" checked="checked">女
+            {% else %}
+                <input type="radio" name="gender" value="男" checked="checked">男
+                <input type="radio" name="gender" value="女">女
+            {% endif -%}
+            </p>
+            <input type="submit" name="submit" value="提交更新" class="button green" />
+        </form>
     {% endif %}
 
 </article>
