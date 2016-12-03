@@ -21,8 +21,6 @@ allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] i
 def UploadImage():
     logger.debug(request.files)
     f = request.files.get("WriteBlogImage", "editormd-image-file")
-    logger.debug(dir(f))
-    logger.debug(f.stream.read())
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))
