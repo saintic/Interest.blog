@@ -25,7 +25,7 @@ PRODUCT={
 
 SSO={
 
-    "SSO.URL": os.getenv("Interest_blog_SSOURL", "https://passport.saintic.com"),
+    "SSO.URL": os.getenv("Interest_blog_SSOURL", ""),
     #The passport(SSO Authentication System) Web Site URL.
 
     "SSO.PROJECT": PRODUCT["ProcessName"],
@@ -60,7 +60,7 @@ BLOG={
 
     "AdminPrefix": os.getenv("Interest_blog_AdminPrefix", "/admin"),
 
-    "ApiUrl": os.getenv("Interest_blog_ApiUrl", "https://api.saintic.com"),
+    "ApiUrl": os.getenv("Interest_blog_ApiUrl", ""),
 
     "ExternalSearch": os.getenv("Interest_blog_ExternalSearch", "https://cse.google.com/cse/publicurl?cx=009741766366936003815:jfv5jmieqo8"),
 }

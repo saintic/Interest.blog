@@ -158,8 +158,6 @@ def robots():
 # robots.txt generated at http://www.51240.com
 User-agent: *
 Disallow: 
-Disallow: /admin
-Disallow: /admin/
 Sitemap: http://www.saintic.com/sitemap.xml
     """
 
