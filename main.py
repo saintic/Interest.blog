@@ -4,7 +4,7 @@
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "0.6"
+__version__ = "0.7"
 
 import json, requests, datetime, SpliceURL
 from urllib import urlencode
