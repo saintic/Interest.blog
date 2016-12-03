@@ -4,9 +4,10 @@ import requests
 import hashlib
 import datetime
 import random
+import upyun
 from uuid import uuid4
 from log import Syslog
-from config import SSO, MYSQL
+from config import SSO, MYSQL, PLUGINS
 from torndb import Connection
 from flask import g
 
@@ -71,3 +72,17 @@ def isAdmin(username):
     if username in AdminUsers:
         return True
     return False
+
+def UploadImage2Upyun(file, imgurl, kwargs=PLUGINS['UpYunStorage']):
+    """ Upload image to Upyun Cloud with Api """
+
+    logger.info({"UploadFile": file, "imgurl": imgurl, "kwargs": kwargs})
+
+    up = upyun.UpYun(kwargs.get("bucket"), username=kwargs.get("username"), password=kwargs.get("password"), secret=kwargs.get("secret"), timeout=kwargs.get("timeout", 10))
+
+    formkw = { 'allow-file-type': kwargs.get('allow-file-type', 'jpg,jpeg,png,gif') }
+
+    with open(file, "rb") as f:
+        res = up.put(imgurl, f, checksum=True, need_resume=True, form=True, **formkw)
+
+    return res

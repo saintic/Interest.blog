@@ -1,16 +1,17 @@
 # -*- coding: utf8 -*-
 
 import os, requests
-from utils.public import logger, gen_filename
+from utils.public import logger, gen_filename, UploadImage2Upyun
 from flask import Blueprint, request, Response, url_for, redirect, g
 from werkzeug import secure_filename
+from config import PLUGINS
 
 upload_page             = Blueprint("upload", __name__)
 BLOG_IMAGE_UPLOAD_DIR   = 'static/img/ImageUploads/'
 AVATAR_IMAGE_UPLOAD_DIR = 'static/img/avatar/ImageUploads/'
 BLOG_UPLOAD_FOLDER      = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), BLOG_IMAGE_UPLOAD_DIR)
 AVATAR_UPLOAD_FOLDER    = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), AVATAR_IMAGE_UPLOAD_DIR)
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS      = set(['png', 'jpg', 'jpeg', 'gif'])
 
 #文件名合法性验证
 allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -20,15 +21,24 @@ allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] i
 def UploadImage():
     logger.debug(request.files)
     f = request.files.get("WriteBlogImage", "editormd-image-file")
+    logger.debug(dir(f))
+    logger.debug(f.stream.read())
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))
         filedir  = os.path.join(upload_page.root_path, BLOG_UPLOAD_FOLDER)
-        if not os.path.exists(filedir): os.makedirs(filedir)
+        if not os.path.exists(filedir):
+            os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
-        imgUrl = request.url_root + BLOG_IMAGE_UPLOAD_DIR + filename
-        logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
-        res =  Response(imgUrl)
+        if PLUGINS['UpYunStorage']['enable']:
+            imgUrl = "/interest.blog/test/" + filename
+            upres  = UploadImage2Upyun(os.path.join(filedir, filename), imgUrl)
+            imgUrl = PLUGINS['UpYunStorage']['dn'].strip("/") + imgUrl
+            logger.info("To Upyun file saved, its url is %s, result is %s" %(imgUrl, upres))
+        else:
+            imgUrl = request.url_root + BLOG_IMAGE_UPLOAD_DIR + filename
+            logger.info("To local file saved in %s, its url is %s" %(filedir, imgUrl))
+        res = Response(imgUrl)
         res.headers["ContentType"] = "text/html"
         res.headers["Charset"] = "utf-8"
         return res

@@ -54,6 +54,18 @@ PLUGINS={
 
     "BackupBlog": os.getenv("Interest_blog_BackupBlog", True),
     #备份文章插件
+
+    "UpYunStorage": {
+        "enable": os.getenv("Interest_blog_UpYunStorage_enable", True),
+        "bucket": os.getenv("Interest_blog_UpYunStorage_bucket"),
+        "username": os.getenv("Interest_blog_UpYunStorage_username"),
+        "password": os.getenv("Interest_blog_UpYunStorage_password"),
+        "secret": os.getenv("Interest_blog_UpYunStorage_secret"),
+        "timeout": os.getenv("Interest_blog_UpYunStorage_timeout", 10),
+        "dn": os.getenv("Interest_blog_UpYunStorage_dn", "http://img.saintic.com"),
+        "allow-file-type": "jpg,jpeg,png,gif"
+    },
+    #又拍云存储插件
 }
 
 BLOG={
