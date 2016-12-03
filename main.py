@@ -30,7 +30,7 @@ def before_request():
     g.username  = request.cookies.get("username", "")
     g.expires   = request.cookies.get("time", "")
     g.signin    = isLogged_in('.'.join([ g.username, g.expires, g.sessionId ]))
-    g.apiurl    = BLOG['ApiUrl']
+    g.apiurl    = BLOG['ApiUrl'].strip('/')
     g.searchurl = BLOG['ExternalSearch'] 
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
 
