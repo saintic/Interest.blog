@@ -56,7 +56,7 @@ PLUGINS={
     #备份文章插件
 
     "UpYunStorage": {
-        "enable": os.getenv("Interest_blog_UpYunStorage_enable", True),
+        "enable": os.getenv("Interest_blog_UpYunStorage_enable", False),
         "bucket": os.getenv("Interest_blog_UpYunStorage_bucket"),
         "username": os.getenv("Interest_blog_UpYunStorage_username"),
         "password": os.getenv("Interest_blog_UpYunStorage_password"),

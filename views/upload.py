@@ -29,13 +29,13 @@ def UploadImage():
             os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
         if PLUGINS['UpYunStorage']['enable']:
-            imgUrl = "/interest.blog/test/" + filename
+            imgUrl = "/interest.blog/blog/" + filename
             upres  = UploadImage2Upyun(os.path.join(filedir, filename), imgUrl)
             imgUrl = PLUGINS['UpYunStorage']['dn'].strip("/") + imgUrl
-            logger.info("To Upyun file saved, its url is %s, result is %s" %(imgUrl, upres))
+            logger.info("Blog to Upyun file saved, its url is %s, result is %s" %(imgUrl, upres))
         else:
             imgUrl = request.url_root + BLOG_IMAGE_UPLOAD_DIR + filename
-            logger.info("To local file saved in %s, its url is %s" %(filedir, imgUrl))
+            logger.info("Blog to local file saved in %s, its url is %s" %(filedir, imgUrl))
         res = Response(imgUrl)
         res.headers["ContentType"] = "text/html"
         res.headers["Charset"] = "utf-8"
@@ -57,10 +57,17 @@ def UploadProfileAvatar():
         filename = secure_filename(gen_filename() + "." + f.filename.split('.')[-1]) #随机命名
         logger.info("get allowed file %s, its name is %s" %(f, filename))
         filedir  = os.path.join(upload_page.root_path, AVATAR_UPLOAD_FOLDER)
-        if not os.path.exists(filedir): os.makedirs(filedir)
+        if not os.path.exists(filedir):
+            os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
-        imgUrl   = "/" + AVATAR_IMAGE_UPLOAD_DIR + filename
-        logger.info("file saved in %s, its url is %s" %(filedir, imgUrl))
+        if PLUGINS['UpYunStorage']['enable']:
+            imgUrl = "/interest.blog/avatar/" + filename
+            upres  = UploadImage2Upyun(os.path.join(filedir, filename), imgUrl)
+            imgUrl = PLUGINS['UpYunStorage']['dn'].strip("/") + imgUrl
+            logger.info("Avatar to Upyun file saved, its url is %s, result is %s" %(imgUrl, upres))
+        else:
+            imgUrl   = "/" + AVATAR_IMAGE_UPLOAD_DIR + filename
+            logger.info("Avatar to local file saved in %s, its url is %s" %(filedir, imgUrl))
         # return user home and write avatar url into mysql db.
         res = requests.put(g.apiurl + "/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()
         logger.info(res)
