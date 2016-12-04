@@ -25,7 +25,7 @@
         <form action="{{ url_for('upload.UploadProfileAvatar') }}" method="post" enctype="multipart/form-data">
             <p>选择头像图片(仅支持jpg/jpeg/png/gif)：</p>
             <p><input type="file" name="file" /><p />
-            <input type="submit" name="submit" value="提交更新" class="button green" />
+            <input type="submit" name="submit" value="更新头像" class="button green" />
         </form>
     {% else %}
         <form id="UpdateUserFormId" method="" action="">
@@ -45,7 +45,7 @@
             {% endif -%}
             </p>
             <input type="hidden" name="username" value="{{ g.username }}">
-            <input onclick=putForm() type="button" value="更新博客" class="button green" />
+            <input onclick=putForm() type="button" value="更新资料" class="button green" />
         </form>
     {% endif %}
 
