@@ -18,6 +18,7 @@ requests
 torndb
 MySQL-python
 SpliceURL>=1.2
+upyun>=2.4.2
 ```
 
 ## Usage
