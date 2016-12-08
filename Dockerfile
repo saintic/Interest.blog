@@ -6,7 +6,7 @@ ADD . /Interest.blog
 
 ADD misc/supervisord.conf /etc/
 
-RUN  apk add --no-cache linux-header &&\
+RUN  apk add --no-cache linux-headers &&\
      pip install --index https://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
 
 WORKDIR /Interest.blog
