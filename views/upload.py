@@ -23,8 +23,8 @@ def UploadImage():
     f = request.files.get("WriteBlogImage", "editormd-image-file")
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename) #随机命名
-        logger.info("get allowed file %s, its name is %s" %(f, filename))
         filedir  = os.path.join(upload_page.root_path, BLOG_UPLOAD_FOLDER)
+        logger.info("get allowed file %s, its name is %s, save in %s" %(f, filename, filedir))
         if not os.path.exists(filedir):
             os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
@@ -55,8 +55,8 @@ def UploadProfileAvatar():
     # Check if the file is one of the allowed types/extensions
     if f and allowed_file(f.filename):
         filename = secure_filename(gen_filename() + "." + f.filename.split('.')[-1]) #随机命名
-        logger.info("get allowed file %s, its name is %s" %(f, filename))
         filedir  = os.path.join(upload_page.root_path, AVATAR_UPLOAD_FOLDER)
+        logger.info("get allowed file %s, its name is %s, save in %s" %(f, filename, filedir))
         if not os.path.exists(filedir):
             os.makedirs(filedir)
         f.save(os.path.join(filedir, filename))
