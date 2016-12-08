@@ -16,7 +16,7 @@
 <div>
     <h1>创作文章</h1>
     {%- if request.args.get("editor", "wangEditor") == "wangEditor" %}
-    <h3>当前使用<a href="http://www.wangeditor.com/" target="_blank">wangEditor</a>富文本编辑器<sub><a href="{{ url_for('blogWrite', editor='Editor.md') }}">&nbsp;切换&nbsp;</a></sub></h3>
+    <h3>当前使用<a href="http://www.wangeditor.com/" target="_blank">wangEditor</a>富文本编辑器<sub><a href="{{ url_for('front.blogWrite', editor='Editor.md') }}">&nbsp;切换&nbsp;</a></sub></h3>
     <form id="CreateBlogFormId" method="" action="">
         <p>标题：<input type="text" style="width:300px;height:20px" name="title" placeholder="请在此处填写文章标题" required /><em style="color:red; front-size:bold">*</em></p>
         <p>标签：<input type="text" style="width:300px;height:20px" name="tag" placeholder="请在此处输入标签并以空格分割" required /></p>
@@ -37,7 +37,7 @@
         <input onclick=postForm() type="button" value="提交博客" class="button green" />
     </form>
     {% else%}
-    <h3>当前使用<a href="http://pandao.github.io/editor.md/" target="_blank">Editor.md</a>富文本编辑器<sub><a href="{{ url_for('blogWrite', editor='wangEditor') }}">&nbsp;切换&nbsp;</a></sub></h3>
+    <h3>当前使用<a href="http://pandao.github.io/editor.md/" target="_blank">Editor.md</a>富文本编辑器<sub><a href="{{ url_for('front.blogWrite', editor='wangEditor') }}">&nbsp;切换&nbsp;</a></sub></h3>
     <form id="CreateBlogFormId" method="" action="">
         <p>标题：<input type="text" style="width:300px;height:20px" name="title" placeholder="请在此处填写文章标题" required /><em style="color:red; front-size:bold">*</em></p>
         <p>标签：<input type="text" style="width:300px;height:20px" name="tag" placeholder="请在此处输入标签并以空格分割" required /></p>

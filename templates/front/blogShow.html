@@ -24,15 +24,15 @@
     {% if data['tag'] %}
         <p class="post-meta">Tags: 
         {% for tag in data['tag'].split() %}
-            <a href="{{ url_for('blogResources', resources_type='tag', resources_data=tag) }}" target="_blank"><scan class="badge green">{{ tag }}</scan></a>&nbsp;
+            <a href="{{ url_for('front.blogResources', resources_type='tag', resources_data=tag) }}" target="_blank"><scan class="badge green">{{ tag }}</scan></a>&nbsp;
         {% endfor %}
         </p>
     {% endif %}
     {% if data['catalog'] %}
-        <p class="post-meta">Catalog: <a href="{{ url_for('blogResources', resources_type='catalog', resources_data=data['catalog']) }}" target="_blank"><scan class="badge yellow">{{ data['catalog'] }}</scan></a></p>
+        <p class="post-meta">Catalog: <a href="{{ url_for('front.blogResources', resources_type='catalog', resources_data=data['catalog']) }}" target="_blank"><scan class="badge yellow">{{ data['catalog'] }}</scan></a></p>
     {% endif %}
     {% if data.get("sources") %}
-        <p class="post-meta">Sources: <a href="{{ url_for('blogResources', resources_type='source', resources_data=data.get('sources')) }}" target="_blank">
+        <p class="post-meta">Sources: <a href="{{ url_for('front.blogResources', resources_type='source', resources_data=data.get('sources')) }}" target="_blank">
         {% if data.get("sources") == "原创" %}
             <img src="{{ url_for('static', filename='img/icon/Original.gif') }}" /></a></p>
         {% elif data.get("sources") == "转载" %}
@@ -43,7 +43,7 @@
     {% endif %}
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
-        <a href="{{ url_for('blogEdit', blogId=blogId) }}">编辑文章</a>
+        <a href="{{ url_for('front.blogEdit', blogId=blogId) }}">编辑文章</a>
     </p>
     {% endif %}
   </header>

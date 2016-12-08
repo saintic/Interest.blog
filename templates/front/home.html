@@ -8,7 +8,7 @@
 
   <header class="post-header">
     <p>
-        <a href="{{ url_for('profile', change='avatar') }}" title="Change Your Avatar"><img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar"></a>
+        <a href="{{ url_for('front.profile', change='avatar') }}" title="Change Your Avatar"><img src="{{ user.get('avatar') or url_for('static', filename='img/avatar/default.jpg') }}" class="circular--square home-avatar"></a>
     </p>
   </header>
 
@@ -44,7 +44,7 @@
         <p>我的代码: <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">{{ user.get('github') }}</a></p>
     {% endif %}
 
-    <p><a href="{{ url_for('profile', change='profile') }}" title="Change Your Profile">修改我的资料&nbsp;<img src="{{ url_for('static', filename='img/icon/profile.png') }}" height="18px" /></a></p>
+    <p><a href="{{ url_for('front.profile', change='profile') }}" title="Change Your Profile">修改我的资料&nbsp;<img src="{{ url_for('static', filename='img/icon/profile.png') }}" height="18px" /></a></p>
 
     {% if blog %}
     <div>
@@ -53,7 +53,7 @@
         {% for _ in blog %}
           <li>
             <scan>
-            <a href="{{ url_for('blogShow', bid=_.get('id')) }}">{{ _.get("title") }}</a>
+            <a href="{{ url_for('front.blogShow', bid=_.get('id')) }}">{{ _.get("title") }}</a>
             <sub>{{ _.get("create_time") }}</sub> |
             <sub>{{ _.get("sources") }}</sub> |
             <sub>{{ _.get("catalog") }}</sub> |

@@ -71,4 +71,4 @@ def UploadProfileAvatar():
         # return user home and write avatar url into mysql db.
         res = requests.put(g.apiurl + "/user/", timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}, params={"change": "avatar"}, data={"avatar": imgUrl, "username": g.username}).json()
         logger.info(res)
-    return redirect(url_for('home'))
+    return redirect(url_for('front.home'))

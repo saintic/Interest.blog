@@ -11,7 +11,7 @@ def AdminIndex():
     if g.signin and isAdmin(g.username):
         return render_template("admin/index.html")
     else:
-        return redirect(url_for("login"))
+        return redirect(url_for("front.login"))
 
 @admin_page.route("/user/")
 def AdminUser():
@@ -21,7 +21,7 @@ def AdminUser():
         data = chunks(data, 5)
         return render_template("admin/user.html", data=data)
     else:
-        return redirect(url_for("login"))
+        return redirect(url_for("front.login"))
 
 @admin_page.route("/blog/")
 def AdminBlog():
@@ -31,4 +31,4 @@ def AdminBlog():
         data = chunks(data, 5)
         return render_template("admin/blog.html", data=data)
     else:
-        return redirect(url_for("login"))
+        return redirect(url_for("front.login"))

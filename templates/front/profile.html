@@ -66,7 +66,7 @@
                 console.log(res);
                 if (res.success == true){
                     alert("更新用户资料成功！");
-                    window.location="{{ url_for('home') }}";
+                    window.location="{{ url_for('front.home') }}";
                 } else {
                     alert("更新用户资料失败，请重试提交或报告错误！\n错误原因是：" + res.msg);
                     //location.reload(true);
