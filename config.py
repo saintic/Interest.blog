@@ -19,8 +19,8 @@ PRODUCT={
     "ProcessName": "Interest.blog",
     #Custom process, you can see it with "ps aux|grep ProcessName"(with setproctitle module)
 
-    "ProductType": os.getenv("Interest_blog_ProductType", "tornado"),
-    #Production environment starting method, optional: `gevent`, `tornado`
+    "ProductType": os.getenv("Interest_blog_ProductType", "uwsgi"),
+    #Production environment starting method, optional: `gevent`, `tornado`, `uwsgi`
 }
 
 SSO={
