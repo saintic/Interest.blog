@@ -6,8 +6,9 @@ ADD . /Interest.blog
 
 ADD misc/supervisord.conf /etc/
 
-WORKDIR /Interest.blog
+RUN  apk add --no-cache linux-header &&\
+     pip install --index https://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
 
-RUN pip install --index https://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
+WORKDIR /Interest.blog
 
 ENTRYPOINT ["supervisord"]
