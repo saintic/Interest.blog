@@ -45,7 +45,7 @@ upyun>=2.4.2
     3.4 python super_debug.py #SuperDebug Mode
 
 ```
-[http://www.saintic.com/blog/201.html](http://www.saintic.com/blog/201.html "http://www.saintic.com/blog/201.html")
+亦可参考：[http://www.saintic.com/blog/201.html](http://www.saintic.com/blog/201.html "http://www.saintic.com/blog/201.html")
 
 ## Design
 ![Design][1]
