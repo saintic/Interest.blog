@@ -2,7 +2,7 @@
 
 import os, requests
 from utils.public import logger, gen_filename, UploadImage2Upyun
-from flask import Blueprint, request, Response, url_for, redirect, g
+from flask import Blueprint, request, Response, url_for, redirect, g, jsonify
 from werkzeug import secure_filename
 from config import PLUGINS
 
@@ -19,10 +19,11 @@ allowed_file = lambda filename: '.' in filename and filename.rsplit('.', 1)[1] i
 #对图片上传进行响应
 @upload_page.route("/image/", methods=["POST",])
 def UploadImage():
+    editorType = request.args.get("editorType", "wangEditor")
     logger.debug(request.files)
-    f = request.files.get("WriteBlogImage", "editormd-image-file")
+    f = request.files.get("WriteBlogImage") or request.files.get("editormd-image-file")
     if f and allowed_file(f.filename):
-        filename = secure_filename(f.filename) #随机命名
+        filename = secure_filename(gen_filename() + "." + f.filename.split('.')[-1]) #随机命名
         filedir  = os.path.join(upload_page.root_path, BLOG_UPLOAD_FOLDER)
         logger.info("get allowed file %s, its name is %s, save in %s" %(f, filename, filedir))
         if not os.path.exists(filedir):
@@ -36,16 +37,26 @@ def UploadImage():
         else:
             imgUrl = request.url_root + BLOG_IMAGE_UPLOAD_DIR + filename
             logger.info("Blog to local file saved in %s, its url is %s" %(filedir, imgUrl))
-        res = Response(imgUrl)
-        res.headers["ContentType"] = "text/html"
+        if editorType == "wangEditor":
+            res = Response(imgUrl)
+            res.headers["ContentType"] = "text/html"
+        else:
+            res = jsonify(url=imgUrl, message=None, success=1)
+            res.headers["ContentType"] = "application/json"
         res.headers["Charset"] = "utf-8"
+        logger.debug(res)
         return res
     else:
         result = r"error|未成功获取文件，上传失败"
-        logger.error(result)
-        res =  Response(result)
-        res.headers["ContentType"] = "text/html"
+        logger.warn(result)
+        if editorType == "wangEditor":
+            res = Response(result)
+            res.headers["ContentType"] = "text/html"
+        else:
+            res = jsonify(message=result, success=0)
+            res.headers["ContentType"] = "application/json"
         res.headers["Charset"] = "utf-8"
+        logger.debug(res)
         return res
 
 @upload_page.route('/avatar/', methods=['POST','OPTIONS'])

@@ -86,7 +86,7 @@
        后台文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/115736;
        后台需要配置一个获取表单上传图片并保存的路由。
     */
-    editor.config.uploadImgUrl = '/upload/image/';
+    editor.config.uploadImgUrl = "{{ url_for('upload.UploadImage', editorType='wangEditor') }}";
     editor.config.uploadImgFileName = 'WriteBlogImage';
 
     // 创建编辑器
@@ -104,11 +104,17 @@
                 height  : 500,
                 syncScrolling : "single",
                 path    : "/static/Editor.md/lib/",
-                /*
                 // 开启上传图片功能
                 imageUpload : true,
-                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/upload/image/",
+                imageFormats : ['png', 'jpg', 'jpeg', 'gif'],
+                imageUploadURL : "{{ url_for('upload.UploadImage', editorType='Editor.md') }}",
+                /*
+                     上传的后台只需要返回一个 JSON 数据，结构如下：
+                     {
+                        success : 0 | 1,           // 0 表示上传失败，1 表示上传成功
+                        message : "提示的信息，上传成功或上传失败及错误信息等。",
+                        url     : "图片地址"        // 上传成功时才返回
+                     }
                 */
                 emoji : true,                 // Emoji表情
                 saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
