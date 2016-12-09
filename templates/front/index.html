@@ -2,7 +2,7 @@
 
 {% block title %}Interest Blog Index | SaintIC{% endblock %}
 
-{% if EnableBaiduStatistics %}
+{% if g.plugins['BaiduStatistics'] %}
 {% block head %}
 <script>
 var _hmt = _hmt || [];

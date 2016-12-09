@@ -12,7 +12,6 @@ from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite
 from views.upload import upload_page
 from views.front import front_page
 
-
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.register_blueprint(front_page)
@@ -30,11 +29,6 @@ def before_request():
     g.plugins   = PLUGINS
     g.apiurl    = g.blog['ApiUrl'].strip('/')
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    logger.debug(app.url_map)
-    logger.debug(type(g.blog))
-    logger.debug(type(g.plugins))
-    logger.debug(g.blog)
-    logger.debug(g.plugins)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
@@ -53,6 +47,7 @@ def add_header(response):
     ClickMysqlWrite(ClickLog)
     return response
 
+#404 found page
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("public/404.html"), 404
