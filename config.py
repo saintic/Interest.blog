@@ -37,7 +37,7 @@ PLUGINS={
     "CodeHighlighting": os.getenv("Interest_blog_CodeHighlighting", True),
     #代码高亮插件
 
-    "DuoshuoComment": os.getenv("Interest_blog_DuoshuoComment", True),
+    "DuoshuoComment": os.getenv("Interest_blog_DuoshuoComment", False),
     #多说评论插件
 
     "Weather": os.getenv("Interest_blog_Weather", True),

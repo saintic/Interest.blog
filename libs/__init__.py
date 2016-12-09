@@ -1,18 +1,24 @@
 # -*- coding: utf8 -*-
 # modules open interface
 
+import requests
+from flask import g
 from utils.public import logger, mysql, today
 
-def get_index_list(sort, limit):
-    sql = "SELECT id,title,create_time,update_time FROM blog ORDER BY id %s %s"
-    logger.info(sql)
-    try:
-        data = mysql.query(sql, sort, limit)
-    except Exception,e:
-        logger.error(e, exc_info=True)
-        return []
-    else:
-        return data
+def get_blogId_data(blogId):
+    return requests.get(g.apiurl + "/blog", params={"blogId": blogId}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}).json().get("data")
+
+def get_user_profile(username):
+    return requests.get(g.apiurl + "/user", params={"username": username}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}).json().get("data")
+
+def get_user_blog(username):
+    return requests.get(g.apiurl + "/blog", params={"get_user_blog": username, "limit": "all"}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}).json().get("data") or []
+
+def get_index_list(sort="desc", limit="all"):
+    return requests.get(g.apiurl + "/blog", params={"get_index_only": True, "sort": sort, "limit": limit}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}).json().get("data") or []
+
+def get_index_data(sort="desc", limit="all"):
+    return requests.get(g.apiurl + "/blog", params={"sort": sort, "limit": limit}, timeout=5, verify=False, headers={'User-Agent': 'Interest.blog'}).json().get("data") or []
 
 def get_catalog_list():
     sql = "SELECT catalog FROM blog"
@@ -71,13 +77,3 @@ def get_author_data(author, sort, limit):
     else:
         return data
 
-def get_blogId_data(blogId):
-    sql = "SELECT id,title,content,create_time,update_time,tag,catalog,sources,author FROM blog WHERE id=%d"
-    logger.info(sql)
-    try:
-        data = mysql.get(sql, int(blogId))
-    except Exception,e:
-        logger.error(e, exc_info=True)
-        return {}
-    else:
-        return data
