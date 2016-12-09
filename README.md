@@ -19,8 +19,9 @@ torndb
 MySQL-python
 SpliceURL>=1.2
 upyun>=2.4.2
-sh
-uwsgi
+#sh
+#uwsgi
+#如果你打算生产环境使用uwsgi启动，那么去掉这两个注释。
 ```
 
 ## Usage
@@ -41,9 +42,10 @@ uwsgi
     3.1 python main.py        #Develop Mode
     3.2 sh Control.sh         #Product Mode
     3.3 python -O Product.py  #Product Mode
-    3.4 python super_debug.py #Debug Mode
+    3.4 python super_debug.py #SuperDebug Mode
 
 ```
+[http://www.saintic.com/blog/201.html](http://www.saintic.com/blog/201.html "http://www.saintic.com/blog/201.html")
 
 ## Design
 ![Design][1]

@@ -4,10 +4,8 @@ MAINTAINER Mr.tao <staugur@saintic.com>
 
 ADD . /Interest.blog
 
-ADD misc/supervisord.conf /etc/
-
-#RUN apk add --no-cache linux-headers
-RUN  pip install --index https://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
+RUN cp -f /Interest.blog/misc/supervisord.conf /etc/ &&\
+    pip install --index https://pypi.douban.com/simple/ -r /Interest.blog/requirements.txt
 
 WORKDIR /Interest.blog
 
