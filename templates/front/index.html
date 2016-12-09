@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
             },
             error: function(error){
                 console.log(error);
-                location.reload(true);
+                window.location="{{ url_for('.index') }}";
             }
         });
         // 获取所有更新文章索引
@@ -85,7 +85,7 @@ var _hmt = _hmt || [];
             },
             error: function(error){
                 console.log(error);
-                location.reload(true);
+                window.location="{{ url_for('.index') }}";
             }
         });
     </script>
