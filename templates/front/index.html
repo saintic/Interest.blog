@@ -91,7 +91,7 @@ var _hmt = _hmt || [];
         });
         // 获取10篇热评文章索引
         $.ajax({
-            url: "http://api.duoshuo.com/sites/listTopThreads.jsonp?short_name={{ g.plugins['DuoshuoComment']['shortName'] }}&range=all&num_items=10",
+            url: "http://api.duoshuo.com/sites/listTopThreads.json?short_name={{ g.plugins['DuoshuoComment']['shortName'] }}&range=all&num_items=10",
             method: 'GET',
             datatype: 'json',
             success: function(res) {
