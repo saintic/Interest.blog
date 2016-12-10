@@ -21,7 +21,7 @@ var _hmt = _hmt || [];
   <div class="home">
     <h1 class="page-heading">
         <a href="{{ url_for('.index', tab='all') }}" title="所有文章">所有文章</a><span class="badge green" id="index_number"></span>&nbsp;
-        <a href="{{ url_for('.index', tab='update') }}" title="所有更新文章">最近更新</a><span class="badge yellow" id="update_number"></span>&nbsp;
+        <a href="{{ url_for('.index', tab='update') }}" title="最近十篇更新文章">最近更新</a><span class="badge yellow" id="update_number"></span>&nbsp;
         <a href="{{ url_for('.index', tab='hot') }}" title="最新十篇热评文章">热评文章</a><span class="badge red" id="hot_number"></span>
     </h1>
     <hr /><br />
@@ -67,7 +67,7 @@ var _hmt = _hmt || [];
         });
         // 获取所有更新文章索引
         $.ajax({
-            url: "{{ g.apiurl }}/blog?get_update_data=true&sort=desc&limit=all",
+            url: "{{ g.apiurl }}/blog?get_update_data=true&sort=desc&limit=10",
             method: 'GET',
             datatype: 'json',
             success: function(res) {
@@ -91,12 +91,12 @@ var _hmt = _hmt || [];
         });
         // 获取10篇热评文章索引
         $.ajax({
-            url: "http://api.duoshuo.com/sites/listTopThreads.json?short_name={{ g.plugins['DuoshuoComment']['shortName'] }}&range=all&num_items=10",
+            url: "{{ url_for('api.ApiComments') }}",
             method: 'GET',
             datatype: 'json',
             success: function(res) {
                 console.log(res);
-                var data= res.response;
+                var data= res.data;
                 var str = '';
                 for(i=0; i<data.length; i++) {
                     blog = data[i];

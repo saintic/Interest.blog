@@ -11,11 +11,13 @@ from config import GLOBAL, PLUGINS, BLOG
 from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite
 from views.upload import upload_page
 from views.front import front_page
+from views.api import api_page
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.register_blueprint(front_page)
 app.register_blueprint(upload_page, url_prefix="/upload")
+app.register_blueprint(api_page, url_prefix="/api")
 
 #Before each URL request, define the initialization time, requestId, user authentication results and other related information and bind to g
 @app.before_request
@@ -30,10 +32,6 @@ def before_request():
     g.apiurl    = g.blog['ApiUrl'].strip('/')
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
     logger.debug(app.url_map)
-    logger.debug(type(g.blog))
-    logger.debug(type(g.plugins))
-    logger.debug(g.blog)
-    logger.debug(g.plugins)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
