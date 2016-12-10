@@ -15,11 +15,10 @@ try:
 except ImportError as e:
     logger.warn("%s, try to pip install setproctitle, otherwise, you can't use the process to customize the function" %e)
 else:
-    if ProductType != "uwsgi":
-        setproctitle.setproctitle(ProcessName)
-        msg = "The process is %s" %ProcessName
-        print(msg)
-        logger.info(msg)
+    setproctitle.setproctitle(ProcessName)
+    msg = "The process is %s" %ProcessName
+    print(msg)
+    logger.info(msg)
 
 try:
     msg = "%s has been launched, %s:%s, with %s." %(ProcessName, Host, Port, ProductType)
