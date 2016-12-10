@@ -12,13 +12,13 @@ front_page = Blueprint("front", __name__)
 
 @front_page.route("/")
 def index():
-    return render_template("front/index.html")
+    return render_template("front/index.html", EnableBaiduStatistics=PLUGINS['BaiduStatistics'])
 
 @front_page.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = get_blogId_data(bid)
     if data:
-        return render_template("front/blogShow.html", blogId=bid, data=data)
+        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'], EnableBiaduShare=PLUGINS['BaiduShare'])
     else:
         return abort(404)
 
@@ -47,7 +47,7 @@ def home():
     if g.signin:
         user = get_user_profile(g.username)
         blog = get_user_blog(g.username)
-        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
     else:
         return redirect(url_for(".login"))
 

@@ -67,7 +67,7 @@
   </div>
 </article>
 
-{%- if g.plugins['DuoshuoComment'] %}
+{%- if g.plugins['DuoshuoComment']['enable'] %}
 <!-- 多说评论框插件 start -->
   <div class="ds-thread" data-thread-key="{{ blogId }}" data-title="{{ data['title'] }}" data-url="{{ request.url }}"></div>
 <!-- 多说评论框插件 end -->
@@ -94,7 +94,7 @@
 })();
 {% endif %}
 
-{% if g.plugins['DuoshuoComment'] %}
+{% if g.plugins['DuoshuoComment']['enable'] %}
 /* 多说评论框公共JS代码 */
 var duoshuoQuery = {short_name:"saintic"};
   (function() {
