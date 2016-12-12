@@ -72,7 +72,7 @@ var _hmt = _hmt || [];
                 alert("所有文章数据获取错误，请尝试刷新重试！");
             }
         });
-        // 获取所有更新文章索引
+        // 获取10篇更新文章索引
         $.ajax({
             url: "{{ g.apiurl }}/blog?get_update_data=true&sort=desc&limit=10",
             method: 'GET',
