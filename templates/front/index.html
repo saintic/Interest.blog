@@ -37,6 +37,13 @@ var _hmt = _hmt || [];
     </ul>
   </div>
 
+{% if g.plugins['ChristmasBlessings'] %}
+  <!--圣诞节祝福插件-->
+  <div id="MagicFace" style="position: absolute; z-index: 999;">
+  <script src="http://qiniu.ws234.com/christmas.js"></script>
+</div>
+{% endif %}
+
 {% endblock %}
 
 {% block script %}

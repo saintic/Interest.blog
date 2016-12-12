@@ -69,6 +69,9 @@ PLUGINS={
         "allow-file-type": "jpg,jpeg,png,gif"
     },
     #又拍云存储插件
+
+    "ChristmasBlessings": os.getenv("Interest_blog_ChristmasBlessings", False),
+    #圣诞节祝福插件
 }
 
 BLOG={
