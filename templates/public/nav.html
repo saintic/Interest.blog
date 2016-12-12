@@ -17,8 +17,8 @@
           {% else %}
               <a class="page-link" href="{{ url_for('front.login') }}"><attr title="Welcome to join us!">登录</attr></a>
           {% endif -%}
-              <a class="page-link" href="{{ url_for('front.blogShow', bid=110) }}">更新记录</a>
-              <a class="page-link" href="{{ url_for('front.blogShow', bid=113) }}">关于本站</a>
+              <a class="page-link" href="{{ url_for('front.blogShow', bid=g.blog['UpdateRecordId']) }}">更新记录</a>
+              <a class="page-link" href="{{ url_for('front.blogShow', bid=g.blog['AboutId']) }}">关于本站</a>
               <a class="page-link" href="{{ url_for('front.blogResources') }}">标签分类</a>
               <a class="page-link" href="{{ g.blog['ExternalSearch'] }}" target="_blank">站内搜索</a>
               <a class="page-link" href="{{ url_for('front.feed') }}" target="_blank"><img src="{{ url_for('static', filename='img/icon/rss.png') }}" alt="订阅更新" title="订阅更新" border="0" /></a>

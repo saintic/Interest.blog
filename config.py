@@ -78,6 +78,10 @@ BLOG={
     "ApiUrl": os.getenv("Interest_blog_ApiUrl", ""),
 
     "ExternalSearch": os.getenv("Interest_blog_ExternalSearch", "https://cse.google.com/cse/publicurl?cx=009741766366936003815:jfv5jmieqo8"),
+
+    "UpdateRecordId": os.getenv("Interest_blog_UpdateRecordId", 110),
+
+    "AboutId": os.getenv("Interest_blog_AboutId", 113),
 }
 
 MYSQL=os.getenv("Interest_blog_MYSQL", "")
