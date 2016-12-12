@@ -11,7 +11,7 @@ def ApiComments():
     res  = {"code": 0, "data": [], "msg": None}
     args = dict(short_name=g.plugins['DuoshuoComment']['shortName'], range="all", num_items=request.args.get("limit", 10))
     try:
-        data = requests.get("http://api.duoshuo.com/sites/listTopThreads.json", params=args, timeout=10, headers={"User-Agent": "Interest.blog/www.saintic.com"}).json()
+        data = requests.get("http://api.duoshuo.com/sites/listTopThreads.json", params=args, timeout=5, headers={"User-Agent": "Interest.blog/www.saintic.com"}).json()
         blog = [ _ for _ in data.get("response") if _.get("comments") != 0 ]
     except Exception,e:
         logger.error(e, exc_info=True)
