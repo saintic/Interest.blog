@@ -8,7 +8,7 @@ __version__ = "1.1"
 
 from flask import Flask, g, render_template, request
 from config import GLOBAL, PLUGINS, BLOG
-from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite
+from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite, BaiduActivePush
 from views.upload import upload_page
 from views.front import front_page
 from views.api import api_page

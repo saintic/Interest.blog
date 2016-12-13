@@ -49,6 +49,12 @@ PLUGINS={
     "BaiduAutoPush": os.getenv("Interest_blog_BaiduAutoPush", True),
     #百度自动推送插件
 
+    "BaiduActivePush": {
+        "enable":  os.getenv("Interest_blog_BaiduActivePush_enable", True),
+        "callUrl": os.getenv("Interest_blog_BaiduActivePush_callUrl", "http://data.zz.baidu.com/urls?site=www.saintic.com&token=QbriJ4Iv7TGi8yOF")
+    },
+    #百度主动推送(实时)插件
+
     "BaiduStatistics": os.getenv("Interest_blog_BaiduStatistics", True),
     #百度统计插件
 

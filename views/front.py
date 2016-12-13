@@ -5,20 +5,22 @@ from urlparse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 from flask import Blueprint, g, render_template, request, redirect, url_for, make_response, abort
 from config import SSO, PLUGINS, BLOG
-from utils.public import logger, md5
+from utils.public import logger, md5, BaiduActivePush
 from libs import get_blogId_data, get_user_profile, get_user_blog, get_index_list, get_index_data
 
 front_page = Blueprint("front", __name__)
 
 @front_page.route("/")
 def index():
-    return render_template("front/index.html", EnableBaiduStatistics=PLUGINS['BaiduStatistics'])
+    return render_template("front/index.html")
 
 @front_page.route('/blog/<int:bid>.html')
 def blogShow(bid):
     data = get_blogId_data(bid)
     if data:
-        return render_template("front/blogShow.html", blogId=bid, data=data, EnableCodeHighlighting=PLUGINS['CodeHighlighting'], EnableDuoshuoComment=PLUGINS['DuoshuoComment'], EnableBaiduAutoPush=PLUGINS['BaiduAutoPush'], EnableBiaduShare=PLUGINS['BaiduShare'])
+        original = True if data.get("sources") == "原创" else False
+        BaiduActivePush(url_for("blogShow", bid=bid), original=original)
+        return render_template("front/blogShow.html", blogId=bid, data=data)
     else:
         return abort(404)
 
@@ -47,7 +49,7 @@ def home():
     if g.signin:
         user = get_user_profile(g.username)
         blog = get_user_blog(g.username)
-        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog), EnableWeather=PLUGINS['Weather'])
+        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
     else:
         return redirect(url_for(".login"))
 

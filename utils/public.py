@@ -86,3 +86,10 @@ def UploadImage2Upyun(file, imgurl, kwargs=PLUGINS['UpYunStorage']):
         res = up.put(imgurl, f, checksum=True, need_resume=True, form=True, **formkw)
 
     return res
+
+def BaiduActivePush(pushUrl, original=True, callUrl=PLUGINS['BaiduActivePush']['callUrl']):
+    """百度主动推送(实时)接口提交链接"""
+    callUrl = callUrl + "&type=original" if original else callUrl
+    res = requests.post(url=callUrl, data=pushUrl, timeout=3, headers={"User-Agent": "BaiduActivePush/www.saintic.com"}).json()
+    logger.info("BaiduActivePush PushUrl is %s, Result is %s" % (pushUrl, res))
+    return res
