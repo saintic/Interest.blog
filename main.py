@@ -31,7 +31,6 @@ def before_request():
     g.plugins   = PLUGINS
     g.apiurl    = g.blog['ApiUrl'].strip('/')
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
-    logger.debug(app.url_map)
 
 #Each return data in response to head belt, including the version and the requestId access log records request.
 @app.after_request
