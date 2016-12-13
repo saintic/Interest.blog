@@ -18,6 +18,18 @@ logger         = Syslog.getLogger()
 gen_requestId  = lambda :str(uuid4())
 gen_filename   = lambda :"%s%s" %(datetime.datetime.now().strftime('%Y%m%d%H%M%S'), str(random.randrange(1000, 10000)))
 
+def timeChange(timestring):
+    logger.debug("Change time, source time is %s" %timestring)
+    startedat = timestring.replace('T', ' ')[:19]
+    try:
+        dt  = datetime.datetime.strptime(startedat, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(hours=8)
+        res = dt.strftime("%Y-%m-%d %H:%M:%S")
+    except Exception, e:
+        logger.warn(e, exc_info=True)
+    else:
+        logger.debug("Change time, result time is %s" %res)
+        return res
+
 def ParseMySQL(mysql, callback="dict"):
     protocol, dburl = mysql.split("://")
     if "?" in mysql:
