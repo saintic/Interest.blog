@@ -72,6 +72,9 @@ PLUGINS={
 
     "ChristmasBlessings": os.getenv("Interest_blog_ChristmasBlessings", False),
     #圣诞节祝福插件
+
+    "360AutoPush": os.getenv("Interest_blog_360AutoPush", True),
+    #360自动推送插件
 }
 
 BLOG={

@@ -107,5 +107,13 @@ var duoshuoQuery = {short_name:"saintic"};
   })();
 {% endif %}
 
+{% if g.plugins['360AutoPush'] %}
+/* 360自动推送插件 */
+(function(){
+   var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?0804a1ea6759eb5939e26ae7531fb05a":"https://jspassport.ssl.qhimg.com/11.0.1.js?0804a1ea6759eb5939e26ae7531fb05a";
+   document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+{% endif %}
+
 </script>
 {% endblock %}
