@@ -12,11 +12,7 @@ def ApiComments():
     args = dict(short_name=g.plugins['DuoshuoComment']['shortName'], range="all", num_items=request.args.get("limit", 10))
     try:
         data = requests.get("http://api.duoshuo.com/sites/listTopThreads.json", params=args, timeout=5, headers={"User-Agent": "Interest.blog/www.saintic.com"}).json()
-        blog = []
-        for _ in data.get("response"):
-            if _.get("comments") != 0:
-                _.update('created_at') = timeChange(_['created_at'])
-                blog.append(_)
+        blog = [ _ for _ in data.get("response") if _.get("comments") != 0 and _.update(created_at=timeChange(_['created_at'])) == None ]
     except Exception,e:
         logger.error(e, exc_info=True)
     else:
