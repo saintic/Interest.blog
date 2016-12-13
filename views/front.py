@@ -136,3 +136,7 @@ def feed():
                  updated=datetime.datetime.strptime(article['update_time'] or article['create_time'],"%Y-%m-%d"),
                  published=datetime.datetime.strptime(article['create_time'],"%Y-%m-%d"))
     return feed.get_response()
+
+@front_page.route("/webscan_360_cn.html")
+def webscan_360_cn():
+    return render_template("public/webscan_360_cn.html")
