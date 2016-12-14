@@ -44,6 +44,7 @@
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
         <a href="{{ url_for('front.blogEdit', blogId=blogId) }}">编辑文章</a>&nbsp;
+        {% if g.username == "admin" %}
         {% if data.top in ('true', 'True', True) %}
         <a href="javascript:setTop(false)">取消置顶</a>&nbsp;
         {% else %}
@@ -53,6 +54,7 @@
         <a href="javascript:setRecommend(false)">取消推荐</a>&nbsp;
         {% else %}
         <a href="javascript:setRecommend(true)">推荐文章</a>&nbsp;
+        {% endif %}
         {% endif %}
     </p>
     {% endif %}
@@ -125,6 +127,7 @@ var duoshuoQuery = {short_name:"{{ g.plugins['DuoshuoComment']['shortName'] }}"}
 })();
 {% endif %}
 
+{% if g.username == "admin" %}
 // 设置或取消置顶文章
 function setTop(value) {
     $.ajax({
@@ -184,5 +187,6 @@ function setRecommend(value) {
         }
     });
 }
+{% endif %}
 </script>
 {% endblock %}
