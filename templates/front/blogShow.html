@@ -43,7 +43,17 @@
     {% endif %}
     {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
     <p class="post-meta">
-        <a href="{{ url_for('front.blogEdit', blogId=blogId) }}">编辑文章</a>
+        <a href="{{ url_for('front.blogEdit', blogId=blogId) }}">编辑文章</a>&nbsp;
+        {% if data.top in ('true', 'True', True) %}
+        <a href="javascript:setTop(false)">取消置顶</a>&nbsp;
+        {% else %}
+        <a href="javascript:setTop(true)">置顶文章</a>&nbsp;
+        {% endif %}
+        {% if data.recommend in ('true', 'True', True) %}
+        <a href="javascript:setRecommend(false)">取消推荐</a>&nbsp;
+        {% else %}
+        <a href="javascript:setRecommend(true)">推荐文章</a>&nbsp;
+        {% endif %}
     </p>
     {% endif %}
   </header>
@@ -115,5 +125,64 @@ var duoshuoQuery = {short_name:"{{ g.plugins['DuoshuoComment']['shortName'] }}"}
 })();
 {% endif %}
 
+// 设置或取消置顶文章
+function setTop(value) {
+    $.ajax({
+        url: "{{ g.apiurl }}/misc?action=top&blogId={{ blogId }}&value=" + value,
+        method: 'POST',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var res = res.success;
+            if (res==true) {
+                if(value==false) {
+                    alert("取消置顶成功！");
+                } else {
+                    alert("置顶文章成功！");
+                }
+            } else {
+                if(value==false) {
+                    alert("取消置顶失败！");
+                } else {
+                    alert("置顶文章失败！");
+                }
+            }
+            window.location.reload();
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+// 设置或取消推荐文章
+function setRecommend(value) {
+    $.ajax({
+        url: "{{ g.apiurl }}/misc?action=recommend&blogId={{ blogId }}&value=" + value,
+        method: 'POST',
+        datatype: 'json',
+        success: function(res) {
+            console.log(res);
+            var res = res.success;
+            if (res==true) {
+                if(value==false) {
+                    alert("取消推荐成功！");
+                } else {
+                    alert("推荐文章成功！");
+                }
+            } else {
+                if(value==false) {
+                    alert("取消推荐失败！");
+                } else {
+                    alert("推荐文章失败！");
+                }
+            }
+            window.location.reload();
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
 </script>
 {% endblock %}

@@ -81,6 +81,9 @@ PLUGINS={
 
     "360AutoPush": os.getenv("Interest_blog_360AutoPush", True),
     #360自动推送插件
+
+    "IndexService": os.getenv("Interest_blog_IndexService", True),
+    #首页相关服务插件
 }
 
 BLOG={

@@ -321,6 +321,22 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
   background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
   background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
 }
+.badge.blue {
+  background: #0000E3;
+  border-color: #0000E3;
+  background-image: -webkit-linear-gradient(top, #0000E3, #0000E3);
+  background-image: -moz-linear-gradient(top, #0000E3, #0000E3);
+  background-image: -o-linear-gradient(top, #0000E3, #0000E3);
+  background-image: linear-gradient(to bottom, #0000E3, #0000E3);
+}
+.badge.purple {
+  background: #8600FF;
+  border-color: #8600FF;
+  background-image: -webkit-linear-gradient(top, #E800E8, #8600FF);
+  background-image: -moz-linear-gradient(top, #E800E8, #8600FF);
+  background-image: -o-linear-gradient(top, #E800E8, #8600FF);
+  background-image: linear-gradient(to bottom, #E800E8, #8600FF);
+}
 
 /* 返回顶部 */
 #goTopBtn {

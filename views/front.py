@@ -18,8 +18,9 @@ def index():
 def blogShow(bid):
     data = get_blogId_data(bid)
     if data:
-        original = True if data.get("sources") == "原创" else False
-        BaiduActivePush(request.url, original=original)
+        if PLUGINS['BaiduActivePush']['enable'] in ("true", "True", True):
+            original = True if data.get("sources") == "原创" else False
+            BaiduActivePush(request.url, original=original)
         return render_template("front/blogShow.html", blogId=bid, data=data)
     else:
         return abort(404)
