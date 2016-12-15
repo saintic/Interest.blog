@@ -27,14 +27,8 @@ var _hmt = _hmt || [];
         <a href="{{ url_for('.index', tab='recommend') }}" title="所有推荐文章">所有推荐</a><span class="badge purple" id="recommend_number"></span>&nbsp;
     </h1>
     <hr /><br />
-    {%- if g.plugins['IndexService'] in ('true', 'True', True) %}
     <ul class="post-list" id="article_service_top">
     </ul>
-    <ul class="post-list" id="article_service_recommend">
-    </ul>
-    <ul class="post-list" id="article_service_hot">
-    </ul>
-    {% endif %}
     <ul class="post-list" id="article">
       <!--
       <li>
