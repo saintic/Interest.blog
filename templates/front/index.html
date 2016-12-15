@@ -147,7 +147,7 @@ var _hmt = _hmt || [];
                 document.getElementById('top_number').innerHTML=data.length;
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
-                    str += '<li><b class="post-meta badge blue">置顶</b>&nbsp;<span class="post-meta">' + blog.create_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
+                    str += '<li><b class="post-meta badge blue">置顶</b>&nbsp;<span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
                     if (i==0) {
                       {%- if request.args.get("tab", "all") == "all" %}
                         document.getElementById('article_service_top').innerHTML=str;
@@ -176,7 +176,7 @@ var _hmt = _hmt || [];
                 document.getElementById('recommend_number').innerHTML=data.length;
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
-                    str += '<li><b class="post-meta badge purple">推荐</b>&nbsp;<span class="post-meta">' + blog.create_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
+                    str += '<li><b class="post-meta badge purple">推荐</b>&nbsp;<span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
                     if (i==0) {
                       {%- if request.args.get("tab", "all") == "all" %}
                         document.getElementById('article_service_recommend').innerHTML=str;
