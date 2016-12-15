@@ -31,17 +31,24 @@ def timeChange(timestring):
         return res
 
 def ParseMySQL(mysql, callback="dict"):
-    protocol, dburl = mysql.split("://")
-    if "?" in mysql:
-        dbinfo, dbargs  = dburl.split("?")
-    else:
-        dbinfo, dbargs  = dburl, "charset=utf8&timezone=+8:00"
-    host,port,user,password,database = dbinfo.split(":")
-    charset, timezone = dbargs.split("&")[0].split("charset=")[-1] or "utf8", dbargs.split("&")[-1].split("timezone=")[-1] or "+8:00"
-    if callback in ("list", "tuple"):
-        return protocol,host,port,user,password,database,charset, timezone
-    else:
-        return {"Protocol": protocol, "Host": host, "Port": port, "Database": database, "User": user, "Password": password, "Charset": charset, "Timezone": timezone}
+    try:
+        protocol, dburl = mysql.split("://")
+        if "?" in mysql:
+            dbinfo, dbargs  = dburl.split("?")
+        else:
+            dbinfo, dbargs  = dburl, "charset=utf8&timezone=+8:00"
+        host,port,user,password,database = dbinfo.split(":")
+        charset, timezone = dbargs.split("&")[0].split("charset=")[-1] or "utf8", dbargs.split("&")[-1].split("timezone=")[-1] or "+8:00"
+        if callback in ("list", "tuple"):
+            return protocol,host,port,user,password,database,charset, timezone
+        else:
+            return {"Protocol": protocol, "Host": host, "Port": port, "Database": database, "User": user, "Password": password, "Charset": charset, "Timezone": timezone}
+    except Exception,e:
+        logger.warn(e, exc_info=True)
+        if callback in ("list", "tuple"):
+            return ()
+        else:
+            return {}
 
 mysql = Connection(
                     host     = "%s:%s" %(ParseMySQL(MYSQL).get('Host'), ParseMySQL(MYSQL).get('Port', 3306)),

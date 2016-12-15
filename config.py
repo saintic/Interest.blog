@@ -99,5 +99,5 @@ BLOG={
     "AboutId": os.getenv("Interest_blog_AboutId", 113),
 }
 
-MYSQL=os.getenv("Interest_blog_MYSQL", "")
+MYSQL=""#os.getenv("Interest_blog_MYSQL", "")
 
