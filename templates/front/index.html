@@ -119,11 +119,13 @@ var _hmt = _hmt || [];
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
                     str += '<li><b class="post-meta badge red">热评</b>&nbsp;<span class="post-meta">' + blog.created_at + '</span><h2><a class="post-link" href="' + blog.url + '">' + blog.title + '</a></h2></li>';
+                    /*
                     if (i==0) {
                       {%- if request.args.get("tab", "all") == "all" %}
                         document.getElementById('article_service_hot').innerHTML=str;
                       {% endif -%}
                     }
+                    */
                 };
                 {%- if request.args.get("tab", "all") == "hot" %}
                 document.getElementById('article').innerHTML=str;
@@ -177,11 +179,13 @@ var _hmt = _hmt || [];
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
                     str += '<li><b class="post-meta badge purple">推荐</b>&nbsp;<span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
+                    /*
                     if (i==0) {
                       {%- if request.args.get("tab", "all") == "all" %}
                         document.getElementById('article_service_recommend').innerHTML=str;
                       {% endif -%}
                     }
+                    */
                 };
                 {%- if request.args.get("tab", "all") == "recommend" %}
                 document.getElementById('article').innerHTML=str;

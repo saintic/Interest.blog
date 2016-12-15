@@ -66,10 +66,10 @@ PLUGINS={
 
     "UpYunStorage": {
         "enable": os.getenv("Interest_blog_UpYunStorage_enable", False),
-        "bucket": os.getenv("Interest_blog_UpYunStorage_bucket"),
-        "username": os.getenv("Interest_blog_UpYunStorage_username"),
-        "password": os.getenv("Interest_blog_UpYunStorage_password"),
-        "secret": os.getenv("Interest_blog_UpYunStorage_secret"),
+        "bucket": os.getenv("Interest_blog_UpYunStorage_bucket", ""),
+        "username": os.getenv("Interest_blog_UpYunStorage_username", ""),
+        "password": os.getenv("Interest_blog_UpYunStorage_password", ""),
+        "secret": os.getenv("Interest_blog_UpYunStorage_secret", ""),
         "timeout": os.getenv("Interest_blog_UpYunStorage_timeout", 10),
         "dn": os.getenv("Interest_blog_UpYunStorage_dn", "http://img.saintic.com"),
         "allow-file-type": "jpg,jpeg,png,gif"
@@ -81,9 +81,6 @@ PLUGINS={
 
     "360AutoPush": os.getenv("Interest_blog_360AutoPush", True),
     #360自动推送插件
-
-    "IndexService": os.getenv("Interest_blog_IndexService", True),
-    #首页相关服务插件
 }
 
 BLOG={
@@ -99,5 +96,4 @@ BLOG={
     "AboutId": os.getenv("Interest_blog_AboutId", 113),
 }
 
-MYSQL=""#os.getenv("Interest_blog_MYSQL", "")
-
+MYSQL=os.getenv("Interest_blog_MYSQL", "")
