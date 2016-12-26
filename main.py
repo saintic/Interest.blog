@@ -4,7 +4,7 @@
 #
 __author__  = "Mr.tao"
 __email__   = "staugur@saintic.com"
-__version__ = "1.1"
+__version__ = "1.2"
 
 from flask import Flask, g, render_template, request
 from config import GLOBAL, PLUGINS, BLOG
