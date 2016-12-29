@@ -50,7 +50,7 @@ def home():
     if g.signin:
         user = get_user_profile(g.username)
         blog = get_user_blog(g.username)
-        return render_template("front/home.html", user=user, blog=blog, blogLength=len(blog))
+        return render_template("front/home.html", user=user, blog=blog)
     else:
         return redirect(url_for(".login"))
 
