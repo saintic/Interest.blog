@@ -46,12 +46,6 @@
 
     <p><a href="{{ url_for('front.profile', change='profile') }}" title="Change Your Profile">修改我的资料&nbsp;<img src="{{ url_for('static', filename='img/icon/profile.png') }}" height="18px" /></a></p>
 
-    {% if user.get('github') %}
-    <div>
-        <h1 class="page-heading">代码库<span class="badge green" id="repo_count"></span></h1>
-        <ul class="post-list" id="repo_list"></ul>
-    </div>
-    {% endif %}
     {% if blog %}
     <div>
         <h1 class="page-heading">文章展<span class="badge green">{{ blog|length }}</span></h1>
@@ -68,6 +62,13 @@
           </li>
         {% endfor %}
         </ul>
+    </div>
+    {% endif %}
+
+    {% if user.get('github') %}
+    <div>
+        <h1 class="page-heading">代码库<span class="badge green" id="repo_count"></span></h1>
+        <ul class="post-list" id="repo_list"></ul>
     </div>
     {% endif %}
   </div>
@@ -109,11 +110,7 @@ init = {
             dataType: "json",
             success: function(result) {
                 for( i in result ) {
-                   msg = "<b><a href='" + result[i].html_url + "' title='" + result[i].full_name + ":&nbsp;" + result[i].description + "' target='_blank'>" +
-                        result[i].name + "</a></b><span class='badge red'>" + result[i].watchers_count + "," + result[i].stargazers_count + "," + result[i].forks_count + "</span>&nbsp;";
-                    if(i%5==0 && i!=0) {
-                        msg += '<br/ >';
-                    }
+                   msg = "<li><b><a href='" + result[i].html_url + "' title='" + result[i].full_name + ":&nbsp;" + result[i].description + "' target='_blank'>" + result[i].name + "</a></b><span class='badge red'>" + result[i].watchers_count + "," + result[i].stargazers_count + "," + result[i].forks_count + "</span>&nbsp;</li>";
                     $("#repo_list").append(msg);
                 }
                 $("#repo_count").append(result.length);
