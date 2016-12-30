@@ -41,7 +41,9 @@
     {% endif %}
 
     {% if user.get('github') %}
-        <p>我的代码: <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">{{ user.get('github') }}</a></p>
+        <p>我的代码: <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">{{ user.get('github') }}</a>
+        <sub><iframe src="https://ghbtns.com/github-btn.html?user=staugur&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></sub>
+        </p>
     {% endif %}
 
     <p><a href="{{ url_for('front.profile', change='profile') }}" title="Change Your Profile">修改我的资料&nbsp;<img src="{{ url_for('static', filename='img/icon/profile.png') }}" height="18px" /></a></p>
