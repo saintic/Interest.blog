@@ -156,6 +156,9 @@
             for(i=0; i<data.length; i++) {
                 catalog = data[i];
                 str2 += '<a href="/blog/resources/?resources_type=catalog&resources_data=' + catalog + '" target="_blank"><scan class="badge yellow">' + catalog +'</scan></a>&nbsp;';
+                if(i%5==0 && i!=0) {
+                    str2 += '<br/ >';
+                }
             };
             document.getElementById('catalog_number').innerHTML=data.length;
             document.getElementById('misc_catalogs').innerHTML=str2;
