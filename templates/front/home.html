@@ -113,7 +113,7 @@ init = {
             dataType: "json",
             success: function(result) {
                 for( i in result ) {
-                   msg = "<li><b><a href='" + result[i].html_url + "' title='" + result[i].full_name + ":&nbsp;" + result[i].description + "' target='_blank'>" + result[i].name + "</a></b><span class='badge red'>" + result[i].watchers_count + "," + result[i].stargazers_count + "," + result[i].forks_count + "</span>&nbsp;</li>";
+                   msg = "<li><b><a href='" + result[i].html_url + "' title='" + result[i].description + "' target='_blank'>" + result[i].full_name + "</a></b><span class='badge red'>" + result[i].watchers_count + "," + result[i].stargazers_count + "," + result[i].forks_count + "</span>&nbsp;</li>";
                     $("#repo_list").append(msg);
                 }
                 $("#repo_count").append(result.length);
