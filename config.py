@@ -81,6 +81,9 @@ PLUGINS={
 
     "360AutoPush": os.getenv("Interest_blog_360AutoPush", True),
     #360自动推送插件
+
+    "ShowGitHub": os.getenv("Interest_blog_ShowGitHub", True),
+    #个人中心页展现GitHub代码库
 }
 
 BLOG={

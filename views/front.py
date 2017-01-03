@@ -46,7 +46,9 @@ def blogResources():
     return render_template("front/resources.html")
 
 @front_page.route("/home/")
-def home():
+@front_page.route("/home/<user>/")
+def home(user=None):
+    logger.debug(user)
     if g.signin:
         user = get_user_profile(g.username)
         blog = get_user_blog(g.username)
@@ -54,13 +56,21 @@ def home():
     else:
         return redirect(url_for(".login"))
 
-@front_page.route("/home/profile/")
+@front_page.route("/user/profile/")
 def profile():
     if g.signin:
         user = get_user_profile(g.username)
         return render_template("front/profile.html", user=user)
     else:
         return redirect(url_for(".login"))
+
+@front_page.route("/user/UpdatePasswd", methods=["POST",])
+def UpdatePasswd():
+    if g.signin:
+        logger.debug(request.form)
+        #ImmutableMultiDict([('username', u'admin'), ('new_pass', u''), ('new_repass', u''), ('old_pass', u'')])
+    else:
+        abort(403)
 
 @front_page.route('/login/')
 def login():

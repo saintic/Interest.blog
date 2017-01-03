@@ -42,11 +42,12 @@
 
     {% if user.get('github') %}
         <p>我的代码: <a href="{% if 'http' in user.get('github') %}{{ user.get('github') }}{% else %}{{ 'http://' + user.get('github') }}{% endif %}" target="_blank">{{ user.get('github') }}</a>
-        <sub><iframe src="https://ghbtns.com/github-btn.html?user=staugur&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></sub>
         </p>
     {% endif %}
 
-    <p><a href="{{ url_for('front.profile', change='profile') }}" title="Change Your Profile">修改我的资料&nbsp;<img src="{{ url_for('static', filename='img/icon/profile.png') }}" height="18px" /></a></p>
+    <p><a href="{{ url_for('front.profile', change='password') }}" title="Change Your Password">修改密码</a>&nbsp;</p>
+
+    <p><a href="{{ url_for('front.profile', change='profile') }}" title="Change Your Profile">修改个人资料</a>&nbsp;</p>
 
     {% if blog %}
     <div>
@@ -67,7 +68,7 @@
     </div>
     {% endif %}
 
-    {% if user.get('github') %}
+    {% if g.plugins["ShowGitHub"] in ("true", "True", True) and user.get('github') %}
     <div>
         <h1 class="page-heading">代码库<span class="badge green" id="repo_count"></span></h1>
         <ul class="post-list" id="repo_list"></ul>
@@ -99,7 +100,7 @@ tpwidget("show");
 </script>
 {% endif %}
 
-{% if user.get('github') %}
+{% if g.plugins["ShowGitHub"] in ("true", "True", True) and user.get('github') %}
 <script type="text/javascript">
 init = {
     getRepos: function() {
@@ -116,6 +117,10 @@ init = {
                     $("#repo_list").append(msg);
                 }
                 $("#repo_count").append(result.length);
+            },
+            error: function(result) {
+                console.log(result);
+                alert("GitHub代码库获取错误，请刷新重试！");
             }
         });
     },

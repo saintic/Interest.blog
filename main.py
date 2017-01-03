@@ -16,8 +16,9 @@ from views.api import api_page
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.register_blueprint(front_page)
-app.register_blueprint(upload_page, url_prefix="/upload")
 app.register_blueprint(api_page, url_prefix="/api")
+app.register_blueprint(upload_page, url_prefix="/upload")
+
 
 #Before each URL request, define the initialization time, requestId, user authentication results and other related information and bind to g
 @app.before_request
@@ -57,4 +58,4 @@ def page_not_found(e):
 if __name__ == "__main__":
     Host = GLOBAL.get('Host')
     Port = GLOBAL.get('Port')
-    app.run(host=Host, port=int(Port), debug=True)
+    app.run(host=Host, port=int(Port), debug=True, threaded=True)
