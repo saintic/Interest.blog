@@ -109,7 +109,7 @@ init = {
         console.log(GitHubUser);
         $.ajax({
             type: "GET",
-            url: "https://api.github.com/users/" + GitHubUser + "/repos",
+            url: "https://api.github.com/users/" + GitHubUser + "/repos?per_page=49",
             dataType: "json",
             success: function(result) {
                 for( i in result ) {
