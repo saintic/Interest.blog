@@ -16,7 +16,6 @@
         <p>标签：<input type="text" style="width:300px;height:20px" name="tag" value="{{ data.get('tag') }}" required /></p>
         <p>分类：<input type="text" style="width:300px;height:20px" name="catalog" value="{{ data.get('catalog') }}" list="blog_catalogs" required /></p>
         <datalist id="blog_catalogs">
-            <option>未分类</option>
         </datalist>
         <p>类型：
           {% if data.get('sources') == '原创' %}
@@ -72,7 +71,7 @@
        后台文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/115736;
        后台需要配置一个获取表单上传图片并保存的路由，demo地址：https://github.com/staugur/flask-wangEditor-demo
     */
-    editor.config.uploadImgUrl = '/upload/image/';
+    editor.config.uploadImgUrl = '{{ upload.UploadImage }}';
     editor.config.uploadImgFileName = 'WriteBlogImage';
 
     // 创建编辑器
@@ -86,7 +85,7 @@
         success: function(res) {
             console.log(res);
             var data = res.data;
-            var str2 = '';
+            var str2 = '<option>未分类</option>';
             for(i=0; i<data.length; i++) {
                 catalog = data[i];
                 str2 += '<option>' + catalog + '</option>';
@@ -109,7 +108,7 @@
                 console.log(res);
                 if (res.success == true){
                     alert("更新文章成功！");
-                    window.location="/blog/" + {{ blogId }} + ".html";
+                    window.location="/blog/{{ blogId }}.html";
                 } else {
                     alert("提交文章失败，请重试提交或报告错误！\n错误原因是：" + res.msg);
                     //location.reload(true);

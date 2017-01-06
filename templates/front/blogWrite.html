@@ -22,7 +22,6 @@
         <p>标签：<input type="text" style="width:300px;height:20px" name="tag" placeholder="请在此处输入标签并以空格分割" required /></p>
         <p>分类：<input type="text" style="width:300px;height:20px" name="catalog" placeholder="请自定义输入分类或选择列表内条目" list="blog_catalogs" required /></p>
         <datalist id="blog_catalogs">
-            <option>未分类</option>
         </datalist>
         <p>类型：
             <input type="radio" name="sources" value="原创" checked="checked">原创
@@ -43,7 +42,6 @@
         <p>标签：<input type="text" style="width:300px;height:20px" name="tag" placeholder="请在此处输入标签并以空格分割" required /></p>
         <p>分类：<input type="text" style="width:300px;height:20px" name="catalog" placeholder="请自定义输入分类或选择列表内条目" list="blog_catalogs" required /></p>
         <datalist id="blog_catalogs">
-            <option>未分类</option>
         </datalist>
         <p>类型：
             <input type="radio" name="sources" value="原创" checked="checked">原创
@@ -135,7 +133,7 @@
         success: function(res) {
             console.log(res);
             var data = res.data;
-            var str2 = '';
+            var str2 = '<option>未分类</option>';
             for(i=0; i<data.length; i++) {
                 catalog = data[i];
                 str2 += '<option>' + catalog + '</option>';
