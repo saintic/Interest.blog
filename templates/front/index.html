@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
         <a href="{{ url_for('.index', tab='all') }}" title="所有文章">所有文章</a><span class="badge green" id="index_number"></span>&nbsp;
         <a href="{{ url_for('.index', tab='update') }}" title="最近十篇更新文章">最近更新</a><span class="badge yellow" id="update_number"></span>&nbsp;
         <a href="{{ url_for('.index', tab='hot') }}" title="最新十篇热评文章">热评文章</a><span class="badge red" id="hot_number"></span>&nbsp;
-        <a href="{{ url_for('.index', tab='top') }}" title="所有置顶文章">所有置顶</a><span class="badge blue" id="top_number"></span>&nbsp;
+        <!--<a href="{{ url_for('.index', tab='top') }}" title="所有置顶文章">所有置顶</a><span class="badge blue" id="top_number"></span>&nbsp;-->
         <a href="{{ url_for('.index', tab='recommend') }}" title="所有推荐文章">所有推荐</a><span class="badge purple" id="recommend_number"></span>&nbsp;
     </h1>
     <hr /><br />
@@ -140,19 +140,22 @@ var _hmt = _hmt || [];
                 console.log(res);
                 var data= res.data;
                 var str = '';
-                document.getElementById('top_number').innerHTML=data.length;
+                //document.getElementById('top_number').innerHTML=data.length;
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
                     str += '<li><b class="post-meta badge blue">置顶</b>&nbsp;<span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
+                    /*
                     if (i==0) {
                       {%- if request.args.get("tab", "all") == "all" %}
                         document.getElementById('article_service_top').innerHTML=str;
                       {% endif -%}
                     }
+                    */
                 };
-                {%- if request.args.get("tab", "all") == "top" %}
-                document.getElementById('article').innerHTML=str;
+                {%- if request.args.get("tab", "all") == "all" %}
+                //document.getElementById('article').innerHTML=str;
                 console.log("index top");
+                document.getElementById('article_service_top').innerHTML=str;
                 {% endif %}
             },
             error: function(error){
