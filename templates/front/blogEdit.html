@@ -71,7 +71,7 @@
        后台文档地址：http://www.kancloud.cn/wangfupeng/wangeditor2/115736;
        后台需要配置一个获取表单上传图片并保存的路由，demo地址：https://github.com/staugur/flask-wangEditor-demo
     */
-    editor.config.uploadImgUrl = '{{ upload.UploadImage }}';
+    editor.config.uploadImgUrl = '{{ url_for("upload.UploadImage") }}';
     editor.config.uploadImgFileName = 'WriteBlogImage';
 
     // 创建编辑器
