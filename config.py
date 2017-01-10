@@ -61,7 +61,7 @@ PLUGINS={
     "BaiduShare": os.getenv("Interest_blog_BaiduShare", True),
     #百度分享插件
 
-    "BackupBlog": os.getenv("Interest_blog_BackupBlog", True),
+    "BackupBlog": os.getenv("Interest_blog_BackupBlog", False),
     #备份文章插件
 
     "UpYunStorage": {
@@ -83,20 +83,29 @@ PLUGINS={
     #360自动推送插件
 
     "ShowGitHub": os.getenv("Interest_blog_ShowGitHub", False),
-    #个人中心页展现GitHub代码库
+    #个人中心页展现GitHub代码库插件，最多展现49个
 }
 
 BLOG={
 
     "AdminPrefix": os.getenv("Interest_blog_AdminPrefix", "/admin"),
+    #后台URI前缀
 
     "ApiUrl": os.getenv("Interest_blog_ApiUrl", "https://api.saintic.com"),
+    #博客API接口地址
 
     "ExternalSearch": os.getenv("Interest_blog_ExternalSearch", "https://cse.google.com/cse/publicurl?cx=009741766366936003815:jfv5jmieqo8"),
+    #站内搜索地址
 
-    "UpdateRecordId": os.getenv("Interest_blog_UpdateRecordId", 110),
+    #"UpdateRecordId": os.getenv("Interest_blog_UpdateRecordId", 110),
 
-    "AboutId": os.getenv("Interest_blog_AboutId", 113),
+    #"AboutId": os.getenv("Interest_blog_AboutId", 113),
+
+    "openSource": {
+        "user": os.getenv("Interest_blog_openSource_user", "staugur"),
+        "displayNumber": os.getenv("Interest_blog_openSource_displaynumber", 49),
+    },
+    #导航-开源项目展现，GitHub用户名
 }
 
 MYSQL=os.getenv("Interest_blog_MYSQL", "mysql://host:port:user:password:db")

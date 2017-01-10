@@ -1,0 +1,62 @@
+{% extends "base/front.html" %}
+
+{% block title %}Interest Blog OpenSource | SaintIC{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>开源项目GitHub展示<span class="badge green" id="repo_count"></span></h1>
+        <ul class="new_tools_list" id="repo_list">
+			<li style="list-style-type:decimal;"><b class="post-meta badge purple">推荐</b>
+			    <a href="#SwarmOps">SwarmOps: 使用Flask + Bootstrap开发的Docker Swarm 管理平台，提供API和UI。</a>
+			</li>
+			<li style="list-style-type:decimal;"><b class="post-meta badge purple">推荐</b>
+			    <a href="#Interest.blog">Interest.blog: 使用Flask开发的技术博客，依赖Api、Passport。</a>
+			</li>
+		</ul>
+    </div>
+    <div id="loading">
+        <div>
+            &nbsp;&nbsp;<img src='/static/img/icon/loading.gif' />&nbsp;正在处理中，请稍后！
+        </div>
+    </div>
+    <div class="openSourcePage" id="repo_page_display">
+    </div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+init = {
+    getRepos: function() {
+        GitHubUser   = "{{ g.blog.openSource.user }}";
+        GitHubNumber = "{{ g.blog.openSource.displayNumber }}";
+        $.ajax({
+            type: "GET",
+            url: "https://api.github.com/users/" + GitHubUser + "/repos?per_page=" + GitHubNumber,
+            dataType: "json",
+            async: true,
+            success: function(result) {
+            	console.info("success");
+                for( i in result ) {
+	               page_msg = '<a name="' + result[i].name + '"></a><div class="github-widget" data-repo="' + result[i].full_name +'"></div><br /><br />'
+			       console.log(page_msg);
+                   $("#repo_page_display").append(page_msg);
+                }
+                $("#repo_count").append(result.length);
+                $("#loading").remove();
+            },
+            error: function(result) {
+                console.error(result);
+                $("#loading").replaceWith("<div>&nbsp;&nbsp;&nbsp;GitHub代码库获取错误，错误代码：" + result.status + "，请尝试刷新！<div>");
+            },
+        });
+    },
+};
+$(document).ready(function() {
+    init.getRepos();
+});
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/GithubRepoWidget.min.js') }}"></script>
+<script type="text/javascript">
+    setTimeout(GithubRepoWidget.init, 5000);
+</script>
+{% endblock %}

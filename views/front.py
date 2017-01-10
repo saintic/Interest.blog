@@ -153,3 +153,7 @@ def feed():
 @front_page.route("/webscan_360_cn.html")
 def webscan_360_cn():
     return render_template("public/webscan_360_cn.html")
+
+@front_page.route("/openSource/")
+def openSource():
+    return render_template("front/openSource.html")
