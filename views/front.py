@@ -30,7 +30,7 @@ def blogEdit():
     blogId = request.args.get("blogId")
     if g.signin and blogId:
         data = get_blogId_data(blogId)
-        if data and g.username == data.get("author") or g.username == "admin":
+        if data and g.username == data.get("author") or g.username in g.admins:
             return render_template("front/blogEdit.html", blogId=blogId, data=data)
     return redirect(url_for(".login"))
 

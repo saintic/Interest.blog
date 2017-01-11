@@ -86,9 +86,12 @@ def chunks(arr, n):
     """arr是被分割的list，n是每个chunk中含n元素。"""
     return [arr[i:i+n] for i in range(0, len(arr), n)]
 
-def isAdmin(username):
+def getAdmins():
     AdminUsers = requests.get(g.apiurl + "/user/", params={"getadminuser": True}, timeout=5, verify=False, headers={"User-Agent": SSO.get("SSO.PROJECT")}).json().get("data")
-    if username in AdminUsers:
+    return AdminUsers
+
+def isAdmin(username):
+    if username in getAdmins():
         return True
     return False
 

@@ -8,7 +8,7 @@ __version__ = "1.2"
 
 from flask import Flask, g, render_template, request
 from config import GLOBAL, PLUGINS, BLOG
-from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite, BaiduActivePush
+from utils.public import logger, gen_requestId, isLogged_in, ClickMysqlWrite, BaiduActivePush, getAdmins
 from views.upload import upload_page
 from views.front import front_page
 from views.api import api_page
@@ -31,6 +31,7 @@ def before_request():
     g.blog      = BLOG
     g.plugins   = PLUGINS
     g.apiurl    = g.blog['ApiUrl'].strip('/')
+    g.admins    = getAdmins()
     logger.info("Start Once Access, and this requestId is %s, isLogged_in:%s" %(g.requestId, g.signin))
 
 #Each return data in response to head belt, including the version and the requestId access log records request.

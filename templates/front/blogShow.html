@@ -41,10 +41,10 @@
             <img src="{{ url_for('static', filename='img/icon/Translate.gif') }}" /></a></p>
         {% endif %}
     {% endif %}
-    {% if g.signin and g.username == data.get("author") or g.username == "admin" %}
+    {% if g.signin and g.username == data.get("author") or g.username in g.admins %}
     <p class="post-meta">
         <a href="{{ url_for('front.blogEdit', blogId=blogId) }}">编辑文章</a>&nbsp;
-        {% if g.username == "admin" %}
+        {% if g.username in g.admins %}
         {% if data.top in ('true', 'True', True) %}
         <a href="javascript:setTop(false)">取消置顶</a>&nbsp;
         {% else %}
@@ -127,7 +127,7 @@ var duoshuoQuery = {short_name:"{{ g.plugins['DuoshuoComment']['shortName'] }}"}
 })();
 {% endif %}
 
-{% if g.username == "admin" %}
+{% if g.username in g.admins %}
 // 设置或取消置顶文章
 function setTop(value) {
     $.ajax({
