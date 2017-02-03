@@ -71,7 +71,7 @@ PLUGINS={
         "password": os.getenv("Interest_blog_UpYunStorage_password", ""),
         "secret": os.getenv("Interest_blog_UpYunStorage_secret", ""),
         "timeout": os.getenv("Interest_blog_UpYunStorage_timeout", 10),
-        "dn": os.getenv("Interest_blog_UpYunStorage_dn", "http://img.saintic.com"),
+        "dn": os.getenv("Interest_blog_UpYunStorage_dn", "https://img.saintic.com"),
         "allow-file-type": "jpg,jpeg,png,gif"
     },
     #又拍云存储插件
