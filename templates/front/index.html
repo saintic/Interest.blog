@@ -88,7 +88,7 @@ var _hmt = _hmt || [];
                 document.getElementById('update_number').innerHTML=data.length;
                 for(i=0; i<data.length; i++) {
                     blog = data[i];
-                    str += '<li><span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
+                    str += '<li><b class="post-meta badge green">更新</b>&nbsp;<span class="post-meta">' + blog.update_time + '</span><h2><a class="post-link" href="/blog/' + blog.id + '.html">' + blog.title + '</a></h2></li>';
                 };
                 {%- if request.args.get("tab", "all") == "update" %}
                 document.getElementById('article').innerHTML=str;
